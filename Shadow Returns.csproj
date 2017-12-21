@@ -152,6 +152,8 @@
     <Compile Include="Assets\Scripts\ControllScripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\Ghost\GhostDead.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Slime\SlimeAI.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Slime\SlimeHealth.cs" />
     <Compile Include="Assets\Scripts\Enemies\Zombie\ZombieAIController.cs" />
     <Compile Include="Assets\Scripts\FireLight.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\FLickerLights.cs" />

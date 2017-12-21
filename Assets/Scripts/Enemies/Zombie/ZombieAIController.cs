@@ -11,6 +11,9 @@ public class ZombieAIController : MonoBehaviour {
     private Animator anim;
     private bool isAttacking = false;
     private bool isMoving = false;
+    private bool canshoot = true;
+
+    public float rangeAttackWaitTime = 2f;
 
     //Animation Speed
     private float speed = 0;
@@ -20,8 +23,11 @@ public class ZombieAIController : MonoBehaviour {
     public float maxDistanceToMeele = 0.5f;
     public float smooth = 2.0f;
     public float attackRateTime = 1.0f;
+    public float fireForce = 5f;
     public BoxCollider hitbox;
 
+    public Transform shotTransform;
+    public GameObject shot;
     public int meeleDMG = 15;
     //public int rangeDMG = 10;
 
@@ -59,7 +65,8 @@ public class ZombieAIController : MonoBehaviour {
         {
             //Auf Spieler zulaufen und Angreifen
             //Wechsel Fernkampfangriff zwischen dem Laufen Todo
-            WalkToPlayer();
+            if (canshoot && !isAttacking) StartCoroutine(RangeAttack());
+            else if (!isAttacking) WalkToPlayer();
         }
         else
         {
@@ -81,6 +88,22 @@ public class ZombieAIController : MonoBehaviour {
         yield return new WaitForSeconds(attackRateTime);
         hitbox.enabled = false;
         isAttacking = false;
+        yield return null;
+    }
+
+    IEnumerator RangeAttack()
+    {
+        isAttacking = true;
+        agent.isStopped = true;
+        canshoot = false;
+        if (anim != null) anim.SetTrigger("attack");
+        GameObject shooted =  Instantiate(shot, shotTransform.position, shot.transform.rotation);
+        shooted.GetComponent<Rigidbody>().velocity = fireForce * shotTransform.forward;
+        yield return new WaitForSeconds(attackRateTime);
+        isAttacking = false;
+        agent.isStopped = false;
+        yield return new WaitForSeconds(rangeAttackWaitTime);
+        canshoot = true;
         yield return null;
     }
 
