@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SlimeHealth : MonoBehaviour
 {
 
-    private int maxHealth = 100;
+    private int maxHealth = 30;
     private float health;
     public Image healthbar;
 

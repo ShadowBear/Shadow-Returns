@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour {
 
     public float fireRate = 0.5f;
     public bool isShooting = false;
+    public bool fireStickDown = false;
 
     private Animator anim;
     public ParticleSystem fireParticle;
@@ -27,8 +28,12 @@ public class PlayerAttack : MonoBehaviour {
 
     private void CheckFired()
     {
-        if(Input.GetButtonDown("Fire1") && !isShooting) StartCoroutine(Fire());
+#if Unity_STANDALONE || UNITY_WEBPLAYER
+        if (Input.GetButtonDown("Fire1") && !isShooting) StartCoroutine(Fire());
         if (Input.GetButtonDown("Fire2")) StartCoroutine(Light());
+#else
+        if (fireStickDown && !isShooting) StartCoroutine(Fire());
+#endif
     }
 
     IEnumerator Fire()
