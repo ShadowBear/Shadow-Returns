@@ -11,13 +11,14 @@ public class ShieldAndroidButton : MonoBehaviour, IPointerUpHandler, IPointerDow
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        shield.SetActive(true);
+        shield.GetComponent<Shield>().activateShield();
         //playerMovementScript.shieldedAndroid = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        shield.SetActive(false);
+        shield.GetComponent<Shield>().deActivateShield();
+        //shield.SetActive(false);
         //playerMovementScript.shieldedAndroid = false;
     }
 

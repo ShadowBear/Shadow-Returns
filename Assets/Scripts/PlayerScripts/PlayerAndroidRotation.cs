@@ -14,7 +14,6 @@ public class PlayerAndroidRotation : MonoBehaviour
         {
             // Fehler um 180 Grad
             float angle = (Mathf.Atan2(fireJS.Horizontal(), fireJS.Vertical()) * Mathf.Rad2Deg) - 180;
-            print(angle);
             transform.rotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
         }
     }

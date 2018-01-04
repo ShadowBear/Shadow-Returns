@@ -154,12 +154,18 @@
     <Compile Include="Assets\Scripts\ControllScripts\CamerController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\LibaryController.cs" />
     <Compile Include="Assets\Scripts\Enemies\FollowPlayer.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Ghost\FlyTowardsObject.cs" />
     <Compile Include="Assets\Scripts\Enemies\Ghost\GhostDead.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Ghost\GhostRage.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\SlimeAI.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\SlimeHealth.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Slime\SlimeSpawner.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Tower\Tower.cs" />
     <Compile Include="Assets\Scripts\Enemies\Zombie\ZombieAIController.cs" />
     <Compile Include="Assets\Scripts\FireLight.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\EnemyShotDamage.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\FLickerLights.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\FadeOutObject.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\GhostDoorOpen.cs" />
@@ -168,6 +174,7 @@
     <Compile Include="Assets\Scripts\ObjectScripts\LightDamage.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\MoveLight.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\RotateObjectScript.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\StopRotationBug.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\TombSpawn.cs" />
     <Compile Include="Assets\Scripts\Particle\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Particle\ShieldParticel.cs" />

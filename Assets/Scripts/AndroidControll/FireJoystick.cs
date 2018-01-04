@@ -14,6 +14,15 @@ public class FireJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
     private PlayerAndroidRotation playerAdRotation;
     private PlayerAttack playerAttack;
 
+    private int tapCounter = 0;
+    private Coroutine singleTap;
+
+    public Sprite swordSprite;
+    public Sprite magicSprite;
+
+    public Image actualSprite;
+
+
     // Use this for initialization
 
     void Awake()
@@ -31,15 +40,38 @@ public class FireJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
         joystickImage = transform.GetChild(0).GetComponent<Image>();
         playerAdRotation = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAndroidRotation>();
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>();
+        //actualSprite = transform.GetComponentInChildren<Image>();
     }
 
-    //void Update()
-    //{
-    //    if(Input.touchCount == 2)
-    //    {
-    //        print("Double Tap");
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            tapCounter++;
+            singleTap = StartCoroutine(SingleTap());
+        }
+    }
+
+    IEnumerator SingleTap()
+    {
+        yield return new WaitForSeconds(0.3f);
+        if (tapCounter >= 2 ) StartCoroutine(DoubleTap());
+        else
+        {
+            //print("SingleTap");
+            tapCounter = 0;
+        }
+    }
+
+    IEnumerator DoubleTap()
+    {
+        StopCoroutine(singleTap);
+        actualSprite.sprite = actualSprite.sprite == swordSprite ? magicSprite : swordSprite;
+        playerAttack.rangeAttack = actualSprite.sprite == swordSprite ? false : true;
+        //print("DoubleTap");
+        tapCounter = 0;
+        yield return null;
+    }
 
     public virtual void OnDrag(PointerEventData eventData)
     {
@@ -63,6 +95,11 @@ public class FireJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoi
         OnDrag(eventData);
         playerAdRotation.onDrag = true;
         playerAttack.fireStickDown = true;
+
+        //Double or Single Tap to Change Weapon
+        tapCounter++;
+        singleTap = StartCoroutine(SingleTap());
+
     }
 
     public virtual void OnPointerUp(PointerEventData eventData)

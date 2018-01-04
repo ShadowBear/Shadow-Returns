@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SlimeHealth : MonoBehaviour
 {
 
+    [SerializeField]
     private int maxHealth = 30;
     private float health;
     public Image healthbar;
@@ -15,6 +16,7 @@ public class SlimeHealth : MonoBehaviour
     public Quaternion relativeRotation;
     public GameObject slime;
 
+    [SerializeField]
     private int lifeState = 3;
 
     //Header Beispiel für bessere Übersicht im Inspector

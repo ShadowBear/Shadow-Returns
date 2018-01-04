@@ -8,6 +8,8 @@ public class HealthScript : MonoBehaviour {
     private int maxHealth = 100;
     private float health;
     public Image healthbar;
+    public bool isShielded = false;
+    public Shield playerShieldScript;
 
     public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
     public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
@@ -48,13 +50,17 @@ public class HealthScript : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
-        if (!isDead)
+        if (!isDead && !isShielded)
         {
             //print("DamageTaken");
             health -= damage;
             healthbar.fillAmount = (float)health / maxHealth;
             if(anim != null) anim.SetTrigger("damaged");
             if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
+        }
+        else if(!isDead && isShielded)
+        {
+            playerShieldScript.TakeDMG(damage);
         }
     }
 

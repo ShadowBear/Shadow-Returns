@@ -21,6 +21,7 @@ public class SlimeAI : MonoBehaviour
     public float maxDistanceToMeele = 0.5f;
     public float smooth = 2.0f;
     public float attackRateTime = 1.0f;
+    public float waitAttackTime = 0.75f;
     public float fireForce = 5f;
     public BoxCollider hitbox;
 
@@ -70,6 +71,7 @@ public class SlimeAI : MonoBehaviour
     IEnumerator MeeleAttack()
     {
         isAttacking = true;
+        yield return new WaitForSeconds(waitAttackTime);
         if (anim != null) anim.SetTrigger("attack");
         hitbox.enabled = true;
         yield return new WaitForSeconds(attackRateTime);
