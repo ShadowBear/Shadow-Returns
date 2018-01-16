@@ -66,7 +66,7 @@ public class HealthScript : MonoBehaviour {
 
     void Dying()
     {
-        print("Die!!");
+        //print("Die!!");
         if (GameObject.FindGameObjectWithTag("Player") != gameObject) StartCoroutine(DieAnim());
     }
 

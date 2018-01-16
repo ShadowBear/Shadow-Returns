@@ -1,0 +1,140 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class GhostBossController : MonoBehaviour {
+
+    // ********* Attack Rate und SwapTime auf 0.5f Witziges Feature evtl. als Schwierigkeitsgrad nutzbar *****// 
+
+
+    GameObject player;
+    NavMeshAgent navAgent;
+    public LayerMask layer;
+    float testCounter = 0f;
+    bool left = false;
+    private float distanceToPlayer;
+    public float minDistanceBeforeAttack = 5;
+    public int minDistanceBeforeDodge = 8;
+    public float maxShootingDistance = 10;
+    public float swapTime = 2f;
+    public float waitDodgeTime = 1f;
+
+    public bool playerInView = true;
+    public Transform shotTransform;
+
+    private GhostBossAttack attackScript;
+    private bool hasDodged = false;
+    
+
+    
+    // Use this for initialization
+	void Start () {
+        player = GameObject.FindGameObjectWithTag("Player");
+        navAgent = GetComponent<NavMeshAgent>();
+        attackScript = GetComponent<GhostBossAttack>();
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        distanceToPlayer = (transform.position - player.transform.position).magnitude;
+        
+        // ********** Angriffen ausweichen ************* //
+        //if(distanceToPlayer < minDistanceBeforeDodge)
+        //{
+        //    if (!hasDodged)
+        //    {
+        //        if (player.GetComponentInChildren<PlayerAttack>().getAttackStatus())
+        //        {
+        //            StartCoroutine(Dodge(true));
+        //        }
+        //    }            
+        //}
+        if (distanceToPlayer < minDistanceBeforeAttack)
+        {
+            transform.LookAt(player.transform);
+            RaycastHit hit;
+            if (Physics.Raycast(shotTransform.position, shotTransform.forward, out hit, maxShootingDistance))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    //navAgent.isStopped = true;
+                    if (testCounter > swapTime)
+                    {
+                        testCounter = 0;
+                        //RoundThePlayer();
+                        attackScript.AttackEnemy(distanceToPlayer);
+                        //print("See Player and Attack");
+                    }
+                }
+                else
+                {
+                    navAgent.isStopped = false;
+                    navAgent.SetDestination(player.transform.position);
+                    //print("Walk to Player Cant See him");
+                }
+            }                       
+            testCounter += Time.deltaTime;
+        }
+        else
+        {
+            navAgent.isStopped = false;
+            navAgent.SetDestination(player.transform.position);
+        }
+        
+        
+	}
+
+    IEnumerator Dodge(bool sidewards)
+    {
+        hasDodged = true;
+        NavMeshHit hit;
+        if (sidewards)
+        {
+            if (Random.Range(0, 2) == 1)
+            {
+                if (NavMesh.SamplePosition(transform.position + 2 * Vector3.left, out hit, 0.5f, layer))
+                    navAgent.Warp(hit.position);
+                else if (NavMesh.SamplePosition(transform.position + 2 * Vector3.right, out hit, 0.5f, layer))
+                    navAgent.Warp(hit.position);
+            }
+            else
+            {
+                if (NavMesh.SamplePosition(transform.position + 2 * Vector3.right, out hit, 0.5f, layer))
+                    navAgent.Warp(hit.position);
+                else if (NavMesh.SamplePosition(transform.position + 2 * Vector3.left, out hit, 0.5f, layer))
+                    navAgent.Warp(hit.position);
+            }                
+        }
+        else
+        {
+            if (NavMesh.SamplePosition(transform.position + 2 * Vector3.back, out hit, 0.5f, layer))
+                navAgent.Warp(hit.position);
+        }
+        yield return new WaitForSeconds(waitDodgeTime);
+        hasDodged = false;
+        yield return null;
+
+    }
+
+    void RoundThePlayer()
+    {
+        //Vector3 pos = (Vector3)Random.insideUnitCircle.normalized * 5;
+        //navAgent.Warp(player.transform.position + pos);
+
+        // get a random direction (360°) in radians
+        float angle = Random.Range(0.0f, Mathf.PI * 2);
+
+        // create a vector with length 1.0
+        Vector3 V = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
+
+        // scale it to the desired length
+
+        NavMeshHit hit;
+        //Check if Position is on Navmesh 
+        if (NavMesh.SamplePosition(transform.position + V * minDistanceBeforeAttack, out hit, 1, layer))
+            navAgent.Warp(player.transform.position + V * minDistanceBeforeAttack);
+
+        transform.LookAt(player.transform.position);
+    }
+}

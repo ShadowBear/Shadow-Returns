@@ -16,7 +16,7 @@ public class EnemyShotDamage : MonoBehaviour
             col.GetComponent<HealthScript>().TakeDamage(damage);
         }
 
-        if (!col.CompareTag("Enemy") && !col.CompareTag("Light"))
+        if (!col.CompareTag("Enemy") && !col.CompareTag("Light") && !col.CompareTag("Boss"))
         {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadow-Returns", "Shadow-Returns.csproj", "{C1EF0696-1173-55A5-E607-F12AACA93B91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadow-Returns.Plugins", "Shadow-Returns.Plugins.csproj", "{DED20368-7660-7343-D55F-9E0FD8901064}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadow-Returns.Editor", "Shadow-Returns.Editor.csproj", "{BAC249CE-D909-9FC1-7844-64E0855B98EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1EF0696-1173-55A5-E607-F12AACA93B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1EF0696-1173-55A5-E607-F12AACA93B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1EF0696-1173-55A5-E607-F12AACA93B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1EF0696-1173-55A5-E607-F12AACA93B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED20368-7660-7343-D55F-9E0FD8901064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED20368-7660-7343-D55F-9E0FD8901064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED20368-7660-7343-D55F-9E0FD8901064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED20368-7660-7343-D55F-9E0FD8901064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC249CE-D909-9FC1-7844-64E0855B98EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC249CE-D909-9FC1-7844-64E0855B98EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC249CE-D909-9FC1-7844-64E0855B98EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC249CE-D909-9FC1-7844-64E0855B98EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

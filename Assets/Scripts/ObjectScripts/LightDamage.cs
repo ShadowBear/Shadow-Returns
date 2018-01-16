@@ -21,7 +21,7 @@ public class LightDamage : MonoBehaviour {
     void OnTriggerStay(Collider col)
     {
         if (col.CompareTag("Player")){
-            print("Dmg durch Licht");
+            //print("Dmg durch Licht");
             col.GetComponent<HealthScript>().TakeDamage(dmgAmount * Time.deltaTime);
         }
     }

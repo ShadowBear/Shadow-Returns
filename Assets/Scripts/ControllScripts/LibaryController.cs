@@ -128,6 +128,7 @@ public class LibaryController : MonoBehaviour
                 break;
             case 3:
                 ghostRageScript.enabled = true;
+                StartCoroutine(InstantiateEnemies(stage * 5));
                 stageCounter++;
                 break;
             case 4:

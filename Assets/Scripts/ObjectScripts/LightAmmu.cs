@@ -14,10 +14,15 @@ public class LightAmmu : MonoBehaviour {
             //Apply Damage
             col.GetComponent<HealthScript>().TakeDamage(damage);
         }
+        if (col.CompareTag("Boss"))
+        {
+            //Apply Damage
+            col.GetComponent<LibaryGhostBossHealth>().TakeDamage(damage);
+        }
         if (col.CompareTag("Slime")) col.GetComponent<SlimeHealth>().TakeDamage(damage);
         if (!col.CompareTag("Player") && !col.CompareTag("Light"))
         {
-            Instantiate(explosion, transform.position, transform.rotation);
+            if(explosion != null) Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FLickerLights : MonoBehaviour {
 
-    private Light light;
+    private Light lightSource;
     private float maxLightIntensitiy = 0.75f;
     public float waitTimeZip1 = 0.1f;
     public float waitTimeZip2 = 0.4f;
@@ -13,13 +13,13 @@ public class FLickerLights : MonoBehaviour {
     
     // Use this for initialization
 	void Start () {
-        light = gameObject.GetComponent<Light>();
+        lightSource = gameObject.GetComponent<Light>();
         StartCoroutine(Flicker());
     }
 
     void Update()
     {
-        if(light.intensity > 0)
+        if(lightSource.intensity > 0)
         {
             GetComponent<SphereCollider>().enabled = true;
         }
@@ -34,18 +34,18 @@ public class FLickerLights : MonoBehaviour {
         while (true)
         {
             //Flicker 4 times before light´s up
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip1);
-            light.intensity = 0f;
+            lightSource.intensity = 0f;
             yield return new WaitForSeconds(waitTimeZip1);
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip1);
-            light.intensity = 0f;;
+            lightSource.intensity = 0f;;
             yield return new WaitForSeconds(waitTimeZip3);
 
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip2);
-            light.intensity = 0f;
+            lightSource.intensity = 0f;
             //yield return new WaitForSeconds(waitTimeZip2);
             //light.intensity = maxLightIntensitiy;
             //yield return new WaitForSeconds(waitTimeZip2);
@@ -53,22 +53,22 @@ public class FLickerLights : MonoBehaviour {
             yield return new WaitForSeconds(waitTimeZip3);
 
             //Lights up for x Seconds
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(lightTime);
 
             //Flicker 2 times before light´s out
-            light.intensity = 0f;
+            lightSource.intensity = 0f;
             yield return new WaitForSeconds(waitTimeZip1);
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip1);
-            light.intensity = 0;
+            lightSource.intensity = 0;
             yield return new WaitForSeconds(waitTimeZip1);
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip3);
 
-            light.intensity = 0f;
+            lightSource.intensity = 0f;
             yield return new WaitForSeconds(waitTimeZip2);
-            light.intensity = maxLightIntensitiy;
+            lightSource.intensity = maxLightIntensitiy;
             //yield return new WaitForSeconds(waitTimeZip2);
             //light.intensity = 0;
             //yield return new WaitForSeconds(waitTimeZip2);
@@ -76,7 +76,7 @@ public class FLickerLights : MonoBehaviour {
             yield return new WaitForSeconds(waitTimeZip3);
 
             //Lights out for x Seconds
-            light.intensity = 0f;
+            lightSource.intensity = 0f;
             yield return new WaitForSeconds(lightTime);
         }
     }

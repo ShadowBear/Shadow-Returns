@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour {
 
     // Webplayer Beispiel Bedingung
 
-#if Unity_STANDALONE || UNITY_WEBPLAYER
-        // PC
+#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+    // PC
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
-#if Unity_STANDALONE || UNITY_WEBPLAYER
+#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 #else

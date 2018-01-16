@@ -25,7 +25,7 @@ public class PlayerRotation : MonoBehaviour {
 
         //Get the angle between the points
         float angle = -AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-        angle -= 270;
+        angle -= 90;
 
         //Ta Daaa
         transform.rotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
