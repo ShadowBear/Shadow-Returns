@@ -45,7 +45,21 @@ public class GhostBossAttack : MonoBehaviour {
 
     public void AttackEnemy(float distanceToPlayer)
     {
-        if (canShoot && !isAttacking) StartCoroutine(Attack03(distanceToPlayer));
+        if(distanceToPlayer < 2)
+        {
+            if (canShoot && !isAttacking) StartCoroutine(MeleeAttack01());
+        }else if(distanceToPlayer < 3)
+        {
+            if (canShoot && !isAttacking) StartCoroutine(Attack03(distanceToPlayer));
+        }else if(distanceToPlayer < 6)
+        {
+            if (canShoot && !isAttacking) StartCoroutine(RangeAttack());
+        }
+        else
+        {
+            if (canShoot && !isAttacking) StartCoroutine(Attack02());
+        }
+       
     }
 
     IEnumerator MeleeAttack01()
@@ -71,7 +85,7 @@ public class GhostBossAttack : MonoBehaviour {
         yield return new WaitForSeconds(attackRateTime);
         isAttacking = false;
         agent.isStopped = false;
-        yield return new WaitForSeconds(rangeAttackWaitTime);
+        //yield return new WaitForSeconds(rangeAttackWaitTime);
         canShoot = true;
         yield return null;
     }

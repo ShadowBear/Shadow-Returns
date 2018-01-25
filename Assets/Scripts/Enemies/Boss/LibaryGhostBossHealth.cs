@@ -8,6 +8,7 @@ public class LibaryGhostBossHealth : MonoBehaviour {
     [SerializeField]
     private int maxHealth = 3500;
     private float health;
+    private GhostBossController bossControl;
     public Image healthbar;
 
     public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
@@ -32,6 +33,7 @@ public class LibaryGhostBossHealth : MonoBehaviour {
         healthbar.fillAmount = health / maxHealth;
         relativeRotation = relativeRotationTransform.rotation;
         anim = GetComponent<Animator>();
+        bossControl = GetComponent<GhostBossController>();
         isDead = false;
         maxScale = transform.localScale;
     }
@@ -63,7 +65,13 @@ public class LibaryGhostBossHealth : MonoBehaviour {
             if (anim != null) anim.SetTrigger("damaged");
             //Scale of the Ghost is min 25% + Amount of Life left Full Life 75% halflife 37,5% ...
             transform.localScale = maxScale * (0.25f + (0.75f * (health / maxHealth)));
+            SetRageMode();
         }
+    }
+
+    private void SetRageMode()
+    {
+        if (health / maxHealth < 0.25) bossControl.SetRageMode(true,(health/maxHealth));
     }
 
     IEnumerator Die()

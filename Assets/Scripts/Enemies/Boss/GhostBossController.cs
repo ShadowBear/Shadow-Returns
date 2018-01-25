@@ -21,6 +21,8 @@ public class GhostBossController : MonoBehaviour {
     public float waitDodgeTime = 1f;
 
     public bool playerInView = true;
+    public bool rageMode = false;
+    public ParticleSystem rageParticle;
     public Transform shotTransform;
 
     private GhostBossAttack attackScript;
@@ -62,7 +64,7 @@ public class GhostBossController : MonoBehaviour {
                     if (testCounter > swapTime)
                     {
                         testCounter = 0;
-                        //RoundThePlayer();
+                        if(rageMode) RoundThePlayer();
                         attackScript.AttackEnemy(distanceToPlayer);
                         //print("See Player and Attack");
                     }
@@ -136,5 +138,14 @@ public class GhostBossController : MonoBehaviour {
             navAgent.Warp(player.transform.position + V * minDistanceBeforeAttack);
 
         transform.LookAt(player.transform.position);
+    }
+
+    public void SetRageMode(bool state, float leftHealthPercentage)
+    {
+        rageMode = true;
+        navAgent.speed *= 1.5f;
+        swapTime = 0.5f + 0.5f * (1 - leftHealthPercentage);
+        GetComponent<GhostBossAttack>().attackRateTime *= 0.5f;
+        rageParticle.Play();
     }
 }
