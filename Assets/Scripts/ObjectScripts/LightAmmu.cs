@@ -9,7 +9,7 @@ public class LightAmmu : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider col)
     {        
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag("Enemy") || col.CompareTag("Destroyable"))
         {
             //Apply Damage
             col.GetComponent<HealthScript>().TakeDamage(damage);

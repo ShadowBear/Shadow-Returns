@@ -1,0 +1,21 @@
+GraveYard:
+	- Riesiger Geist dessen Seele in 9 Teile aufgespalten ist
+	- Gräber mit Seelen (x)
+	- Geist verfolgt Spieler schießt und Raged (x)
+	- Slime erscheint aus dem Boden (x)
+	- Türme spawnen (x)
+	- Deko Kerzen/Totenköpfe/Ketten/etc.
+
+Libary:
+	- Explosion des Geisterfängers und dann Bosskampf
+	-
+
+ShadowRoom:
+
+
+
+GuI
+	- Menu
+	- Anzahl Geister
+	- Text am Bildschirm
+	- 

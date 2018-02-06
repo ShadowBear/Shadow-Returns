@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 6.0F;
     private Vector3 moveDirection = Vector3.zero;
     private Rigidbody playerRigidbody;
+    private Shield shield;
 
     // Webplayer Beispiel Bedingung
 
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        shield = GetComponentInChildren<Shield>();
     }
 #else
     // Android
@@ -45,6 +47,15 @@ public class PlayerMovement : MonoBehaviour {
         //moveDirection *= speed * Time.deltaTime;
         //transform.Translate(moveDirection);
         //this.characterController.Move(moveDirection);
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            shield.activateShield();
+        }
+        else
+        {
+            shield.deActivateShield();
+        }
     }
 
     private void Move(float h, float v)

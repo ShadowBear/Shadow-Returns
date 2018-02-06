@@ -9,9 +9,8 @@ public class LibaryController : MonoBehaviour
 {
     public int stageCounter = 1;
     public int towerDamage = 10;
-    public GameObject ghost;
-    public GameObject zombie;
-    public GameObject tower;
+    public GameObject ghost,zombie,tower;
+    public GameObject boss;
     public GameObject[] chains;
     public GhostRage ghostRageScript;
 
@@ -104,9 +103,9 @@ public class LibaryController : MonoBehaviour
     }
     void CheckEnemyState()
     {
-        if (GameObject.FindGameObjectWithTag("Enemy") == null && stageCounter < 5 && stageCounter > 0 && !gamePaused)
+        if (GameObject.FindGameObjectWithTag("Enemy") == null && GameObject.FindGameObjectWithTag("Boss") == null && !gamePaused)
         {
-            nextStage(stageCounter);
+            if(stageCounter < 5 && stageCounter > 0) nextStage(stageCounter);
         }
     }
 
@@ -124,6 +123,7 @@ public class LibaryController : MonoBehaviour
             case 2:
                 StartCoroutine(InstantiateTowers(5));
                 StartCoroutine(InstantiateEnemies(stage * 5));
+                boss.SetActive(true);
                 stageCounter++;
                 break;
             case 3:

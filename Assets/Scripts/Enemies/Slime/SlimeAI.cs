@@ -80,7 +80,7 @@ public class SlimeAI : MonoBehaviour
             if (isCircling) transform.LookAt(player.transform.position);
 
             //Ausweichen falls Angriff kommt und ausweichen darf
-            if (player.GetComponentInChildren<PlayerAttack>().getAttackStatus() && !hasDodged)
+            if (player.GetComponentInChildren<PlayerAttack>().getAttackStatus() && !hasDodged && rigid != null)
             {
                 //Wahrscheinlichkeit mit der ausgewichen werden soll 0.5 = 50%; 0.8 = 80%;
                 if(Random.Range(0,1) < dodgeChance)StartCoroutine(DodgeAttack());
@@ -106,7 +106,7 @@ public class SlimeAI : MonoBehaviour
     IEnumerator DodgeAttack()
     {
         hasDodged = true;
-        int dodgeDirection = (int)Mathf.Round(Random.Range(0, 2));
+        int dodgeDirection = Random.Range(0, 3);
         switch (dodgeDirection)
         {
             case 0: rigid.AddForce(-transform.forward.normalized * dodgeForce, ForceMode.Impulse);

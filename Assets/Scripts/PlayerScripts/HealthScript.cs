@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour {
 
-    private int maxHealth = 100;
+    public int maxHealth = 100;
     private float health;
     public Image healthbar;
     public bool isShielded = false;
@@ -25,8 +25,8 @@ public class HealthScript : MonoBehaviour {
 
     void Start () {
         health = maxHealth;
-        healthbar.fillAmount = health / maxHealth;
-        relativeRotation = relativeRotationTransform.rotation;
+        if(healthbar != null) healthbar.fillAmount = health / maxHealth;
+        if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
         anim = GetComponent<Animator>();
         isDead = false;
         if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
@@ -54,13 +54,13 @@ public class HealthScript : MonoBehaviour {
         {
             //print("DamageTaken");
             health -= damage;
-            healthbar.fillAmount = (float)health / maxHealth;
+            if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
             if(anim != null) anim.SetTrigger("damaged");
             if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
         }
         else if(!isDead && isShielded)
         {
-            playerShieldScript.TakeDMG(damage);
+            if (playerShieldScript != null) playerShieldScript.TakeDMG(damage);
         }
     }
 
@@ -73,8 +73,12 @@ public class HealthScript : MonoBehaviour {
     IEnumerator DieAnim()
     {
         isDead = true;
-        anim.SetBool("die", true);
-        yield return new WaitForSeconds(1.2f);
+        if (anim != null)
+        {
+            anim.SetBool("die", true);
+            yield return new WaitForSeconds(1.2f);
+        }
+        if (GetComponent<HidingGhostTomb>() != null) GetComponent<HidingGhostTomb>().Die();
         Destroy(gameObject);
         yield return null;   
     }

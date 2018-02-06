@@ -12,6 +12,8 @@ public class PlayerAttack : MonoBehaviour {
     public float fireRate = 0.5f;
     public bool isAttacking = false;
     public bool fireStickDown = false;
+    private bool isShielded = false;
+    public HealthScript healthScript;
 
     //Range AttackBoolen & Collider for Meele
     public bool rangeAttack = true;
@@ -23,7 +25,7 @@ public class PlayerAttack : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
-        meeleHitbox.enabled = false;
+        meeleHitbox.enabled = false;        
 	}
 	
 	// Update is called once per frame
@@ -37,13 +39,25 @@ public class PlayerAttack : MonoBehaviour {
 
     private void CheckFired()
     {
+        
 #if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        if (Input.GetButtonDown("Fire1") && !isAttacking)
+        if (Input.GetButtonDown("Fire1"))
         {
-            if (rangeAttack) StartCoroutine(Fire());
-            else StartCoroutine(MeeleHit());
+            isShielded = healthScript.isShielded;
+            if (!isAttacking && !isShielded)
+            {
+                if (rangeAttack) StartCoroutine(Fire());
+                else StartCoroutine(MeeleHit());
+            }            
         }
-        if (Input.GetButtonDown("Fire2")) StartCoroutine(Light());
+        if (Input.GetButtonDown("Fire2"))
+        {
+            isShielded = healthScript.isShielded;
+            if (!isAttacking && !isShielded)
+            {
+                StartCoroutine(Light());
+            }            
+        }
 #else
         if (fireStickDown && rangeAttack && !isShooting) StartCoroutine(Fire());
         else if(fireStickDown && !rangeAttack && !isShooting) StartCoroutine(MeeleHit());

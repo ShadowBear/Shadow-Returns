@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public int playerHealth = 100;
     public int shieldHealth = 100;
 
+
     public static GameManager control;
     
     
