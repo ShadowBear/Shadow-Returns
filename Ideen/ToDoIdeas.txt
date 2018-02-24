@@ -4,7 +4,7 @@ GraveYard:
 	- Geist verfolgt Spieler schießt und Raged (x)
 	- Slime erscheint aus dem Boden (x)
 	- Türme spawnen (x)
-	- Deko Kerzen/Totenköpfe/Ketten/etc.
+	- Deko Kerzen/Totenköpfe/Ketten/etc.(\)
 
 Libary:
 	- Explosion des Geisterfängers und dann Bosskampf
@@ -18,4 +18,25 @@ GuI
 	- Menu
 	- Anzahl Geister
 	- Text am Bildschirm
+	- GTA RadMenu
+	- Schadenanzeigen bei Treffer
+	- Schaden prozentsatz wie Parameters
+	- 
+Gegner:
+	- Charge auf alte Pos attack in aktuelle Pos
+	- Nur von Hinten Schaden (Trojan SPKn)
+	- Blick in eine Richtung (Augen Stories)
+	- Heilende Bots
+Drops:
+	- Erfahrung?
+	- Leben
+	- Energie?
+Waffen: 
+	- Bomben?
+	- Schwert dreier Kombo
+	- Bewegung beim Schießen verlangsamen
+	- 3-5 Schuss dann nachladen
+	- 
+Generell:
+	- Roarmolus Twins prinzip
 	- 
