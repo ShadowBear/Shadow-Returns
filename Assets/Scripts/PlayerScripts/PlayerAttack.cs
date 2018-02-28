@@ -8,9 +8,13 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject light;
     public Transform fireTransform;
     public float fireForce = 5;
+    public int ammuAmount;
+    public int maxAmmu = 3;
+    private static float reloadTime = 1.467f;
 
     public float fireRate = 0.5f;
     public bool isAttacking = false;
+    public bool isReloading = false;
     public bool fireStickDown = false;
     private bool isShielded = false;
     public HealthScript healthScript;
@@ -25,7 +29,8 @@ public class PlayerAttack : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
-        meeleHitbox.enabled = false;        
+        meeleHitbox.enabled = false;
+        ammuAmount = maxAmmu;  
 	}
 	
 	// Update is called once per frame
@@ -44,9 +49,16 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             isShielded = healthScript.isShielded;
-            if (!isAttacking && !isShielded)
+            if (!isAttacking && !isShielded && !isReloading)
             {
-                if (rangeAttack) StartCoroutine(Fire());
+                if (rangeAttack)
+                {
+                    if (ammuAmount > 0)
+                    {
+                        ammuAmount--;
+                        StartCoroutine(Shooting());    //StartCoroutine(Fire());
+                    }
+                }
                 else StartCoroutine(MeeleHit());
             }            
         }
@@ -67,7 +79,7 @@ public class PlayerAttack : MonoBehaviour {
     IEnumerator Fire()
     {
         isAttacking = true;
-        anim.SetBool("Range",true);
+        anim.SetBool("Range", true);
         anim.SetTrigger("Fire");
         yield return new WaitForSeconds(0.25f);
         GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
@@ -78,6 +90,43 @@ public class PlayerAttack : MonoBehaviour {
         isAttacking = false;
         yield return null;
         
+    }
+
+    IEnumerator Shooting()
+    {
+        if (isReloading || isAttacking) yield break;
+        isAttacking = true;
+        if (!anim.GetBool("Shooting")) {
+            anim.SetBool("Range", true);
+            anim.SetBool("Shooting", true);
+            yield return new WaitForSeconds(0.25f);
+        }
+        if (!isReloading)
+        {
+            GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
+            shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
+            //ammuAmount--;
+        }
+        if(ammuAmount <= 0 && !isReloading)
+        {
+            anim.SetTrigger("Reload");
+            isReloading = true;
+            // reloadTime Animtion + Puffer time 0.25
+            yield return new WaitForSeconds(reloadTime + 0.25f);
+            //yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(anim.GetLayerIndex("Reload-02")).Length);
+            ammuAmount = maxAmmu;
+            isReloading = false;
+        }
+        yield return new WaitForSeconds(fireRate - 0.25f);
+        isAttacking = false;
+        //WaitTime before Stop Shooting
+        yield return new WaitForSeconds(0.5f);
+        if (!isAttacking)
+        {
+            anim.SetBool("Shooting", false);
+            ammuAmount = maxAmmu;
+        }
+        yield return null;
     }
 
     IEnumerator MeeleHit()
