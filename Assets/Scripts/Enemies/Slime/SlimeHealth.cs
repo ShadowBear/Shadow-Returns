@@ -57,6 +57,7 @@ public class SlimeHealth : MonoBehaviour
         {
             health -= damage;
             healthbar.fillAmount = (float)health / maxHealth;
+            if (damage > 1) GameManager.control.ShowDmgText(damage, transform);
             //if (anim != null) anim.SetTrigger("damaged");
         }
     }

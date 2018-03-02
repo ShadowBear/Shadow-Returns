@@ -61,6 +61,7 @@ public class LibaryGhostBossHealth : MonoBehaviour {
         {
             health -= damage;
             healthbar.fillAmount = (float)health / maxHealth;
+            if (damage > 1) GameManager.control.ShowDmgText(damage, transform);
             if (Random.Range(0f, 1f) < ghostSpawnPercentage) Instantiate(ghost, transform.position, ghost.transform.rotation);
             if (anim != null) anim.SetTrigger("damaged");
             //Scale of the Ghost is min 25% + Amount of Life left Full Life 75% halflife 37,5% ...

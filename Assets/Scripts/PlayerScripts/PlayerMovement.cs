@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            Vector3 dashVelocity = Vector3.Scale(transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * playerRigidbody.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * playerRigidbody.drag + 1)) / -Time.deltaTime)));
+            Vector3 dashVelocity = Vector3.Scale(transform.GetChild(1).transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime)));
             playerRigidbody.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
 

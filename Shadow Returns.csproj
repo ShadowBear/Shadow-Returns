@@ -366,6 +366,7 @@
     <Compile Include="Assets\Scripts\ControllScripts\Arena01Controller.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\CamerController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\CursorControll.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\DamageTextControll.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\DemoCheats.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GraveyardController.cs" />
