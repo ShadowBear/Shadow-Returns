@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     //Animation Speed
     private float animSpeed = 0;
     private Vector3 lastPosition = Vector3.zero;
+    private PlayerAttack attackScript;
 
 
     // Webplayer Beispiel Bedingung
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour {
         shield = GetComponentInChildren<Shield>();
         groundCheckTrans = transform.GetChild(0);
         anim = GetComponentInChildren<Animator>();
+        attackScript = GetComponentInChildren<PlayerAttack>();
     }
 #else
     // Android
@@ -71,7 +73,8 @@ public class PlayerMovement : MonoBehaviour {
         /* ******************** Shield *************************/
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            shield.activateShield();
+
+            if(!attackScript.isAttacking && !attackScript.isReloading) shield.activateShield();
         }
         else
         {
