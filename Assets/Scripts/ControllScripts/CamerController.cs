@@ -9,21 +9,51 @@ public class CamerController : MonoBehaviour {
     public float smoothSpeed = .125f;
     private Vector3 desiredPosition;
     private Vector3 smoothedPosition;
+    private GameObject player;
+
+    public Transform cameraPoint;
 
     //private RaycastHit oldHit;
+    RaycastHit[] hits;
 
     // Use this for initialization
     void Start () {
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        Debug.DrawRay(this.transform.position, (cameraPoint.position - transform.position), Color.magenta);
+        if(hits != null) HideObjects(true);        
         desiredPosition = follow.transform.position + offset;
         smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
+        //hits = Physics.RaycastAll(transform.position, (cameraPoint.position - transform.position), Vector3.Distance(transform.position, cameraPoint.position));
+        hits = Physics.SphereCastAll(transform.position, 0.5f, (cameraPoint.position - transform.position), Vector3.Distance(transform.position, cameraPoint.position));
+        HideObjects(false);
         //XRay();
     }
+
+
+    void HideObjects(bool state)
+    {
+        foreach (RaycastHit hit in hits)
+        {
+            Renderer r = null;
+            if (hit.transform != null) r = hit.collider.GetComponent<Renderer>();
+            if (r)
+            {
+                //r.enabled = state;
+                Color temp = r.material.color;
+                temp.a = state ? 1f : 0.5f;
+                r.material.color = temp;
+                if (!state) r.material.shader = Shader.Find("Transparent/Diffuse");
+                else r.material.shader = Shader.Find("Toon/Lit");
+            }
+        }
+    }
+
+
     //private void XRay()
     //{
 

@@ -22,7 +22,6 @@ public class HealthScript : MonoBehaviour {
 
     private Animator anim;
 
-
     void Start () {
         health = maxHealth;
         if(healthbar != null) healthbar.fillAmount = health / maxHealth;
@@ -53,10 +52,12 @@ public class HealthScript : MonoBehaviour {
         if (!isDead && !isShielded)
         {
             //print("DamageTaken");
+            
             health -= damage;
             if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
             if(anim != null) anim.SetTrigger("damaged");
             if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
+            else if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
         }
         else if(!isDead && isShielded)
         {

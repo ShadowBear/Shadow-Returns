@@ -8,6 +8,8 @@ public class PlayerRotation : MonoBehaviour {
     private Vector2 mousePos;
     private Vector2 screenPos;
 
+    public LayerMask floorMask;
+
  
     // Use this for initialization
     void Start () {
@@ -16,23 +18,26 @@ public class PlayerRotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
-        //Get the Screen positions of the object
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-
-        //Get the Screen position of the mouse
-        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-
-        //Get the angle between the points
-        float angle = -AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
-        angle -= 90;
-
-        //Ta Daaa
-        transform.rotation = Quaternion.Euler(new Vector3(0f, angle, 0f));
+        Turning();
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
     {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
+
+    void Turning()
+    {
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit floorHit;
+
+        if(Physics.Raycast(camRay, out floorHit, floorMask))
+        {
+            Vector3 playerToMouse = floorHit.point - transform.position;
+            playerToMouse.y = 0f;
+            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            transform.rotation = newRotation;            
+        }
+    }
+
 }

@@ -9,6 +9,7 @@ public class Arena01Controller : MonoBehaviour {
     public GameObject ghostDoorKepper;
     public GameObject enemyGhost;
     public GameObject enemyZombie;
+    public GameObject bigSlime;
     public float spawnTime = 0.5f;
 
     public Transform spawenPointTransform;
@@ -35,6 +36,10 @@ public class Arena01Controller : MonoBehaviour {
                 waveCounter--;
                 if (waveCounter > 0) StartCoroutine(SpawnEnemies(spawnTime));
                 else ArenaComplete();
+                if(waveCounter == 1)
+                {
+                    Instantiate(bigSlime, transform.position, transform.rotation);
+                }
                //Next Wave Starts
                //print("Nächste Wave");
             }
