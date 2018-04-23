@@ -21,8 +21,11 @@ public class HealthScript : MonoBehaviour {
     public Image dmgFrame;
 
     private Animator anim;
+    private Vector3 rotationOffset;
+    private GameObject player;
 
     void Start () {
+        player = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
         if(healthbar != null) healthbar.fillAmount = health / maxHealth;
         if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
@@ -37,7 +40,7 @@ public class HealthScript : MonoBehaviour {
         {
             Dying();
         }
-        if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
+        //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
     }
 
     public void SetHealth(int value)
@@ -92,5 +95,12 @@ public class HealthScript : MonoBehaviour {
         //dmgFrame.enabled = false;
         dmgFrame.CrossFadeAlpha(0, 0.5f, false);
         yield return null;
+    }
+
+    public void RotateHealthbar()
+    {
+        rotationOffset = Camera.main.transform.position;
+        rotationOffset.y = player.transform.position.y;
+        transform.LookAt(rotationOffset);
     }
 }

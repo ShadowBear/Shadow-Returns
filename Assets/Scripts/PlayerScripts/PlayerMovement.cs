@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 lastPosition = Vector3.zero;
     private PlayerAttack attackScript;
 
+    private Vector3 rotationOffset;
 
     // Webplayer Beispiel Bedingung
 
@@ -58,6 +59,8 @@ public class PlayerMovement : MonoBehaviour {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
+        RotateWithCamera();
+
 #else
         float h = vrStick.Horizontal();
         float v = vrStick.Vertical(); 
@@ -78,7 +81,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
         {
-            shield.deActivateShield();
+            if(shield != null) shield.deActivateShield();
         }
         /************************************************************/
 
@@ -108,11 +111,36 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Move(float h, float v)
     {
-        moveDirection = new Vector3(h, 0, v); 
+        //moveDirection = new Vector3(h, 0, v); 
         // Normalise the movement vector and make it proportional to the speed per second.
-        moveDirection = moveDirection.normalized * speed * Time.deltaTime;
+
 
         // Move the player to it's current position plus the movement.
-        playerRigidbody.MovePosition(new Vector3(transform.position.x + moveDirection.x, transform.position.y , transform.position.z + moveDirection.z));
+
+        /** Had 2 Be Commented for Movement towards Camera Rotation **///
+        if (h != 0 || v != 0)
+        {
+            moveDirection = Vector3.zero;
+            moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
+            moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
+
+            moveDirection = moveDirection.normalized * speed * Time.deltaTime;
+
+            playerRigidbody.MovePosition(new Vector3(transform.position.x + moveDirection.x, transform.position.y, transform.position.z + moveDirection.z));
+        }
+        
+    }
+
+    private void RotateWithCamera()
+    {
+        //rotationOffset = Camera.main.transform.position;
+        //rotationOffset.y = transform.position.y;
+        //Vector3.RotateTowards(transform.position, rotationOffset, (speed * Time.deltaTime), 0.0f);
+        //Debug.Log("Rotate");
+
+        //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
+        //moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
+        //transform.Translate(-moveDirection * Time.deltaTime * speed);
     }
 }

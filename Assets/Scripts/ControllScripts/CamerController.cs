@@ -6,12 +6,16 @@ public class CamerController : MonoBehaviour {
 
     public GameObject follow;
     public Vector3 offset;
+    [Range(0.1f,1.0f)]
     public float smoothSpeed = .125f;
     private Vector3 desiredPosition;
     private Vector3 smoothedPosition;
     private GameObject player;
 
     public Transform cameraPoint;
+
+    public bool rotateAroundPlayer = true;
+    public float rotationSpeed = 5.0f;
 
     //private RaycastHit oldHit;
     RaycastHit[] hits;
@@ -23,10 +27,18 @@ public class CamerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed, Vector3.up);
+            offset = camTurnAngle * offset;
+            transform.LookAt(player.transform);
+            player.GetComponent<HealthScript>().RotateHealthbar();
+        }
         Debug.DrawRay(this.transform.position, (cameraPoint.position - transform.position), Color.magenta);
         if(hits != null) HideObjects(true);        
         desiredPosition = follow.transform.position + offset;
-        smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        smoothedPosition = Vector3.Slerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = smoothedPosition;
         //hits = Physics.RaycastAll(transform.position, (cameraPoint.position - transform.position), Vector3.Distance(transform.position, cameraPoint.position));
         hits = Physics.SphereCastAll(transform.position, 0.5f, (cameraPoint.position - transform.position), Vector3.Distance(transform.position, cameraPoint.position));
@@ -40,7 +52,7 @@ public class CamerController : MonoBehaviour {
         foreach (RaycastHit hit in hits)
         {
             Renderer r = null;
-            if (hit.transform != null) r = hit.collider.GetComponent<Renderer>();
+            if (hit.transform != null && !hit.collider.isTrigger) r = hit.collider.GetComponent<Renderer>();
             if (r)
             {
                 //r.enabled = state;
