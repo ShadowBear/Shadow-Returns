@@ -13,8 +13,9 @@ public class Leaver : MonoBehaviour {
 	void Start () {
         anim = GetComponent<Animator>();
         anim.SetBool("isActivated", isActivated);
-        toOpenObject.SetActive(!isActivated);
-	}
+        if(toOpenObject) toOpenObject.SetActive(!isActivated);
+        else print("Leaver has no Objekt assigned"); 
+    }
 
     private void OnTriggerStay(Collider other)
     {

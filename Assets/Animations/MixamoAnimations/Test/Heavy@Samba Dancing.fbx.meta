@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: 6ccbe70d9a9290743a524c08596f74ac
+timeCreated: 1525341160
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bone_Root
+    100002: Head_01
+    100004: Head_02
+    100006: //RootNode
+    100008: Left_Arm
+    100010: Left_Arm_2
+    100012: Left_Calf
+    100014: Left_Finger_01
+    100016: Left_Finger_02
+    100018: Left_Foot_01
+    100020: Left_Foot_02
+    100022: Left_Forearm
+    100024: Left_Leg
+    100026: Left_Thigh
+    100028: Mechanical_skeleton
+    100030: Neck
+    100032: Pelvis
+    100034: Right_Arm
+    100036: Right_Arm_2
+    100038: Right_Calf
+    100040: Right_Finger_01
+    100042: Right_Finger_02
+    100044: Right_Foot_01
+    100046: Right_Foot_02
+    100048: Right_Forearm
+    100050: Right_Leg
+    100052: Right_Thigh
+    100054: Spine
+    100056: Type_B_Breast
+    100058: Type_B_Head
+    100060: Type_B_Left_arm
+    100062: Type_B_Left_leg
+    100064: Type_B_Left_shoulder
+    100066: Type_B_Pelvis
+    100068: Type_B_Right_arm
+    100070: Type_B_Right_leg
+    100072: Type_B_Right_shoulder
+    100074: "\u7ACB\u65B9\u4F53_5"
+    400000: Bone_Root
+    400002: Head_01
+    400004: Head_02
+    400006: //RootNode
+    400008: Left_Arm
+    400010: Left_Arm_2
+    400012: Left_Calf
+    400014: Left_Finger_01
+    400016: Left_Finger_02
+    400018: Left_Foot_01
+    400020: Left_Foot_02
+    400022: Left_Forearm
+    400024: Left_Leg
+    400026: Left_Thigh
+    400028: Mechanical_skeleton
+    400030: Neck
+    400032: Pelvis
+    400034: Right_Arm
+    400036: Right_Arm_2
+    400038: Right_Calf
+    400040: Right_Finger_01
+    400042: Right_Finger_02
+    400044: Right_Foot_01
+    400046: Right_Foot_02
+    400048: Right_Forearm
+    400050: Right_Leg
+    400052: Right_Thigh
+    400054: Spine
+    400056: Type_B_Breast
+    400058: Type_B_Head
+    400060: Type_B_Left_arm
+    400062: Type_B_Left_leg
+    400064: Type_B_Left_shoulder
+    400066: Type_B_Pelvis
+    400068: Type_B_Right_arm
+    400070: Type_B_Right_leg
+    400072: Type_B_Right_shoulder
+    400074: "\u7ACB\u65B9\u4F53_5"
+    2100000: Heavy-3
+    2100002: Heavy-1
+    2100004: Heavy-4
+    2100006: Heavy-2
+    2100008: No Name
+    2100010: Body
+    2300000: Type_B_Breast
+    2300002: Type_B_Head
+    2300004: Type_B_Left_arm
+    2300006: Type_B_Left_leg
+    2300008: Type_B_Left_shoulder
+    2300010: Type_B_Pelvis
+    2300012: Type_B_Right_arm
+    2300014: Type_B_Right_leg
+    2300016: Type_B_Right_shoulder
+    2300018: "\u7ACB\u65B9\u4F53_5"
+    3300000: Type_B_Breast
+    3300002: Type_B_Head
+    3300004: Type_B_Left_arm
+    3300006: Type_B_Left_leg
+    3300008: Type_B_Left_shoulder
+    3300010: Type_B_Pelvis
+    3300012: Type_B_Right_arm
+    3300014: Type_B_Right_leg
+    3300016: Type_B_Right_shoulder
+    3300018: "\u7ACB\u65B9\u4F53_5"
+    4300000: Type_B_Pelvis
+    4300002: Type_B_Left_leg
+    4300004: Type_B_Right_leg
+    4300006: "\u7ACB\u65B9\u4F53_5"
+    4300008: Type_B_Breast
+    4300010: Type_B_Left_shoulder
+    4300012: Type_B_Left_arm
+    4300014: Type_B_Right_shoulder
+    4300016: Type_B_Right_arm
+    4300018: Type_B_Head
+    4300020: Mechanical_skeleton
+    7400000: Samba Dancing
+    9500000: //RootNode
+    13700000: Mechanical_skeleton
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Samba Dancing
+      takeName: mixamo.com
+      firstFrame: 0
+      lastFrame: 546
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
