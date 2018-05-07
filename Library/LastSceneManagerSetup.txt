@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/BasicTestScene.unity
+- path: Assets/PolygonPirates/Scenes/Demo_Main.unity
   isLoaded: 1
   isActive: 1
