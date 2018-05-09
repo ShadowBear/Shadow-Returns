@@ -105,11 +105,11 @@ public class LibaryController : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Enemy") == null && GameObject.FindGameObjectWithTag("Boss") == null && !gamePaused)
         {
-            if(stageCounter < 5 && stageCounter > 0) nextStage(stageCounter);
+            if(stageCounter < 5 && stageCounter > 0) NextStage(stageCounter);
         }
     }
 
-    void nextStage(int stage)
+    void NextStage(int stage)
     {
         switch (stage)
         {

@@ -37,7 +37,7 @@ public class GraveyardController : MonoBehaviour {
         }
     }
 
-    public void ghostKilled()
+    public void GhostKilled()
     {
         ghostCounter--;
         if(ghostCounter <= 0)
@@ -62,11 +62,11 @@ public class GraveyardController : MonoBehaviour {
             bossGhost.SetActive(true);
             GetComponent<BoxCollider>().enabled = false;
             slimeSpawner.enabled = true;
-            activateTowers();
+            ActivateTowers();
         }
     }
 
-    private void activateTowers()
+    private void ActivateTowers()
     {
         foreach(Transform child in towerTransformParent.transform)
         {

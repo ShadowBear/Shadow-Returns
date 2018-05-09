@@ -15,6 +15,6 @@ public class HidingGhostTomb : MonoBehaviour {
         print("Tod");
         GameObject instGhost = Instantiate(ghost, transform.position, ghost.transform.rotation);
         instGhost.GetComponent<HealthScript>().SetHealth(hidingGhostHealth);
-        if (gyControll != null) gyControll.ghostKilled();
+        if (gyControll != null) gyControll.GhostKilled();
     }
 }

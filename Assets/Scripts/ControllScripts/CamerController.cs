@@ -23,17 +23,14 @@ public class CamerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-	}
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed, Vector3.up);
-            offset = camTurnAngle * offset;
-            transform.LookAt(player.transform);
-            player.GetComponent<HealthScript>().RotateHealthbar();
+            TurnCameraLook();
         }
         Debug.DrawRay(this.transform.position, (cameraPoint.position - transform.position), Color.magenta);
         if(hits != null) HideObjects(true);        
@@ -46,13 +43,21 @@ public class CamerController : MonoBehaviour {
         //XRay();
     }
 
+    void TurnCameraLook()
+    {
+        Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed, Vector3.up);
+        offset = camTurnAngle * offset;
+        transform.LookAt(player.transform);
+        player.GetComponent<HealthScript>().RotateHealthbar();
+    }
+
 
     void HideObjects(bool state)
     {
         foreach (RaycastHit hit in hits)
         {
             Renderer r = null;
-            if (hit.transform != null && !hit.collider.isTrigger) r = hit.collider.GetComponent<Renderer>();
+            if (hit.transform != null && !hit.collider.isTrigger && !hit.collider.CompareTag("Invisible")) r = hit.collider.GetComponent<Renderer>();
             if (r)
             {
                 //r.enabled = state;

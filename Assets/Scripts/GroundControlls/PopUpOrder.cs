@@ -33,9 +33,9 @@ public class PopUpOrder : MoveMe {
     {
         if (col.CompareTag("Player"))
         {
-            if (GetComponentInParent<PopUpGroundMaze>().nextTrigger(trigger)) correct = true;
+            if (GetComponentInParent<PopUpGroundMaze>().NextTrigger(trigger)) correct = true;
             else correct = false;
-            print("EnterTrigger");
+            //print("EnterTrigger");
         }
     }
 

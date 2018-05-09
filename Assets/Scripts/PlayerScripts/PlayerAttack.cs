@@ -55,7 +55,7 @@ public class PlayerAttack : MonoBehaviour {
     {
         
 #if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.timeScale != 0)
         {
             isShielded = healthScript.isShielded;
             if (!isAttacking && !isShielded && !isReloading)
@@ -71,7 +71,7 @@ public class PlayerAttack : MonoBehaviour {
                 else StartCoroutine(MeeleHit());
             }            
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && Time.timeScale != 0)
         {
             isShielded = healthScript.isShielded;
             if (!isAttacking && !isShielded)
@@ -167,7 +167,7 @@ public class PlayerAttack : MonoBehaviour {
         rangeAttack = rangeAttack ? false : true;
     }
 
-    public bool getAttackStatus()
+    public bool GetAttackStatus()
     {
         return isAttacking;
     }

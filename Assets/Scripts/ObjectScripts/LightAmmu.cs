@@ -25,7 +25,7 @@ public class LightAmmu : MonoBehaviour {
         {            
             col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
         }
-        if (!col.CompareTag("Player") && !col.CompareTag("Light"))
+        if (!col.CompareTag("Player") && !col.CompareTag("Light") && !col.isTrigger)
         {
             if(explosion != null) Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);

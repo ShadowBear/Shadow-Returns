@@ -12,7 +12,7 @@ public class MoveMe : MonoBehaviour {
     public bool moveDown = false;
 
     [SerializeField]
-    private float movingSpeed = 0.1f;
+    private float movingSpeed = 0.075f;
 
     // Use this for initialization
     void Start () {

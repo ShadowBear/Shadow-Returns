@@ -24,26 +24,32 @@ public class PopUpGroundMaze : MonoBehaviour {
         triggerCounter = 0;
 	}
 	
-    public bool nextTrigger(Collider trigger)
+    public bool NextTrigger(Collider trigger)
     {
         if(triggerCounter < triggerboxes.Length)
         {
             if (trigger == triggerboxes[triggerCounter])
             {
-                print("TriggerCorrect");
+                //print("TriggerCorrect");
                 triggerCounter++;
                 if(triggerCounter == triggerboxes.Length)
                 {
                     if (objectToActivate.GetComponent<BuildAreaUp>())
                     {
                         objectToActivate.GetComponent<BuildAreaUp>().BuildItUp();
+                        ExitRiddle();
+                        return false;
                     }
                 }
                 return true;
             }
             else
             {
-                print("TriggerFalsch");
+                for(int i = 0; i < triggerCounter; i++)
+                {
+                    if (trigger == triggerboxes[i]) return true;
+                }
+                //print("TriggerFalsch");
                 triggerCounter = 0;
                 foreach(CapsuleCollider cap in triggerboxes)
                 {
@@ -55,5 +61,15 @@ public class PopUpGroundMaze : MonoBehaviour {
         return true;   
     }
 
+    void ExitRiddle()
+    {
+        foreach (CapsuleCollider cap in triggerboxes)
+        {
+            if (cap.GetComponent<PopUpOrder>()) {
+                cap.GetComponent<PopUpOrder>().correct = false;
+                Destroy(cap.GetComponent<PopUpOrder>(),1f);
+            }
+        }
+    }
 
 }

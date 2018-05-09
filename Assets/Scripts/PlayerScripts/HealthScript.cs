@@ -40,6 +40,7 @@ public class HealthScript : MonoBehaviour {
         {
             Dying();
         }
+        RotateHealthbar();
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
     }
 
@@ -96,6 +97,7 @@ public class HealthScript : MonoBehaviour {
         dmgFrame.CrossFadeAlpha(0, 0.5f, false);
         yield return null;
     }
+
 
     public void RotateHealthbar()
     {

@@ -20,7 +20,7 @@ public class Shield : MonoBehaviour {
     public Light lightColor;
 
     public Image shieldImage;
-
+    public Text shieldText;
 
 
 	// Use this for initialization
@@ -40,7 +40,8 @@ public class Shield : MonoBehaviour {
 
         //playerShoot.shielded = rend.enabled ? true : false;
 
-        shieldImage.fillAmount = 1 * power/ maxPower;  
+        shieldImage.fillAmount = 1 * power/ maxPower;
+        shieldText.text = (int)power + "/" + maxPower;
 
         if(resetTimer > 0) resetTimer -= Time.deltaTime;
 
