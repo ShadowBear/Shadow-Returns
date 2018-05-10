@@ -85,6 +85,7 @@ public class HealthScript : MonoBehaviour {
         }
         if (GetComponent<HidingGhostTomb>() != null) GetComponent<HidingGhostTomb>().Die();
         Destroy(gameObject);
+        if (GetComponent<DropRate>()) GetComponent<DropRate>().DropItem();
         yield return null;   
     }
 

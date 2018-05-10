@@ -380,6 +380,7 @@
     <Compile Include="Assets\Scripts\Enemies\Boss\GraveyardBoss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\HitboxDMG.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\LibaryGhostBossHealth.cs" />
+    <Compile Include="Assets\Scripts\Enemies\DropRate.cs" />
     <Compile Include="Assets\Scripts\Enemies\Ghost\FlyTowardsObject.cs" />
     <Compile Include="Assets\Scripts\Enemies\Ghost\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\Ghost\GhostDead.cs" />
