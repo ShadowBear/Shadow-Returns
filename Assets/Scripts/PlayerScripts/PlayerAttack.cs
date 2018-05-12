@@ -7,6 +7,10 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject shot;
     public GameObject light;
     public GameObject cursor;
+
+    //Weapons
+    public GameObject[] weapons;
+    private int weaponCount;
     
     public Transform fireTransform;
     public float fireForce = 5;
@@ -37,8 +41,7 @@ public class PlayerAttack : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         meeleHitbox.enabled = false;
-        ammuAmount = maxAmmu;
-        
+        ammuAmount = maxAmmu;        
     }
 	
 	// Update is called once per frame
@@ -164,7 +167,11 @@ public class PlayerAttack : MonoBehaviour {
 
     void SwapWeapon()
     {
+        weapons[weaponCount].SetActive(false);
+        weaponCount = (weaponCount+1) % weapons.Length;
+        weapons[weaponCount].SetActive(true);
         rangeAttack = rangeAttack ? false : true;
+        anim.SetBool("Range", rangeAttack);
     }
 
     public bool GetAttackStatus()

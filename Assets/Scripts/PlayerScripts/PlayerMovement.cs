@@ -106,7 +106,104 @@ public class PlayerMovement : MonoBehaviour {
             animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
             lastPosition = transform.position;
             anim.SetFloat("Speed", animSpeed);
+            MoveAnimation(h,v);
         }
+    }
+
+    private void MoveAnimation(float h, float v)
+    {
+        int direction = GetComponentInChildren<PlayerRotation>().GetDirection();
+        if (Mathf.Abs(h) > Mathf.Abs(v))
+        {
+            if (h > 0)
+            {
+                switch (direction)
+                {
+                    case 0:
+                        anim.SetInteger("Direction", 2);
+                        break;
+                    case -1:
+                        anim.SetInteger("Direction", 1);
+                        break;
+                    case 1:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                    case 2:
+                        anim.SetInteger("Direction", -1);
+                        break;
+                    default:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                }
+            }
+            else
+            {
+                switch (direction)
+                {
+                    case 0:
+                        anim.SetInteger("Direction", 1);
+                        break;
+                    case -1:
+                        anim.SetInteger("Direction", 2);
+                        break;
+                    case 1:
+                        anim.SetInteger("Direction", -1);
+                        break;
+                    case 2:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                    default:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                }
+            }
+        }
+        else
+        {
+            if (v > 0)
+            {
+                switch (direction)
+                {
+                    case 0:
+                        anim.SetInteger("Direction", -1);
+                        break;
+                    case -1:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                    case 1:
+                        anim.SetInteger("Direction", 2);
+                        break;
+                    case 2:
+                        anim.SetInteger("Direction", 1);
+                        break;
+                    default:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                }
+            }
+            else
+            {
+                switch (direction)
+                {
+                    case 0:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                    case -1:
+                        anim.SetInteger("Direction", -1);
+                        break;
+                    case 1:
+                        anim.SetInteger("Direction", 1);
+                        break;
+                    case 2:
+                        anim.SetInteger("Direction", 2);
+                        break;
+                    default:
+                        anim.SetInteger("Direction", 0);
+                        break;
+                }
+            }
+        }
+        
     }
 
     private void Move(float h, float v)
