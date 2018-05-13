@@ -51,20 +51,8 @@ public class GameManager : MonoBehaviour {
         experienceImage.fillAmount = (float)experiencePoints / nextLvlExperience;
     }
 
-    // Update is called once per frame
-    void Update () {
-        
-	}
-
     public void ShowDmgText(float damage, Transform displayTrans)
     {
-        //TEST
-        //Vector3 rotationToCam = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
-        //displayTrans.LookAt(rotationToCam);
-        //Component dmgText = Instantiate(textTmp, displayTrans.position, displayTrans.rotation) as Component;
-        //dmgText.transform.GetComponent<Text>().transform.LookAt(rotationToCam);
-
-
         Component dmgText = Instantiate(textTmp, displayTrans.position, Quaternion.identity) as Component;
         dmgText.transform.SetParent(canvas.transform);
         dmgText.GetComponent<Text>().text = ((int)damage).ToString();
