@@ -40,7 +40,7 @@ public class HealthScript : MonoBehaviour {
         {
             Dying();
         }
-        RotateHealthbar();
+        if (useRelativeRotation) RotateHealthbar();
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
     }
 
@@ -104,6 +104,7 @@ public class HealthScript : MonoBehaviour {
     {
         rotationOffset = Camera.main.transform.position;
         rotationOffset.y = player.transform.position.y;
-        transform.LookAt(rotationOffset);
+        relativeRotationTransform.LookAt(rotationOffset);
+        relativeRotationTransform.forward = -relativeRotationTransform.forward;
     }
 }

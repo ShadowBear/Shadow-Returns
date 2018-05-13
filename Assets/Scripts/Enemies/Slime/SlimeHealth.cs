@@ -42,7 +42,12 @@ public class SlimeHealth : MonoBehaviour
         {
             StartCoroutine(Die());
         }
-        if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
+        //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
+        if (useRelativeRotation)
+        {
+            Vector3 cam = new Vector3(Camera.main.transform.position.x,0,Camera.main.transform.position.z);
+            relativeRotationTransform.LookAt(cam);            
+        }
     }
 
     public void SetHealth(int value)

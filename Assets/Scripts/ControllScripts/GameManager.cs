@@ -58,12 +58,20 @@ public class GameManager : MonoBehaviour {
 
     public void ShowDmgText(float damage, Transform displayTrans)
     {
-        Component dmgText = MonoBehaviour.Instantiate(textTmp, displayTrans.position, Quaternion.identity) as Component;
+        //TEST
+        //Vector3 rotationToCam = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+        //displayTrans.LookAt(rotationToCam);
+        //Component dmgText = Instantiate(textTmp, displayTrans.position, displayTrans.rotation) as Component;
+        //dmgText.transform.GetComponent<Text>().transform.LookAt(rotationToCam);
+
+
+        Component dmgText = Instantiate(textTmp, displayTrans.position, Quaternion.identity) as Component;
         dmgText.transform.SetParent(canvas.transform);
         dmgText.GetComponent<Text>().text = ((int)damage).ToString();
         dmgText.transform.localScale = new Vector3(scaleRate, scaleRate, scaleRate);
         if (damage > 15) dmgText.GetComponent<Text>().color = Color.red;
         dmgText.gameObject.SetActive(true);
+        
         dmgText.transform.GetComponent<Text>().transform.position = displayTrans.position + new Vector3(0,1,0);
         //dmgText.transform.GetComponent<Text>().transform.position = Camera.main.WorldToScreenPoint(displayTrans.position);
     }

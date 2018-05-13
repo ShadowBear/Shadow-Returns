@@ -17,4 +17,12 @@ public class HidingGhostTomb : MonoBehaviour {
         instGhost.GetComponent<HealthScript>().SetHealth(hidingGhostHealth);
         if (gyControll != null) gyControll.GhostKilled();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ammu"))
+        {
+
+        }
+    }
 }

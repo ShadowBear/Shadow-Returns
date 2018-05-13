@@ -8,7 +8,7 @@ public class MenuController : MonoBehaviour {
 
     public GameObject pauseMenu;
     public GameObject dialogMenu;
-
+    public Text dialogText;
 
     // Use this for initialization
     void Start () {
@@ -48,9 +48,14 @@ public class MenuController : MonoBehaviour {
 
     }
 
-    public void DialogExit()
+    public void Dialog()
     {
         ToggleWindow(dialogMenu);
+    }
+
+    public void SetDialogText(string dialog)
+    {
+        dialogText.text = dialog;
     }
 
     void ToggleWindow(GameObject window)
