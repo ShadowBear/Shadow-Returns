@@ -1,8 +1,10 @@
 ﻿<Properties StartupItem="Shadow Returns.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ObjectScripts\Leaver.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ControllScripts\CursorControll.cs">
     <Files>
       <File FileName="Assets\Scripts\ObjectScripts\Leaver.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemies\DropRate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ControllScripts\CursorControll.cs" Line="13" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

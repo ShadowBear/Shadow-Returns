@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadow Returns", "Shadow Returns.csproj", "{21842AE8-40BA-00D9-3CE4-FDBA7EEBE102}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shadow Returns.Plugins", "Shadow Returns.Plugins.csproj", "{635F3715-E8DD-2DC6-0ECA-2BD54279D072}"
