@@ -91,11 +91,14 @@ public class HealthScript : MonoBehaviour {
 
     IEnumerator DMGFrame()
     {
-        //dmgFrame.enabled = true;
-        dmgFrame.CrossFadeAlpha(1, 0.5f, false);
-        yield return new WaitForSeconds(0.5f);
-        //dmgFrame.enabled = false;
-        dmgFrame.CrossFadeAlpha(0, 0.5f, false);
+        if (dmgFrame)
+        {
+            //dmgFrame.enabled = true;
+            dmgFrame.CrossFadeAlpha(1, 0.5f, false);
+            yield return new WaitForSeconds(0.5f);
+            //dmgFrame.enabled = false;
+            dmgFrame.CrossFadeAlpha(0, 0.5f, false);            
+        }
         yield return null;
     }
 

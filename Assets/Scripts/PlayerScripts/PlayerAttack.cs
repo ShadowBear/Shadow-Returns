@@ -74,14 +74,16 @@ public class PlayerAttack : MonoBehaviour {
                 else StartCoroutine(MeeleHit());
             }            
         }
-        if (Input.GetButtonDown("Fire2") && Time.timeScale != 0)
-        {
-            isShielded = healthScript.isShielded;
-            if (!isAttacking && !isShielded)
-            {
-                StartCoroutine(Light());
-            }            
-        }
+
+        /*********************** Fire Button 2 ***********************/
+        //if (Input.GetButtonDown("Fire2") && Time.timeScale != 0)
+        //{
+        //    isShielded = healthScript.isShielded;
+        //    if (!isAttacking && !isShielded)
+        //    {
+        //        StartCoroutine(Light());
+        //    }            
+        //}
 #else
         if (fireStickDown && rangeAttack && !isShooting) StartCoroutine(Fire());
         else if(fireStickDown && !rangeAttack && !isShooting) StartCoroutine(MeeleHit());

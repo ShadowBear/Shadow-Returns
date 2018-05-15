@@ -17,6 +17,8 @@ public class CamerController : MonoBehaviour {
     public bool rotateAroundPlayer = true;
     public float rotationSpeed = 5.0f;
 
+    private string shaderName = "Diffuse";
+
     //private RaycastHit oldHit;
     RaycastHit[] hits;
 
@@ -64,8 +66,14 @@ public class CamerController : MonoBehaviour {
                 Color temp = r.material.color;
                 temp.a = state ? 1f : 0.5f;
                 r.material.color = temp;
-                if (!state) r.material.shader = Shader.Find("Transparent/Diffuse");
-                else r.material.shader = Shader.Find("Toon/Lit");
+                if (!state)
+                {
+                    shaderName = r.material.shader.name;
+                    r.material.shader = Shader.Find("Transparent/Diffuse");
+                }
+                else r.material.shader = Shader.Find(shaderName);
+                //else r.material.shader = Shader.Find("Standart");
+                //else r.material.shader = Shader.Find("Toon/Lit");
             }
         }
     }
