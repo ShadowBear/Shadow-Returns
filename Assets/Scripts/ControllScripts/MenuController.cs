@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour {
     public GameObject pauseMenu;
     public GameObject dialogMenu;
     public Text dialogText;
+    public Button dialogButton;
 
     // Use this for initialization
     void Start () {
@@ -60,6 +61,8 @@ public class MenuController : MonoBehaviour {
 
     void ToggleWindow(GameObject window)
     {
+        print("WechsleFenster");
+        print("TimeScale: " + Time.timeScale);
         if (window.activeSelf)
         {
             Time.timeScale = 1;

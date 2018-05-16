@@ -6,10 +6,15 @@ public class TreasureChest : MonoBehaviour {
 
     private Animator anim;
     private bool open = false;
+    public GameObject chestItem;
+    private bool looted = false;
+
+    private Vector3 offset;
 
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        offset.Set(0, 1, 0);
     }
 
     void OnTriggerEnter(Collider col)
@@ -29,8 +34,17 @@ public class TreasureChest : MonoBehaviour {
             {
                 open = open ? false : true;
                 if (anim) anim.SetBool("Open", open);
-                //print("E gedrückt");
+                if(open && !looted) StartCoroutine(InstantiateItem());
             }
         }
     }
+
+    IEnumerator InstantiateItem()
+    {
+        looted = true;
+        yield return new WaitForSeconds(0.75f);
+        Instantiate(chestItem, transform.position + offset, Quaternion.identity);        
+        yield return null;
+    }
+
 }

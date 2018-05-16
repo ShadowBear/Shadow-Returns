@@ -399,7 +399,10 @@
     <Compile Include="Assets\Scripts\GroundControlls\PopUpGroundMaze.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\PopUpOrder.cs" />
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
+    <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\EnemyShotDamage.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Experience.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\ExperienceFlyToPlayer.cs" />
@@ -417,6 +420,7 @@
     <Compile Include="Assets\Scripts\ObjectScripts\StopRotationBug.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\TombSpawn.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\TreasureChest.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\Walls\BrokenWalls.cs" />
     <Compile Include="Assets\Scripts\Particle\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Particle\ShieldParticel.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\BetterJump.cs" />
@@ -503,6 +507,7 @@
     <None Include="Assets\GUI\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
     <None Include="Assets\POLY STYLE - Sci-Fi Characters\Readme.txt" />
+    <None Include="Assets\Prefabs\Key\readME keys.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />

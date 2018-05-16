@@ -29,30 +29,66 @@ public class PlayerAttack : MonoBehaviour {
     private bool isShielded = false;
     public HealthScript healthScript;
 
+    public float distance;
+
     //Range AttackBoolen & Collider for Meele
-    public bool rangeAttack = true;
+    public bool rangeAttack;
     public Collider meeleHitbox;
 
     private Animator anim;
     public GameObject playerRotation;
     public ParticleSystem fireParticle;
 
+    public GameObject sword;
+    public GameObject gun;
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
         meeleHitbox.enabled = false;
-        ammuAmount = maxAmmu;        
+        rangeAttack = false;
+        ammuAmount = maxAmmu;
+        gun.SetActive(false);
+        sword.SetActive(false);
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            weapons[i] = null;
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
         fireTransform.forward = playerRotation.transform.forward;
-        CheckFired();
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if(sword.activeSelf || gun.activeSelf) CheckFired();
+        
+        if (Input.GetAxis("Mouse ScrollWheel") != 0 && GameManager.control.swordCollected && GameManager.control.gunCollected)
         {
             SwapWeapon();
         }
 	}
+
+    public void AddWeapon(string type)
+    {
+        if(type == "sword")
+        {
+            weapons[0] = sword;
+            sword.SetActive(true);
+            rangeAttack = false;
+            print("Sword added");
+        }
+        else if(type == "gun")
+        {
+            weapons[1] = gun;
+            sword.SetActive(false);
+            gun.SetActive(true);
+            rangeAttack = true;
+        }
+        else if(type == "shield")
+        {
+            //can shield
+        }
+    }
+
 
     private void CheckFired()
     {
@@ -106,7 +142,7 @@ public class PlayerAttack : MonoBehaviour {
         
     }
 
-    public float distance;
+    
 
     IEnumerator Shooting()
     {

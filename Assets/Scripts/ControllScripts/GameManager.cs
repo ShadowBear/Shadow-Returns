@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     private int maxPotionsNmbr = 5;
     public Text potionText;
 
-    private int keyNmbr;
+    public int keyNmbr;
     public Text keyText;
 
     private int coinAmount;
@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour {
     public Canvas canvas;
     public Text textTmp;
     private float scaleRate = 0.005f;
+
+    //Sword, Shield and Pistol 
+    public bool swordCollected = false;
+    public bool gunCollected = false;
+    public bool shieldCollected = false;
 
     public static GameManager control;    
     
@@ -92,6 +97,12 @@ public class GameManager : MonoBehaviour {
         keyText.text = keyNmbr.ToString();
     }
 
+    public void UseKey()
+    {
+        keyNmbr--;
+        keyText.text = keyNmbr.ToString();
+    }
+
     public void CollectCoins(int value)
     {
         coinAmount += value;
@@ -99,5 +110,22 @@ public class GameManager : MonoBehaviour {
         coinText.text = coinAmount.ToString();
     }
 
+    public void SwordCollect()
+    {
+        swordCollected = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("sword");
+    }
+
+    public void GunCollect()
+    {
+        gunCollected = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("gun");
+    }
+
+    public void ShieldCollect()
+    {
+        shieldCollected = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("shield");
+    }
 
 }
