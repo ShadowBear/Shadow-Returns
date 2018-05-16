@@ -6,7 +6,11 @@ public class DoorScript : MonoBehaviour {
 
 
     private Animator anim;
+    public bool keyNeededBool = false;
     public bool specialKey = false;
+
+    public bool doorStatus = false;
+
     public GameObject specialKeyObject;
 
     public string keyNeededText;
@@ -23,7 +27,12 @@ public class DoorScript : MonoBehaviour {
         {
             if (Input.GetButtonDown("Action"))
             {
-                if (!specialKey)
+                if (!keyNeededBool)
+                {
+                    doorStatus = anim.GetBool("Open")? false: true;
+                    anim.SetBool("Open", doorStatus);
+                }
+                else if (!specialKey)
                 {
                     if (GameManager.control.keyNmbr > 0)
                     {
