@@ -65,6 +65,8 @@ public class PlayerMovement : MonoBehaviour {
         float h = vrStick.Horizontal();
         float v = vrStick.Vertical(); 
 #endif
+
+        //if (Input.GetButtonDown("Jump")) print("Springe");
         // Ground With Layers for later ToDo
         isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
 
@@ -87,10 +89,10 @@ public class PlayerMovement : MonoBehaviour {
 
         /* **********************Jumping & Dash *************************/
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-             playerRigidbody.velocity = Vector3.up * jumpHeight;
-        }
+        //if (Input.GetButtonDown("Jump") && isGrounded)
+        //{
+        //     playerRigidbody.velocity = Vector3.up * jumpHeight;
+        //}
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -225,7 +227,11 @@ public class PlayerMovement : MonoBehaviour {
 
             playerRigidbody.MovePosition(new Vector3(transform.position.x + moveDirection.x, transform.position.y, transform.position.z + moveDirection.z));
         }
-        
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            playerRigidbody.velocity = Vector3.up * jumpHeight;
+        }
+
     }
 
     private void RotateWithCamera()

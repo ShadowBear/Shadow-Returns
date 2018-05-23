@@ -43,7 +43,7 @@ public class TreasureChest : MonoBehaviour {
     {
         looted = true;
         yield return new WaitForSeconds(0.75f);
-        Instantiate(chestItem, transform.position + offset, Quaternion.identity);        
+        if(chestItem) Instantiate(chestItem, transform.position + offset, Quaternion.identity);        
         yield return null;
     }
 
