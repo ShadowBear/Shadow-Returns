@@ -32,9 +32,11 @@ public class PlayerRotation : MonoBehaviour {
     {
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit floorHit;
+        
 
-        if(Physics.Raycast(camRay, out floorHit, floorMask))
+        if(Physics.Raycast(camRay, out floorHit,100 ,floorMask))
         {
+            Debug.DrawRay(camRay.direction, floorHit.point);
             Vector3 playerToMouse = floorHit.point - transform.position;
             playerToMouse.y = 0f;
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);

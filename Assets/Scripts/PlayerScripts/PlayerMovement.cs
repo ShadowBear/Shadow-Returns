@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody playerRigidbody;
     [SerializeField]
     private bool isGrounded = true;
+    [SerializeField]
     private Transform groundCheckTrans;
     private Shield shield;
 
@@ -34,7 +35,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         playerRigidbody = GetComponent<Rigidbody>();
         shield = GetComponentInChildren<Shield>();
-        groundCheckTrans = transform.GetChild(0);
         anim = GetComponentInChildren<Animator>();
         attackScript = GetComponentInChildren<PlayerAttack>();
     }
@@ -87,17 +87,41 @@ public class PlayerMovement : MonoBehaviour {
         }
         /************************************************************/
 
-        /* **********************Jumping & Dash *************************/
-
-        //if (Input.GetButtonDown("Jump") && isGrounded)
-        //{
-        //     playerRigidbody.velocity = Vector3.up * jumpHeight;
-        //}
+        /* ********************** Dash *************************/
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            Vector3 dashVelocity = Vector3.Scale(transform.GetChild(1).transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime)));
-            playerRigidbody.AddForce(dashVelocity, ForceMode.VelocityChange);
+            DashImageControll[] dashBlocks = GameManager.control.dashBlocksParent.GetComponentsInChildren<DashImageControll>();
+            foreach(DashImageControll dash in dashBlocks)
+            {
+                if (dash.CanDash())
+                {
+                    dash.Dashing();
+                    Vector3 dashDirection = transform.GetComponentInChildren<PlayerRotation>().transform.forward;
+                    Vector3 dashVector = dashDirection * dashDistance;
+                    Vector3 targetPosition;
+                    Ray dashRay = new Ray(transform.position + playerRigidbody.centerOfMass, dashDirection);
+                    RaycastHit rayHit;
+                    if (Physics.Raycast(dashRay, out rayHit, dashDistance, ground.value))
+                    {
+                        targetPosition = rayHit.point;
+                    }
+                    else
+                    {
+                        targetPosition = transform.position + dashVector;
+                    }
+
+                    transform.SetPositionAndRotation(targetPosition, transform.rotation);
+                    break;
+                }
+            }
+
+            
+
+
+            //old Dash
+            //Vector3 dashVelocity = Vector3.Scale(transform.GetChild(1).transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime)));
+            //playerRigidbody.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
 
         /* ********************* End *******************/
@@ -227,6 +251,8 @@ public class PlayerMovement : MonoBehaviour {
 
             playerRigidbody.MovePosition(new Vector3(transform.position.x + moveDirection.x, transform.position.y, transform.position.z + moveDirection.z));
         }
+
+        //Jumping Code
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerRigidbody.velocity = Vector3.up * jumpHeight;

@@ -16,6 +16,7 @@ public class BrokenWalls : MonoBehaviour {
     private void Start()
     {
         menu = GameManager.control.GetComponent<MenuController>();
+        secretCorridor.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour {
     public Image experienceImage;
     public Text experienceText;
 
+    //Dash Images and Value
+    public GameObject dashBlocksParent;
+
     //Potions, Keys and Coins
     private int potionNmbr;
     private int maxPotionsNmbr = 5;
@@ -54,6 +57,13 @@ public class GameManager : MonoBehaviour {
     {
         experienceText.text = experiencePoints + "/" + nextLvlExperience;
         experienceImage.fillAmount = (float)experiencePoints / nextLvlExperience;
+    }
+
+    public void SuitUp()
+    {
+        swordCollected = true;
+        gunCollected = true;
+        shieldCollected = true;
     }
 
     public void ShowDmgText(float damage, Transform displayTrans)

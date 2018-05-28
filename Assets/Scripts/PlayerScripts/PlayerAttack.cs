@@ -8,9 +8,14 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject light;
     public GameObject cursor;
 
+    //true if u start without Weapons
+    [SerializeField]
+    private bool startNaked = false;
+
     //Weapons
     public GameObject[] weapons;
     private int weaponCount;
+
     
     public Transform fireTransform;
     public float fireForce = 5;
@@ -46,14 +51,13 @@ public class PlayerAttack : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         meeleHitbox.enabled = false;
-        rangeAttack = false;
+        rangeAttack = true;
         ammuAmount = maxAmmu;
-        gun.SetActive(false);
-        sword.SetActive(false);
-        for (int i = 0; i < weapons.Length; i++)
-        {
-            weapons[i] = null;
-        }
+
+        if (startNaked) DontSuitUp();
+        else GameManager.control.SuitUp();
+
+
     }
 	
 	// Update is called once per frame
@@ -66,6 +70,17 @@ public class PlayerAttack : MonoBehaviour {
             SwapWeapon();
         }
 	}
+
+    private void DontSuitUp()
+    {
+        gun.SetActive(false);
+        sword.SetActive(false);
+        rangeAttack = false;
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            weapons[i] = null;
+        }
+    }
 
     public void AddWeapon(string type)
     {

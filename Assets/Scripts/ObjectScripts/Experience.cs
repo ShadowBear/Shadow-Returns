@@ -22,7 +22,9 @@ public class Experience : MonoBehaviour {
     {
         if(other.CompareTag("Player")){
             GameManager.control.ReceiveExperience(experience);
+            print("Zerstört");
             Destroy(this.gameObject);
+            //Destroy(transform.parent.gameObject);
         }
     }
 
