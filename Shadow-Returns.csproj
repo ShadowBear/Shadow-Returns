@@ -388,6 +388,7 @@
     <Compile Include="Assets\Scripts\Enemies\Ghost\RandomSpawn.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\SlimeAI.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\SlimeHealth.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Slime\SlimeHealthChild.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\SlimeSpawner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Tower\Tower.cs" />
     <Compile Include="Assets\Scripts\Enemies\Zombie\ZombieAIController.cs" />
@@ -397,8 +398,12 @@
     <Compile Include="Assets\Scripts\GroundControlls\MoveMe.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\PopUpGroundMaze.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\PopUpOrder.cs" />
+    <Compile Include="Assets\Scripts\GuI\DashImageControll.cs" />
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
+    <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\EnemyShotDamage.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Experience.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\ExperienceFlyToPlayer.cs" />
@@ -415,6 +420,8 @@
     <Compile Include="Assets\Scripts\ObjectScripts\RotateObjectScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\StopRotationBug.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\TombSpawn.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\TreasureChest.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\Walls\BrokenWalls.cs" />
     <Compile Include="Assets\Scripts\Particle\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Particle\ShieldParticel.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\BetterJump.cs" />
@@ -422,11 +429,13 @@
     <Compile Include="Assets\Scripts\PlayerScripts\MeeleDMG.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAndroidRotation.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAttack.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerRotation.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Shield.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ShotDirection.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
+    <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Animation\Grass Animation Help.txt" />
@@ -501,6 +510,7 @@
     <None Include="Assets\GUI\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
     <None Include="Assets\POLY STYLE - Sci-Fi Characters\Readme.txt" />
+    <None Include="Assets\Prefabs\Key\readME keys.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />

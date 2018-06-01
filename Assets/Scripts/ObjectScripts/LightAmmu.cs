@@ -17,13 +17,14 @@ public class LightAmmu : MonoBehaviour {
             //Apply Damage
             col.GetComponent<HealthScript>().TakeDamage(CalculateDmg());
         }
-        if (col.CompareTag("Boss"))
+        else if (col.CompareTag("Boss"))
         {
             col.GetComponent<LibaryGhostBossHealth>().TakeDamage(CalculateDmg());
         }
-        if (col.CompareTag("Slime"))
+        else if (col.CompareTag("Slime"))
         {            
-            col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
+            //col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
+            col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg());
         }
         if (!col.CompareTag("Player") && !col.CompareTag("Light") && !col.isTrigger)
         {

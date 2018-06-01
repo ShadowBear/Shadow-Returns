@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class HealthScript : MonoBehaviour {
 
     public int maxHealth = 100;
-    private float health;
+    protected float health;
     public Image healthbar;
     public bool isShielded = false;
-    public Shield playerShieldScript;
+    //public Shield playerShieldScript;
 
     public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
     public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
@@ -18,24 +18,28 @@ public class HealthScript : MonoBehaviour {
     //Header Beispiel für bessere Übersicht im Inspector
     [Header ("DMG")]
     public bool isDead = false;
-    public Image dmgFrame;
 
-    private Animator anim;
+    //Test Vererbung ************ //
+    //public Image dmgFrame;
+    
+    /************************************/
+
+    protected Animator anim;
     private Vector3 rotationOffset;
-    private GameObject player;
+    protected GameObject player;
 
-    void Start () {
+    protected void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
         if(healthbar != null) healthbar.fillAmount = health / maxHealth;
         if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
         anim = GetComponent<Animator>();
         isDead = false;
-        if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
+        //if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    protected void Update () {
 		if(health <= 0 && !isDead)
         {
             Dying();
@@ -60,19 +64,21 @@ public class HealthScript : MonoBehaviour {
             health -= damage;
             if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
             if(anim != null) anim.SetTrigger("damaged");
-            if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
-            else if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
+            //if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
+            //else 
+            if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
         }
-        else if(!isDead && isShielded)
-        {
-            if (playerShieldScript != null) playerShieldScript.TakeDMG(damage);
-        }
+        //else if(!isDead && isShielded)
+        //{
+        //    if (playerShieldScript != null) playerShieldScript.TakeDMG(damage);
+        //}
     }
 
-    void Dying()
+    protected virtual void Dying()
     {
-        //print("Die!!");
-        if (GameObject.FindGameObjectWithTag("Player") != gameObject) StartCoroutine(DieAnim());
+        print("DieParentHealth!!");
+        //if (GameObject.FindGameObjectWithTag("Player") != gameObject) StartCoroutine(DieAnim());
+        StartCoroutine(DieAnim());
     }
 
     IEnumerator DieAnim()
@@ -89,18 +95,18 @@ public class HealthScript : MonoBehaviour {
         yield return null;   
     }
 
-    IEnumerator DMGFrame()
-    {
-        if (dmgFrame)
-        {
-            //dmgFrame.enabled = true;
-            dmgFrame.CrossFadeAlpha(1, 0.5f, false);
-            yield return new WaitForSeconds(0.5f);
-            //dmgFrame.enabled = false;
-            dmgFrame.CrossFadeAlpha(0, 0.5f, false);            
-        }
-        yield return null;
-    }
+    //IEnumerator DMGFrame()
+    //{
+    //    if (dmgFrame)
+    //    {
+    //        //dmgFrame.enabled = true;
+    //        dmgFrame.CrossFadeAlpha(1, 0.5f, false);
+    //        yield return new WaitForSeconds(0.5f);
+    //        //dmgFrame.enabled = false;
+    //        dmgFrame.CrossFadeAlpha(0, 0.5f, false);            
+    //    }
+    //    yield return null;
+    //}
 
 
     public void RotateHealthbar()

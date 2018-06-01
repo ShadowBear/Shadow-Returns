@@ -27,6 +27,16 @@ public class SlimeAI : MonoBehaviour
     public float maxWaitAttackTime = 1.25f;
     public float minWaitAttackTime = 0.625f;
     public float dodgeWaitTime = 1.5f;
+
+    [Header("Range Attack")]
+    public float startRangeAttackTime = 5f;
+    private float rangeAttackTime;
+    private bool canRangeAttack = false;
+    [SerializeField]
+    private GameObject rangeAttackTransParent;
+    public GameObject rangeAmmu;
+
+
     public float fireForce = 5f;
     public float circleRadius = 2f;
     public float dodgeForce = 50f;
@@ -46,13 +56,14 @@ public class SlimeAI : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         hitbox.enabled = false;
-    }
+        rangeAttackTime = startRangeAttackTime;
+}
 
     // Update is called once per frame
     void Update()
     {
 
-        if (GetComponent<SlimeHealth>().isDead)
+        if (GetComponent<SlimeHealthChild>().isDead)
         {
             agent.isStopped = true;
             return;
@@ -66,11 +77,30 @@ public class SlimeAI : MonoBehaviour
             lastPosition = transform.position;
             anim.SetFloat("speed", speed);
         }
-        if (distanceToPlayer > maxDistanceToMeele)
-        {
-            //Spieler zu weit entfernt für Fernkampfangriff
+
+        //Spieler zu weit entfernt für Fernkampfangriff
+        if (distanceToPlayer > maxDistanceToPlayer)
+        {            
             WalkToPlayer();
-        }else 
+        }else if(distanceToPlayer < maxDistanceToPlayer && distanceToPlayer > maxDistanceToMeele)
+        {
+            if (canRangeAttack)
+            {
+                canRangeAttack = false;
+                StartCoroutine(RangeAttack());
+            }
+            else
+            {
+                WalkToPlayer();
+                rangeAttackTime -= Time.deltaTime;
+                if(rangeAttackTime <= 0)
+                {
+                    canRangeAttack = true;
+                    rangeAttackTime = startRangeAttackTime;
+                }
+            }
+            
+        }else
         {
             //Meele Attack
             if (!isAttacking) StartCoroutine(MeeleAttack());
@@ -137,11 +167,33 @@ public class SlimeAI : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator RangeAttack()
+    {
+        print("RangeAttack");
+        isAttacking = true;
+        agent.isStopped = true;
+        float waitAttackTime = Random.Range(minWaitAttackTime, maxWaitAttackTime);
+        yield return new WaitForSeconds(waitAttackTime);
+        if (anim != null) anim.SetTrigger("attack");
+        yield return new WaitForSeconds(waitAttackTime/2);
+        foreach (Transform child in rangeAttackTransParent.GetComponentsInChildren<Transform>())
+        {
+            if (rangeAttackTransParent.transform == child) continue;
+            GameObject shot = Instantiate(rangeAmmu, child.transform.position, Quaternion.identity);
+            shot.GetComponent<Rigidbody>().velocity = fireForce * child.transform.forward;
+        }
+        
+        agent.isStopped = false;
+        isAttacking = false;
+        yield return null;
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            col.GetComponent<HealthScript>().TakeDamage(meeleDMG);
+            //col.GetComponent<HealthScript>().TakeDamage(meeleDMG);
+            col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG);
         }
     }
 }

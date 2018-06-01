@@ -13,6 +13,8 @@ public class DropRate : MonoBehaviour {
     [SerializeField]
     private GameObject ep;    
     public int epValue;
+    public float explosionRadius;
+    public float explosionForce;
     private Vector3 offset;
 
     //DropRate in Percent 0-1
@@ -33,6 +35,9 @@ public class DropRate : MonoBehaviour {
             Instantiate(drops[item], transform.position, transform.rotation);
         }
         GameObject epObject = Instantiate(ep, transform.position + offset, transform.rotation);
-        epObject.GetComponent<Experience>().experience = epValue;
+        //epObject.GetComponent<Experience>().experience = epValue;
+        epObject.GetComponentInChildren<Experience>().experience = epValue;
+        Vector3 randomExplosionVector = new Vector3(Random.Range(-1f, 1f), 0.9f, Random.Range(-1f, 1f));
+        epObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
     }
 }
