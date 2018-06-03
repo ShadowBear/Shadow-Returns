@@ -10,6 +10,7 @@ public class SlimeHealthChild : HealthScript
     //private float health;
     
     public GameObject slime;
+    private SlimeAI slimeAI;
 
     [SerializeField]
     private int startLifeState = 3;
@@ -22,15 +23,17 @@ public class SlimeHealthChild : HealthScript
     new void Start()
     {
         base.Start();
+        slimeAI = GetComponent<SlimeAI>();
     }
 
     // Update is called once per frame
     new void Update()
     {
-        if (health <= 0 && !isDead)
-        {
-            StartCoroutine(Die());
-        }
+        //if (health <= 0 && !isDead)
+        //{
+        //    StartCoroutine(Die());
+        //}
+        base.Update();
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
         if (useRelativeRotation)
         {
@@ -43,6 +46,17 @@ public class SlimeHealthChild : HealthScript
     {
         startLifeState = startLife;
         lifeState = life;
+    }
+
+    protected override void Dying()
+    {
+        print("DieChild");
+        StartCoroutine(Die());
+    }
+
+    protected override void TakeHit()
+    {
+        slimeAI.TakeHit();
     }
 
     IEnumerator Die()

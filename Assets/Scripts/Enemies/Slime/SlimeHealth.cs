@@ -38,10 +38,10 @@ public class SlimeHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0 && !isDead)
-        {
-            StartCoroutine(Die());
-        }
+        //if (health <= 0 && !isDead)
+        //{
+        //    StartCoroutine(Die());
+        //}
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
         if (useRelativeRotation)
         {
@@ -71,6 +71,7 @@ public class SlimeHealth : MonoBehaviour
     {
         lifeState = life;
     }
+       
 
     IEnumerator Die()
     {

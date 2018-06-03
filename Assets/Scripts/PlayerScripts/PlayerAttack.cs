@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour {
 
     public GameObject shot;
-    public GameObject light;
     public GameObject cursor;
 
     //true if u start without Weapons
@@ -28,11 +27,13 @@ public class PlayerAttack : MonoBehaviour {
     private Vector3 transformTo3D;
 
     public float fireRate = 0.5f;
+    public float meleeAttackRate = 0.5f;
+
     public bool isAttacking = false;
     public bool isReloading = false;
     public bool fireStickDown = false;
     private bool isShielded = false;
-    public HealthScript healthScript;
+    public PlayerHealth healthScript;
 
     public float distance;
 
@@ -62,6 +63,14 @@ public class PlayerAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Test
+        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(2)")) print("Combo");
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack Done")) {
+            print("FertigAngreifen");
+            isAttacking = false;
+            meeleHitbox.enabled = false;
+        }
         fireTransform.forward = playerRotation.transform.forward;
         if(sword.activeSelf || gun.activeSelf) CheckFired();
         
@@ -112,29 +121,19 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetButtonDown("Fire1") && Time.timeScale != 0)
         {
             isShielded = healthScript.isShielded;
-            if (!isAttacking && !isShielded && !isReloading)
+            if (rangeAttack)
             {
-                if (rangeAttack)
+                if (!isAttacking && !isShielded && !isReloading)
                 {
                     if (ammuAmount > 0)
                     {
                         ammuAmount--;
                         StartCoroutine(Shooting());    //StartCoroutine(Fire());
                     }
-                }
-                else StartCoroutine(MeeleHit());
-            }            
+                }                
+            }
+            else if(!isShielded) StartCoroutine(MeeleHit());
         }
-
-        /*********************** Fire Button 2 ***********************/
-        //if (Input.GetButtonDown("Fire2") && Time.timeScale != 0)
-        //{
-        //    isShielded = healthScript.isShielded;
-        //    if (!isAttacking && !isShielded)
-        //    {
-        //        StartCoroutine(Light());
-        //    }            
-        //}
 #else
         if (fireStickDown && rangeAttack && !isShooting) StartCoroutine(Fire());
         else if(fireStickDown && !rangeAttack && !isShooting) StartCoroutine(MeeleHit());
@@ -199,21 +198,18 @@ public class PlayerAttack : MonoBehaviour {
     IEnumerator MeeleHit()
     {
         isAttacking = true;
-        meeleHitbox.enabled = true;
+        
+        //print("MeleeActive");
         anim.SetBool("Range", false);
         anim.SetTrigger("Fire");
-        yield return new WaitForSeconds(fireRate);
-        isAttacking = false;
-        meeleHitbox.enabled = false;
-        yield return null;
-
-    }
-
-    IEnumerator Light()
-    {
-        anim.SetTrigger("Fire");
         yield return new WaitForSeconds(0.25f);
-        GameObject shotInstance = Instantiate(light, fireTransform.position, fireTransform.rotation);
+        meeleHitbox.enabled = true;
+
+        //Before Animation Controlled Finish
+        //yield return new WaitForSeconds(meleeAttackRate-0.25f);
+        //isAttacking = false;
+        //meeleHitbox.enabled = false;
+        ////print("Meleefinish");
         yield return null;
 
     }

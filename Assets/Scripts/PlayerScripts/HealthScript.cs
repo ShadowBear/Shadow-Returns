@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class HealthScript : MonoBehaviour {
 
@@ -19,9 +20,17 @@ public class HealthScript : MonoBehaviour {
     [Header ("DMG")]
     public bool isDead = false;
 
+    public float pushForce = 50;
+
+    [SerializeField]
+    protected float startHitDelay = 0.75f;
+    private float hitDelay = 0;
+    [SerializeField]
+    protected bool hitable = true;
+
     //Test Vererbung ************ //
     //public Image dmgFrame;
-    
+
     /************************************/
 
     protected Animator anim;
@@ -34,16 +43,22 @@ public class HealthScript : MonoBehaviour {
         if(healthbar != null) healthbar.fillAmount = health / maxHealth;
         if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
         anim = GetComponent<Animator>();
-        isDead = false;
+        isDead = false;        
         //if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
     }
 
     // Update is called once per frame
     protected void Update () {
-		if(health <= 0 && !isDead)
+        if (hitDelay > 0)
         {
-            Dying();
+            hitDelay -= Time.deltaTime;
+            if (hitDelay <= 0) hitable = true;
         }
+
+        //if(health <= 0 && !isDead)
+        //      {
+        //          Dying();
+        //      }
         if (useRelativeRotation) RotateHealthbar();
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
     }
@@ -57,9 +72,13 @@ public class HealthScript : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
+        if (!hitable) return;
         if (!isDead && !isShielded)
         {
+            hitable = false;
+            hitDelay = startHitDelay;
             //print("DamageTaken");
+            TakeHit();
             
             health -= damage;
             if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
@@ -67,12 +86,23 @@ public class HealthScript : MonoBehaviour {
             //if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
             //else 
             if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
+
+            //Pushing Back On Hit
+            if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().AddForce(-transform.forward * pushForce);
+
+            if (health <= 0 && !isDead)
+            {
+                Dying();
+            }
         }
         //else if(!isDead && isShielded)
         //{
         //    if (playerShieldScript != null) playerShieldScript.TakeDMG(damage);
         //}
     }
+
+    protected virtual void TakeHit() { }
+    
 
     protected virtual void Dying()
     {

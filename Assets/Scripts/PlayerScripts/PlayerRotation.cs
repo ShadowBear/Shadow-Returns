@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour {
 
-    private GameObject player;
+    private PlayerAttack playerAttack;
     private Vector2 mousePos;
     private Vector2 screenPos;
 
     public LayerMask floorMask;
-    private Animator anim;
 
  
     // Use this for initialization
     void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
-        anim = GetComponentInChildren<Animator>();
+        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        Turning();
+        if (playerAttack.isAttacking && !playerAttack.rangeAttack) { }
+        else Turning();
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)

@@ -13,10 +13,10 @@ public class EnemyShotDamage : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             //Apply Damage
-            col.GetComponent<HealthScript>().TakeDamage(damage);
+            col.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
 
-        if (!col.CompareTag("Enemy") && !col.CompareTag("Light") && !col.CompareTag("Boss"))
+        if (!col.CompareTag("Enemy") && !col.CompareTag("Light") && !col.CompareTag("Boss") && !col.isTrigger)
         {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);

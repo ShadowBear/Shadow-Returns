@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerHealth : HealthScript {
 
+    //public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
+    //public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
+    //public Quaternion relativeRotation;
     
-        
+    //private Vector3 rotationOffset;
+
     //Header Beispiel für bessere Übersicht im Inspector
     [Header ("DMG")]
     public Image dmgFrame;
@@ -68,5 +72,13 @@ public class PlayerHealth : HealthScript {
         }
         yield return null;
     }
+
+    //public void RotateHealthbar()
+    //{
+    //    rotationOffset = Camera.main.transform.position;
+    //    rotationOffset.y = player.transform.position.y;
+    //    relativeRotationTransform.LookAt(rotationOffset);
+    //    relativeRotationTransform.forward = -relativeRotationTransform.forward;
+    //}
 
 }

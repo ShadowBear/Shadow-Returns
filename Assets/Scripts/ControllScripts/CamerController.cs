@@ -50,7 +50,7 @@ public class CamerController : MonoBehaviour {
         Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed, Vector3.up);
         offset = camTurnAngle * offset;
         transform.LookAt(player.transform);
-        player.GetComponent<HealthScript>().RotateHealthbar();
+        player.GetComponent<PlayerHealth>().RotateHealthbar();
     }
 
 
