@@ -22,7 +22,7 @@ public class LightDamage : MonoBehaviour {
     {
         if (col.CompareTag("Player")){
             //print("Dmg durch Licht");
-            col.GetComponent<HealthScript>().TakeDamage(dmgAmount * Time.deltaTime);
+            col.GetComponent<PlayerHealth>().TakeDamage(dmgAmount * Time.deltaTime);
         }
     }
 

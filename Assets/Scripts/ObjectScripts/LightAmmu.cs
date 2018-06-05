@@ -9,13 +9,15 @@ public class LightAmmu : MonoBehaviour {
     //Chance to Make Crit Values between 0-1f : 0 = 0%  and 1 = 100%
     public float criticalChance = 0.15f;
     private int critMultiplier = 0;
+    private bool melee = false;
 	
 	void OnTriggerEnter(Collider col)
     {        
         if (col.CompareTag("Enemy") || col.CompareTag("Destroyable"))
         {
             //Apply Damage
-            col.GetComponent<HealthScript>().TakeDamage(CalculateDmg());
+            if(col.GetComponent<EnemyHealth>()) col.GetComponent<EnemyHealth>().TakeDamage(CalculateDmg(), melee);
+            else if (col.GetComponent<HealthScript>()) col.GetComponent<HealthScript>().TakeDamage(CalculateDmg(), melee);
         }
         else if (col.CompareTag("Boss"))
         {
@@ -24,7 +26,7 @@ public class LightAmmu : MonoBehaviour {
         else if (col.CompareTag("Slime"))
         {            
             //col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
-            col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg());
+            col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg(), melee);
         }
         if (!col.CompareTag("Player") && !col.CompareTag("Light") && !col.isTrigger)
         {

@@ -25,6 +25,7 @@ public class CamerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        follow = player;
     }
 	
 	// Update is called once per frame

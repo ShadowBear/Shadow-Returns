@@ -8,6 +8,8 @@ public class PlayerRotation : MonoBehaviour {
     private Vector2 mousePos;
     private Vector2 screenPos;
 
+    private Vector3 cursorPos = Vector3.zero;
+
     public LayerMask floorMask;
 
  
@@ -36,12 +38,19 @@ public class PlayerRotation : MonoBehaviour {
         if(Physics.Raycast(camRay, out floorHit,100 ,floorMask))
         {
             Debug.DrawRay(camRay.direction, floorHit.point);
+            cursorPos = floorHit.point;
             Vector3 playerToMouse = floorHit.point - transform.position;
             playerToMouse.y = 0f;
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
             transform.rotation = newRotation;            
         }       
       
+    }
+
+    //Maybefor Later Use
+    public Vector3 GetCursorPos()
+    {
+        return cursorPos;
     }
 
     public int GetDirection()

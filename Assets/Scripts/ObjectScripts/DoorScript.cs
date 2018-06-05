@@ -16,6 +16,8 @@ public class DoorScript : MonoBehaviour {
     public string keyNeededText;
     public string swordNeededText;
 
+    public AudioClip doorSound;
+
     // Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
@@ -31,6 +33,7 @@ public class DoorScript : MonoBehaviour {
                 {
                     doorStatus = anim.GetBool("Open")? false: true;
                     anim.SetBool("Open", doorStatus);
+                    AudioSource.PlayClipAtPoint(doorSound, transform.position);
                 }
                 else if (!specialKey)
                 {

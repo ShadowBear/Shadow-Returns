@@ -18,7 +18,7 @@ public class MeeleDMG : MonoBehaviour {
         if (col.CompareTag("Enemy"))
         {
             //Apply Damage
-            col.GetComponent<HealthScript>().TakeDamage(damage);
+            col.GetComponent<EnemyHealth>().TakeDamage(damage,true);
             if (col.GetComponent<Rigidbody>() != null)
                 col.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(player.transform.forward) * pushForce, ForceMode.Impulse);
         }

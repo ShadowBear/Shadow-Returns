@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParticleController : MonoBehaviour
 {
 
-    public float lifeTime = 1.5f;
+    public float lifeTime;
     private float timePassed;
 
     // Use this for initialization

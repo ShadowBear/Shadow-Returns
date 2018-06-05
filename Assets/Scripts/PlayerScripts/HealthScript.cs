@@ -69,39 +69,50 @@ public class HealthScript : MonoBehaviour {
         Start();
         //print(health);
     }
-
     public void TakeDamage(float damage)
     {
-        if (!hitable) return;
         if (!isDead && !isShielded)
         {
-            hitable = false;
-            hitDelay = startHitDelay;
-            //print("DamageTaken");
-            TakeHit();
-            
             health -= damage;
-            if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
-            if(anim != null) anim.SetTrigger("damaged");
-            //if (gameObject == GameObject.FindGameObjectWithTag("Player")) StartCoroutine(DMGFrame());
-            //else 
-            if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
-
-            //Pushing Back On Hit
-            if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().AddForce(-transform.forward * pushForce);
+            if (healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
+            if (anim != null) anim.SetTrigger("damaged");
+            if (damage > 1) GameManager.control.ShowDmgText(damage, transform);
 
             if (health <= 0 && !isDead)
             {
                 Dying();
             }
         }
-        //else if(!isDead && isShielded)
-        //{
-        //    if (playerShieldScript != null) playerShieldScript.TakeDMG(damage);
-        //}
     }
 
-    protected virtual void TakeHit() { }
+    public void TakeDamage(float damage, bool melee)
+    {
+        if (!hitable) return;
+        if (!isDead && !isShielded)
+        {
+            hitable = false;
+            hitDelay = startHitDelay;
+            TakeHit(melee);
+            
+            health -= damage;
+            if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
+            if(anim != null) anim.SetTrigger("damaged");
+            if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
+
+            //Pushing Back On Hit
+            //if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().AddForce(-transform.forward * pushForce);
+
+            if (health <= 0 && !isDead)
+            {
+                Dying();
+            }
+        }
+    }
+
+
+
+
+    protected virtual void TakeHit(bool melee) { }
     
 
     protected virtual void Dying()
@@ -124,19 +135,6 @@ public class HealthScript : MonoBehaviour {
         if (GetComponent<DropRate>()) GetComponent<DropRate>().DropItem();
         yield return null;   
     }
-
-    //IEnumerator DMGFrame()
-    //{
-    //    if (dmgFrame)
-    //    {
-    //        //dmgFrame.enabled = true;
-    //        dmgFrame.CrossFadeAlpha(1, 0.5f, false);
-    //        yield return new WaitForSeconds(0.5f);
-    //        //dmgFrame.enabled = false;
-    //        dmgFrame.CrossFadeAlpha(0, 0.5f, false);            
-    //    }
-    //    yield return null;
-    //}
 
 
     public void RotateHealthbar()

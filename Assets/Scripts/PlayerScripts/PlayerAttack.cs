@@ -48,6 +48,12 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject sword;
     public GameObject gun;
 
+    //PlayerRotation playRot;
+    //private Vector3 offset = new Vector3(0, 1, 0);
+
+    //Sounds
+    public AudioClip fireSound;
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
@@ -58,21 +64,25 @@ public class PlayerAttack : MonoBehaviour {
         if (startNaked) DontSuitUp();
         else GameManager.control.SuitUp();
 
+        //playRot = GetComponentInParent<PlayerRotation>();
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //Test
-        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(2)")) print("Combo");
 
+        //if(anim.GetBool("Fire") == false) { 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack Done")) {
             print("FertigAngreifen");
             isAttacking = false;
             meeleHitbox.enabled = false;
         }
+        //old
         fireTransform.forward = playerRotation.transform.forward;
-        if(sword.activeSelf || gun.activeSelf) CheckFired();
+        
+        //fireTransform.LookAt(playRot.GetCursorPos() + offset);
+
+        if (sword.activeSelf || gun.activeSelf) CheckFired();
         
         if (Input.GetAxis("Mouse ScrollWheel") != 0 && GameManager.control.swordCollected && GameManager.control.gunCollected)
         {
@@ -145,12 +155,16 @@ public class PlayerAttack : MonoBehaviour {
         isAttacking = true;
         anim.SetBool("Range", true);
         anim.SetTrigger("Fire");
+        
+       
         yield return new WaitForSeconds(0.25f);
+        GetComponent<AudioSource>().Play();
         GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
         shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
         //shotInstance.GetComponent<ParticleSystem>().Play();
         //fireParticle.Play();
         yield return new WaitForSeconds(fireRate - 0.25f);
+        GetComponent<AudioSource>().Stop();
         isAttacking = false;
         yield return null;
         
@@ -170,6 +184,7 @@ public class PlayerAttack : MonoBehaviour {
         if (!isReloading)
         {
             GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
+            AudioSource.PlayClipAtPoint(fireSound, fireTransform.position);
             //shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
             shotInstance.GetComponent<Rigidbody>().AddForce(shotInstance.transform.forward * 1000);
         }

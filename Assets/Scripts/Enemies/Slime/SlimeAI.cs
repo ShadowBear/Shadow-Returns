@@ -161,15 +161,16 @@ public class SlimeAI : MonoBehaviour
 
             //Circle Player
             if (!isCircling) StartCoroutine(CirclePlayer());
-            if (isCircling) transform.LookAt(player.transform.position);
+            else transform.LookAt(player.transform.position);
 
-            //Ausweichen falls Angriff kommt und ausweichen darf
-            if (player.GetComponentInChildren<PlayerAttack>().GetAttackStatus() && !hasDodged && rigid != null)
-            {
-                //Wahrscheinlichkeit mit der ausgewichen werden soll 0.5 = 50%; 0.8 = 80%;
-                if (Random.Range(0, 1) < dodgeChance) StartCoroutine(DodgeAttack());
-                print("Dodge");
-            }
+            //Ausweichen falls Angriff kommt und ausweichen darf 
+            //Todo for Better Results
+            //if (player.GetComponentInChildren<PlayerAttack>().GetAttackStatus() && !hasDodged && rigid != null)
+            //{
+            //    //Wahrscheinlichkeit mit der ausgewichen werden soll 0.5 = 50%; 0.8 = 80%;
+            //    if (Random.Range(0, 1) < dodgeChance) StartCoroutine(DodgeAttack());
+            //    print("Dodge");
+            //}
         }
     }
 

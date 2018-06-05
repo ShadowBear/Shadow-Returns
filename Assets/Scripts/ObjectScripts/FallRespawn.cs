@@ -12,7 +12,7 @@ public class FallRespawn : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             other.transform.position = respawnPos.position;
-            other.GetComponent<HealthScript>().TakeDamage(fallDMG);
+            other.GetComponent<PlayerHealth>().TakeDamage(fallDMG);
         }
     }
 }

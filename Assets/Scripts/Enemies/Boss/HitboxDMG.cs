@@ -8,16 +8,18 @@ public class HitboxDMG : MonoBehaviour {
     //Chance to Make Crit Values between 0-1f : 0 = 0%  and 1 = 100%
     public float criticalChance = 0.15f;
     private int critMultiplier = 0;
+    bool meleeAttack = true;
     void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG);
+            col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG, meleeAttack);
         }
         if (col.CompareTag("Enemy") || col.CompareTag("Destroyable"))
         {
             //Apply Damage
-            col.GetComponent<HealthScript>().TakeDamage(CalculateDmg());
+            if (col.GetComponent<EnemyHealth>()) col.GetComponent<EnemyHealth>().TakeDamage(CalculateDmg(), meleeAttack);
+            else if (col.GetComponent<HealthScript>()) col.GetComponent<HealthScript>().TakeDamage(CalculateDmg(), meleeAttack);
         }
         else if (col.CompareTag("Boss"))
         {
@@ -26,7 +28,7 @@ public class HitboxDMG : MonoBehaviour {
         else if (col.CompareTag("Slime"))
         {
             //col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
-            col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg());            
+            col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg(), meleeAttack);            
         }
     }
 

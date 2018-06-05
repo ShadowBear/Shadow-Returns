@@ -12,7 +12,7 @@ public class Shield : MonoBehaviour {
     private Color effectColor;
     public float resetTimer = 0;
 
-    public HealthScript playerHealth;
+    public PlayerHealth playerHealth;
 
     //private TankShooting playerShoot;
 
@@ -26,7 +26,7 @@ public class Shield : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         power = maxPower;
-        deActivateShield();
+        DeActivateShield();
         //playerShoot = GameObject.FindGameObjectWithTag("Player").GetComponent<TankShooting>();
         //matColor = mat.GetColor("MainColor");
     }
@@ -120,13 +120,13 @@ public class Shield : MonoBehaviour {
         }
     }
 
-    public void activateShield()
+    public void ActivateShield()
     {
         rend.enabled = true;
         GetComponent<Light>().enabled = true;
     }
 
-    public void deActivateShield()
+    public void DeActivateShield()
     {
         rend.enabled = false;
         GetComponent<Light>().enabled = false;

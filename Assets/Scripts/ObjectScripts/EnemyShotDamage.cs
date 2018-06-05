@@ -10,7 +10,7 @@ public class EnemyShotDamage : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") && !col.isTrigger)
         {
             //Apply Damage
             col.GetComponent<PlayerHealth>().TakeDamage(damage);

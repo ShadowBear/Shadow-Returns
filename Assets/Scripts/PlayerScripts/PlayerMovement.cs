@@ -52,12 +52,26 @@ public class PlayerMovement : MonoBehaviour {
 
 
     // Update is called once per frame
-    void FixedUpdate () {
+    private void FixedUpdate()
+    {
+        isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
+        if (anim != null)
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+            //CheckSpeed for Animation
+            animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
+            lastPosition = transform.position;
+            anim.SetFloat("Speed", animSpeed);
+            MoveAnimation(h, v);
+        }
+    }
+
+    void Update () {
 #if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //Vector3 inputs = Vector3.zero;
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        
 
         RotateWithCamera();
 
@@ -68,7 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 
         //if (Input.GetButtonDown("Jump")) print("Springe");
         // Ground With Layers for later ToDo
-        isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
+        
 
         //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         //moveDirection *= speed * Time.deltaTime;
@@ -78,18 +92,18 @@ public class PlayerMovement : MonoBehaviour {
         /* ******************** Shield *************************/
         if (Input.GetKey(KeyCode.LeftShift))
         {
-
-            if(!attackScript.isAttacking && !attackScript.isReloading) shield.activateShield();
+            if(!attackScript.isAttacking && !attackScript.isReloading) shield.ActivateShield();
         }
         else
         {
-            if(shield != null) shield.deActivateShield();
+            if(shield != null) shield.DeActivateShield();
         }
         /************************************************************/
 
         /* ********************** Dash *************************/
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        //if (Input.GetButtonDown("Dash"))
+        if(Input.GetButtonDown("Dash"))
         {
             DashImageControll[] dashBlocks = GameManager.control.dashBlocksParent.GetComponentsInChildren<DashImageControll>();
             foreach(DashImageControll dash in dashBlocks)
@@ -125,15 +139,10 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         /* ********************* End *******************/
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
         Move(h,v);
-        if (anim != null)
-        {
-            //CheckSpeed for Animation
-            animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
-            lastPosition = transform.position;
-            anim.SetFloat("Speed", animSpeed);
-            MoveAnimation(h,v);
-        }
+        
     }
 
     private void MoveAnimation(float h, float v)
@@ -256,6 +265,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerRigidbody.velocity = Vector3.up * jumpHeight;
+            print("JumpTwice");
         }
 
     }

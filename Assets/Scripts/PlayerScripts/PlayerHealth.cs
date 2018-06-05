@@ -35,6 +35,7 @@ public class PlayerHealth : HealthScript {
 
     new public void TakeDamage(float damage)
     {
+        print("PLAYERDMG");
         if (!isDead && !isShielded)
         {
             health -= damage;
@@ -62,6 +63,7 @@ public class PlayerHealth : HealthScript {
 
     IEnumerator DMGFrame()
     {
+        print("DMGFRAME");
         if (dmgFrame)
         {
             //dmgFrame.enabled = true;
