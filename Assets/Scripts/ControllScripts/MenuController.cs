@@ -10,10 +10,11 @@ public class MenuController : MonoBehaviour {
     public GameObject dialogMenu;
     public Text dialogText;
     public Button dialogButton;
+    private AudioSource audio;
 
     // Use this for initialization
     void Start () {
-		
+        audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -63,6 +64,7 @@ public class MenuController : MonoBehaviour {
     {
         print("WechsleFenster");
         print("TimeScale: " + Time.timeScale);
+        
         if (window.activeSelf)
         {
             Time.timeScale = 1;
@@ -72,6 +74,7 @@ public class MenuController : MonoBehaviour {
         {
             Time.timeScale = 0;
             window.SetActive(true);
+            audio.Play();
         }
     }
 

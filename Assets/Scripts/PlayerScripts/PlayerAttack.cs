@@ -53,6 +53,8 @@ public class PlayerAttack : MonoBehaviour {
 
     //Sounds
     public AudioClip fireSound;
+    public AudioClip[] swordSounds;
+    private bool playingSound = false;
 
     // Use this for initialization
     void Start () {
@@ -77,6 +79,7 @@ public class PlayerAttack : MonoBehaviour {
             isAttacking = false;
             meeleHitbox.enabled = false;
         }
+        
         //old
         fireTransform.forward = playerRotation.transform.forward;
         
@@ -219,13 +222,18 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetTrigger("Fire");
         yield return new WaitForSeconds(0.25f);
         meeleHitbox.enabled = true;
-
-        //Before Animation Controlled Finish
-        //yield return new WaitForSeconds(meleeAttackRate-0.25f);
-        //isAttacking = false;
-        //meeleHitbox.enabled = false;
-        ////print("Meleefinish");
-        yield return null;
+        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(1)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[1], transform.position);
+        //else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(2)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[2], transform.position);
+        //else if (!playingSound) AudioSource.PlayClipAtPoint(swordSounds[0], transform.position);
+        //playingSound = true;
+        //yield return new WaitForSeconds(0.75f);
+        //playingSound = false;
+            //Before Animation Controlled Finish
+            //yield return new WaitForSeconds(meleeAttackRate-0.25f);
+            //isAttacking = false;
+            //meeleHitbox.enabled = false;
+            ////print("Meleefinish");
+            yield return null;
 
     }
 

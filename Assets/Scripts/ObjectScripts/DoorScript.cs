@@ -8,10 +8,12 @@ public class DoorScript : MonoBehaviour {
     private Animator anim;
     public bool keyNeededBool = false;
     public bool specialKey = false;
+    public bool triggersEnemys = false;
 
     public bool doorStatus = false;
 
     public GameObject specialKeyObject;
+    private EnemyInstantiateTrigger enemyTrigger;
 
     public string keyNeededText;
     public string swordNeededText;
@@ -21,6 +23,7 @@ public class DoorScript : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
+        enemyTrigger = GetComponent<EnemyInstantiateTrigger>();
 	}
 
     private void OnTriggerStay(Collider other)
@@ -33,7 +36,11 @@ public class DoorScript : MonoBehaviour {
                 {
                     doorStatus = anim.GetBool("Open")? false: true;
                     anim.SetBool("Open", doorStatus);
-                    AudioSource.PlayClipAtPoint(doorSound, transform.position);
+                    if(doorSound != null) AudioSource.PlayClipAtPoint(doorSound, transform.position);
+                    if (triggersEnemys) {
+                        enemyTrigger.Triggered();
+                        triggersEnemys = false;
+                    }
                 }
                 else if (!specialKey)
                 {
@@ -41,6 +48,12 @@ public class DoorScript : MonoBehaviour {
                     {
                         GameManager.control.UseKey();
                         anim.SetBool("Open", true);
+                        if (doorSound != null) AudioSource.PlayClipAtPoint(doorSound, transform.position);
+                        if (triggersEnemys)
+                        {
+                            enemyTrigger.Triggered();
+                            triggersEnemys = false;
+                        }
                     }
                 }
                 else
@@ -51,6 +64,12 @@ public class DoorScript : MonoBehaviour {
                         {
                             GameManager.control.UseKey();
                             anim.SetBool("Open", true);
+                            if (doorSound != null) AudioSource.PlayClipAtPoint(doorSound, transform.position);
+                            if (triggersEnemys)
+                            {
+                                enemyTrigger.Triggered();
+                                triggersEnemys = false;
+                            }
                         }
                         else
                         {

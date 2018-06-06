@@ -371,6 +371,7 @@
     <Compile Include="Assets\Scripts\ControllScripts\CursorControll.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\DamageTextControll.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\DemoCheats.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\EnemyInstantiateTrigger.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GraveyardController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\LevelManager.cs" />
@@ -438,6 +439,7 @@
     <Compile Include="Assets\Scripts\PlayerScripts\Shield.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ShotDirection.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
+    <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />
     <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />
   </ItemGroup>
   <ItemGroup>
