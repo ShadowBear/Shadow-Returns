@@ -30,6 +30,10 @@ public class HitboxDMG : MonoBehaviour {
             //col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
             col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg(), meleeAttack);            
         }
+        else if (col.CompareTag("Explosion"))
+        {
+            col.GetComponent<ExplosionItems>().TakeDamage(CalculateDmg());
+        }
     }
 
     int CalculateDmg()

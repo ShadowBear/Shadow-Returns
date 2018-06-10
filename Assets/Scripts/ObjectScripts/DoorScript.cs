@@ -55,6 +55,11 @@ public class DoorScript : MonoBehaviour {
                             triggersEnemys = false;
                         }
                     }
+                    else
+                    {
+                        GameManager.control.GetComponent<MenuController>().SetDialogText(keyNeededText);
+                        GameManager.control.GetComponent<MenuController>().Dialog();
+                    }
                 }
                 else
                 {

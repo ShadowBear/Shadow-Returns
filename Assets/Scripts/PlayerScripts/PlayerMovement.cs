@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float speed = 6.0f;
+    //Standart 8f
+    public float speed = 8.0f;
+    //Standart 8.5f
     [Range(1,10)]
-    public float jumpHeight = 2f;
+    public float jumpHeight = 8.5f;
     public float groundDistance = 0.2f;
     public float dashDistance = 5f;
     public LayerMask ground;
@@ -100,6 +102,11 @@ public class PlayerMovement : MonoBehaviour {
         }
         /************************************************************/
 
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GetComponent<PlayerHealth>().DrinkPotion(GameManager.control.potionValue);
+        }
+
         /* ********************** Dash *************************/
 
         //if (Input.GetButtonDown("Dash"))
@@ -129,10 +136,6 @@ public class PlayerMovement : MonoBehaviour {
                     break;
                 }
             }
-
-            
-
-
             //old Dash
             //Vector3 dashVelocity = Vector3.Scale(transform.GetChild(1).transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime)));
             //playerRigidbody.AddForce(dashVelocity, ForceMode.VelocityChange);

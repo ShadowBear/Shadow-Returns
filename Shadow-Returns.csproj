@@ -403,6 +403,7 @@
     <Compile Include="Assets\Scripts\GroundControlls\PopUpGroundMaze.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\PopUpOrder.cs" />
     <Compile Include="Assets\Scripts\GuI\DashImageControll.cs" />
+    <Compile Include="Assets\Scripts\Items\ExplosionItems.cs" />
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />

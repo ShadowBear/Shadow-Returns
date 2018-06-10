@@ -38,7 +38,7 @@ public class PlayerHealth : HealthScript {
         if (!isDead && !isShielded)
         {
             health -= damage;
-            if (healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
+            if (healthbar != null) healthbar.fillAmount = health / maxHealth;
             if (anim != null) anim.SetTrigger("damaged");
             StartCoroutine(DMGFrame());
         }
@@ -47,6 +47,22 @@ public class PlayerHealth : HealthScript {
             if (playerShieldScript != null) playerShieldScript.TakeDMG(damage);
         }
         if (health <= 0 && !isDead) Dying();
+    }
+
+    //protected override void TakeHit()
+    //{
+        
+    //}
+
+    public void DrinkPotion(int potionValue)
+    {
+        if (GameManager.control.potionNmbr > 0)
+        {
+            if (health >= maxHealth) return;
+            health = (health + potionValue) > maxHealth ? maxHealth : (health + potionValue);
+            if (healthbar != null) healthbar.fillAmount = health / maxHealth;
+            GameManager.control.DrinkPotion();
+        }
     }
 
     IEnumerator DieAnim()

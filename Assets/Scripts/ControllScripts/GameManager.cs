@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour {
     public GameObject dashBlocksParent;
 
     //Potions, Keys and Coins
-    private int potionNmbr;
-    private int maxPotionsNmbr = 5;
+    public int potionNmbr;
+    private int maxPotionsNmbr = 10;
     public Text potionText;
+    public int potionValue = 40;
 
     public int keyNmbr;
     public Text keyText;
@@ -98,6 +99,13 @@ public class GameManager : MonoBehaviour {
     {
         potionNmbr++;
         if (potionNmbr > maxPotionsNmbr) potionNmbr = maxPotionsNmbr;
+        potionText.text = potionNmbr.ToString();
+    }
+
+    public void DrinkPotion()
+    {
+        potionNmbr--;
+        if (potionNmbr < 0) potionNmbr = 0;
         potionText.text = potionNmbr.ToString();
     }
 

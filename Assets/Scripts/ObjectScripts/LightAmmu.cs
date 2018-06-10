@@ -13,10 +13,23 @@ public class LightAmmu : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider col)
     {        
+        if (col.CompareTag("Explosion")) col.GetComponent<HealthScript>().TakeDamage(CalculateDmg());
+        else if (col.CompareTag("Boss") || col.CompareTag("Enemy") || col.CompareTag("Slime"))col.GetComponent<HealthScript>().TakeDamage(CalculateDmg(),melee);
+        if (!col.CompareTag("Player") && !col.CompareTag("Light") && !col.isTrigger)
+        {
+            if(explosion != null) Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
+    /************* OLD Without Inheritance**********************/
+    /*
+    void OnTriggerEnter(Collider col)
+    {
         if (col.CompareTag("Enemy") || col.CompareTag("Destroyable"))
         {
             //Apply Damage
-            if(col.GetComponent<EnemyHealth>()) col.GetComponent<EnemyHealth>().TakeDamage(CalculateDmg(), melee);
+            if (col.GetComponent<EnemyHealth>()) col.GetComponent<EnemyHealth>().TakeDamage(CalculateDmg(), melee);
             else if (col.GetComponent<HealthScript>()) col.GetComponent<HealthScript>().TakeDamage(CalculateDmg(), melee);
         }
         else if (col.CompareTag("Boss"))
@@ -24,16 +37,22 @@ public class LightAmmu : MonoBehaviour {
             col.GetComponent<LibaryGhostBossHealth>().TakeDamage(CalculateDmg());
         }
         else if (col.CompareTag("Slime"))
-        {            
+        {
             //col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
             col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg(), melee);
         }
+        else if (col.CompareTag("Explosion"))
+        {
+            col.GetComponent<ExplosionItems>().TakeDamage(CalculateDmg());
+        }
         if (!col.CompareTag("Player") && !col.CompareTag("Light") && !col.isTrigger)
         {
-            if(explosion != null) Instantiate(explosion, transform.position, transform.rotation);
+            if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
+    */
+    /**********************************************************/
 
     int CalculateDmg()
     {

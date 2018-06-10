@@ -73,6 +73,10 @@ public class HealthScript : MonoBehaviour {
     {
         if (!isDead && !isShielded)
         {
+            hitable = false;
+            hitDelay = startHitDelay;
+            TakeHit();
+
             health -= damage;
             if (healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
             if (anim != null) anim.SetTrigger("damaged");
@@ -112,7 +116,9 @@ public class HealthScript : MonoBehaviour {
 
 
 
+    protected virtual void TakeHit() { }
     protected virtual void TakeHit(bool melee) { }
+
     
 
     protected virtual void Dying()
