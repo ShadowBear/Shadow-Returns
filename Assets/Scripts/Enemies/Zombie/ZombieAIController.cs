@@ -99,7 +99,8 @@ public class ZombieAIController : MonoBehaviour {
 
     void CalculateState()
     {
-        if (distanceToPlayer > followDistance) agent.isStopped = true;
+        if (!gameObject.activeSelf) return;
+        if (distanceToPlayer > followDistance)agent.isStopped = true;
         else if (distanceToPlayer > minDistanceToRange) WalkToPlayer();
         else if (distanceToPlayer > minDistanceToMelee && !meleeOnly)
         {

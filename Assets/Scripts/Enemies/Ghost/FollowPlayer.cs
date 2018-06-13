@@ -13,6 +13,9 @@ public class FollowPlayer : MonoBehaviour {
     Vector3 lastPosition = Vector3.zero;
     private Animator anim;
 
+    public float maxDistanceToPlayer = 5f;
+    private float distanceToPlayer = 0;
+
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -21,13 +24,19 @@ public class FollowPlayer : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void Update() {
         if (GetComponent<HealthScript>() != null) {
             if(GetComponent<HealthScript>().isDead) return;
         }
-        moveDirection = (player.transform.position - transform.position);
-        if (Mathf.Abs(moveDirection.magnitude) > 0.5f) transform.position += new Vector3(moveDirection.x, 0, moveDirection.z) * Time.deltaTime * followSpeed;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((player.transform.position - transform.position)), Time.deltaTime * smooth);
+        distanceToPlayer = Mathf.Abs((player.transform.position - transform.position).magnitude);
+
+        if(distanceToPlayer < maxDistanceToPlayer)
+        {
+            moveDirection = (player.transform.position - transform.position);
+            if (Mathf.Abs(moveDirection.magnitude) > 0.5f) transform.position += new Vector3(moveDirection.x, 0, moveDirection.z) * Time.deltaTime * followSpeed;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation((player.transform.position - transform.position)), Time.deltaTime * smooth);
+
+        }
 
         if (anim != null) { 
             //CheckSpeed for Animation

@@ -26,6 +26,7 @@ public class CamerController : MonoBehaviour {
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         follow = player;
+        StartCoroutine(LateCameraPositionStart());
     }
 	
 	// Update is called once per frame
@@ -77,6 +78,13 @@ public class CamerController : MonoBehaviour {
                 //else r.material.shader = Shader.Find("Toon/Lit");
             }
         }
+    }
+
+    IEnumerator LateCameraPositionStart()
+    {
+        yield return new WaitForSeconds(1.5f);
+        TurnCameraLook();
+        yield return null;
     }
 
 

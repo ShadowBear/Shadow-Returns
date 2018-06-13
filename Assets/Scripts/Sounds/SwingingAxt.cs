@@ -6,10 +6,11 @@ public class SwingingAxt : MonoBehaviour {
 
     // Use this for initialization
 
-    public AudioClip soundclip;
+    public AudioSource audioSource;
 	void Start () {
-        InvokeRepeating("PlaySound",0.5f,1.5f);
-	}
+        InvokeRepeating("PlaySound", 0.5f, 1.5f);
+        //Invoke("PlaySound", 0.5f);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,6 +19,17 @@ public class SwingingAxt : MonoBehaviour {
 
     void PlaySound()
     {
-        AudioSource.PlayClipAtPoint(soundclip, transform.position, 1.5f);
+        //audioSource.Play();
+        StartCoroutine(Sound());
     }
+
+    IEnumerator Sound()
+    {
+        audioSource.Play();
+        yield return new WaitForSeconds(1.25f);
+        audioSource.Stop();
+        yield return null;
+
+    }
+
 }

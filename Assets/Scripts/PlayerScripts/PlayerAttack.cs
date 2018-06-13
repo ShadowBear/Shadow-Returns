@@ -153,25 +153,26 @@ public class PlayerAttack : MonoBehaviour {
 #endif
     }
 
-    IEnumerator Fire()
-    {
-        isAttacking = true;
-        anim.SetBool("Range", true);
-        anim.SetTrigger("Fire");
+    //IEnumerator Fire()
+    //{
+    //    isAttacking = true;
+    //    anim.SetBool("Range", true);
+    //    anim.SetTrigger("Fire");
         
        
-        yield return new WaitForSeconds(0.25f);
-        GetComponent<AudioSource>().Play();
-        GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
-        shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
-        //shotInstance.GetComponent<ParticleSystem>().Play();
-        //fireParticle.Play();
-        yield return new WaitForSeconds(fireRate - 0.25f);
-        GetComponent<AudioSource>().Stop();
-        isAttacking = false;
-        yield return null;
+    //    yield return new WaitForSeconds(0.25f);
+    //    GetComponent<AudioSource>().Play();
+    //    GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
+    //    GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
+    //    shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
+    //    //shotInstance.GetComponent<ParticleSystem>().Play();
+    //    //fireParticle.Play();
+    //    yield return new WaitForSeconds(fireRate - 0.25f);
+    //    GetComponent<AudioSource>().Stop();
+    //    isAttacking = false;
+    //    yield return null;
         
-    }
+    //}
 
     
 
