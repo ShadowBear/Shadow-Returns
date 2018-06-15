@@ -265,11 +265,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Jumping Code
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            playerRigidbody.velocity = Vector3.up * jumpHeight;
-            print("JumpTwice");
-        }
+        if (Input.GetButtonDown("Jump") && isGrounded) playerRigidbody.velocity = Vector3.up * jumpHeight;
+        
 
     }
 

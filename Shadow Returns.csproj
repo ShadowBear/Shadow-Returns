@@ -409,6 +409,7 @@
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\Doors\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\EnemyShotDamage.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Experience.cs" />
@@ -443,6 +444,7 @@
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />
     <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />
+    <Compile Include="Assets\Scripts\Traps\TrapLever.cs" />
     <Compile Include="Assets\Scripts\Traps\TrapTriggerEnterDmg.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ public class SpikeBlock : MonoBehaviour {
         {
             if (activated)
             {
-                anim.SetTrigger("Activate");
+                anim.SetTrigger("isActivated");
             }
         }
     }

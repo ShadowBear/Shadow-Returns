@@ -62,8 +62,8 @@ public class MenuController : MonoBehaviour {
 
     void ToggleWindow(GameObject window)
     {
-        print("WechsleFenster");
-        print("TimeScale: " + Time.timeScale);
+        //print("WechsleFenster");
+        //print("TimeScale: " + Time.timeScale);
         
         if (window.activeSelf)
         {

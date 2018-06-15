@@ -11,7 +11,8 @@ public class PlayerRotation : MonoBehaviour {
     private Vector3 cursorPos = Vector3.zero;
 
     public LayerMask floorMask;
-
+    bool turnbeforeAttack = false;
+    public Animator playerAnim;
  
     // Use this for initialization
     void Start () {
@@ -20,7 +21,14 @@ public class PlayerRotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (playerAttack.isAttacking && !playerAttack.rangeAttack) { }
+        if (playerAttack.isAttacking && !playerAttack.rangeAttack) {
+            if (playerAnim.GetBool("Fire") && !turnbeforeAttack)
+            {
+                Turning();
+                turnbeforeAttack = true;
+            }
+            else turnbeforeAttack = false;
+        }
         else Turning();
     }
 

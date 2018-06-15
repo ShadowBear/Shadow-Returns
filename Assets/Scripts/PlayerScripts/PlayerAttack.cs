@@ -48,8 +48,9 @@ public class PlayerAttack : MonoBehaviour {
     public GameObject sword;
     public GameObject gun;
 
-    //PlayerRotation playRot;
-    //private Vector3 offset = new Vector3(0, 1, 0);
+    PlayerRotation playRot;
+    private Vector3 offset = new Vector3(0, 1, 0);
+    public float distanceForCursor = 2.5f;
 
     //Sounds
     public AudioClip fireSound;
@@ -66,7 +67,7 @@ public class PlayerAttack : MonoBehaviour {
         if (startNaked) DontSuitUp();
         else GameManager.control.SuitUp();
 
-        //playRot = GetComponentInParent<PlayerRotation>();
+        playRot = GetComponentInParent<PlayerRotation>();
 
     }
 	
@@ -79,11 +80,15 @@ public class PlayerAttack : MonoBehaviour {
             isAttacking = false;
             meeleHitbox.enabled = false;
         }
-        
+
         //old
-        fireTransform.forward = playerRotation.transform.forward;
-        
-        //fireTransform.LookAt(playRot.GetCursorPos() + offset);
+        if (Mathf.Abs((playerRotation.transform.position - playRot.GetCursorPos()).magnitude) < distanceForCursor)
+            fireTransform.forward = playerRotation.transform.forward;
+        //new
+        else
+        {
+            fireTransform.LookAt(playRot.GetCursorPos() + offset);
+        }
 
         if (sword.activeSelf || gun.activeSelf) CheckFired();
         

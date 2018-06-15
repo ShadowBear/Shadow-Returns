@@ -5,28 +5,51 @@ using UnityEngine;
 public class Leaver : MonoBehaviour {
 
     private bool isActivated = false;
-    private Animator anim;
-    public GameObject toOpenObject;
+    [SerializeField]
+    private bool reaptingLever = false;
+    private Animator animSelf;
+    public GameObject[] toOpenObject;
+    private bool moving = false;
 
 
     // Use this for initialization
-	void Start () {
-        anim = GetComponent<Animator>();
-        anim.SetBool("isActivated", isActivated);
-        if(toOpenObject) toOpenObject.SetActive(!isActivated);
-        else print("Leaver has no Objekt assigned"); 
+    void Start () {
+        animSelf = GetComponent<Animator>();
+        animSelf.SetBool("isActivated", isActivated);
+        //if(toOpenObject) toOpenObject.SetActive(!isActivated);
+        //else print("Leaver has no Objekt assigned"); 
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetButton("Action"))
             {
-                isActivated = isActivated ? false : true;
-                anim.SetBool("isActivated", isActivated);
-                toOpenObject.SetActive(!isActivated);
+                if (!moving)
+                {
+                    isActivated = isActivated ? false : true;
+                    animSelf.SetBool("isActivated", isActivated);
+                    foreach (GameObject child in toOpenObject)
+                    {
+                        if (child.GetComponent<TrapLever>() != null)
+                        {
+                            if (reaptingLever) child.GetComponent<TrapLever>().DeactivateTrap();
+                            else child.GetComponent<TrapLever>().TriggerTrap();
+                        }
+                    }
+                    StartCoroutine(WaitforNext());
+                }
+                
             }
         }
+    }
+
+    IEnumerator WaitforNext()
+    {
+        moving = true;
+        yield return new WaitForSeconds(1f);
+        moving = false;
+        yield return null;
     }
 }
