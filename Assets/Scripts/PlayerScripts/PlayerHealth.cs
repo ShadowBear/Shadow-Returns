@@ -15,6 +15,8 @@ public class PlayerHealth : HealthScript {
     [Header ("DMG")]
     public Image dmgFrame;
     public Shield playerShieldScript;
+    [SerializeField]
+    private Renderer playerRenderer;
 
     new void Start () {
    
@@ -41,6 +43,7 @@ public class PlayerHealth : HealthScript {
             if (healthbar != null) healthbar.fillAmount = health / maxHealth;
             if (anim != null) anim.SetTrigger("damaged");
             StartCoroutine(DMGFrame());
+            StartCoroutine(Blinking());
         }
         else if (!isDead && isShielded)
         {
@@ -75,6 +78,18 @@ public class PlayerHealth : HealthScript {
         }
 
         yield return null;   
+    }
+
+    IEnumerator Blinking()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            playerRenderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            playerRenderer.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return null;
     }
 
     IEnumerator DMGFrame()

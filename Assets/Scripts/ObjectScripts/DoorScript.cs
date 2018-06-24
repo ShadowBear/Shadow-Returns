@@ -48,6 +48,7 @@ public class DoorScript : MonoBehaviour {
                     {
                         GameManager.control.UseKey();
                         anim.SetBool("Open", true);
+                        keyNeededBool = false;
                         if (doorSound != null) AudioSource.PlayClipAtPoint(doorSound, transform.position);
                         if (triggersEnemys)
                         {
@@ -69,6 +70,8 @@ public class DoorScript : MonoBehaviour {
                         {
                             GameManager.control.UseKey();
                             anim.SetBool("Open", true);
+                            specialKey = false;
+                            keyNeededBool = false;
                             if (doorSound != null) AudioSource.PlayClipAtPoint(doorSound, transform.position);
                             if (triggersEnemys)
                             {

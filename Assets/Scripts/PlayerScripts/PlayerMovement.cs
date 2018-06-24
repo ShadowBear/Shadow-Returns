@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Webplayer Beispiel Bedingung
 
-#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+//#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
     // PC
     void Start()
     {
@@ -40,17 +40,17 @@ public class PlayerMovement : MonoBehaviour {
         anim = GetComponentInChildren<Animator>();
         attackScript = GetComponentInChildren<PlayerAttack>();
     }
-#else
-    // Android
-    public GameObject joystickObject;
-    private VirtualJoystick vrStick;
+//#else
+//    // Android
+//    public GameObject joystickObject;
+//    private VirtualJoystick vrStick;
 
-    void Start()
-    {
-        playerRigidbody = GetComponent<Rigidbody>();
-        vrStick = joystickObject.GetComponent<VirtualJoystick>();
-    }
-#endif
+//    void Start()
+//    {
+//        playerRigidbody = GetComponent<Rigidbody>();
+//        vrStick = joystickObject.GetComponent<VirtualJoystick>();
+//    }
+//#endif
 
 
     // Update is called once per frame
@@ -70,17 +70,17 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update () {
-#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+//#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //Vector3 inputs = Vector3.zero;
 
         
 
         RotateWithCamera();
 
-#else
-        float h = vrStick.Horizontal();
-        float v = vrStick.Vertical(); 
-#endif
+//#else
+//        float h = vrStick.Horizontal();
+//        float v = vrStick.Vertical(); 
+//#endif
 
         //if (Input.GetButtonDown("Jump")) print("Springe");
         // Ground With Layers for later ToDo
@@ -144,8 +144,8 @@ public class PlayerMovement : MonoBehaviour {
         /* ********************* End *******************/
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        Move(h,v);
-        
+        Move(h, v);
+
     }
 
     private void MoveAnimation(float h, float v)

@@ -153,8 +153,8 @@ public class PlayerAttack : MonoBehaviour {
             else if(!isShielded) StartCoroutine(MeeleHit());
         }
 #else
-        if (fireStickDown && rangeAttack && !isShooting) StartCoroutine(Fire());
-        else if(fireStickDown && !rangeAttack && !isShooting) StartCoroutine(MeeleHit());
+        //if (fireStickDown && rangeAttack && !isShooting) StartCoroutine(Fire());
+        //else if(fireStickDown && !rangeAttack && !isShooting) StartCoroutine(MeeleHit());
 #endif
     }
 

@@ -26,7 +26,7 @@ public class MenuController : MonoBehaviour {
 
     public void StartBtn()
     {
-        SceneManager.LoadScene("BasicTestScene");
+        SceneManager.LoadScene("Level01");
     }
 
 
@@ -37,7 +37,8 @@ public class MenuController : MonoBehaviour {
 
     public void QuitBtn()
     {
-        SceneManager.LoadScene("StartMenu");
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("StartMenu")) Application.Quit();
+        else SceneManager.LoadScene("StartMenu");
     }
 
     public void SettingsBtn()

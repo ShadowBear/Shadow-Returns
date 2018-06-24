@@ -397,6 +397,7 @@
     <Compile Include="Assets\Scripts\Enemies\Tower\Tower.cs" />
     <Compile Include="Assets\Scripts\Enemies\Zombie\ZombieAIController.cs" />
     <Compile Include="Assets\Scripts\FireLight.cs" />
+    <Compile Include="Assets\Scripts\GameMenu\StartGameMenu.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\BuildAreaUp.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\GroundMoving.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\MoveMe.cs" />
@@ -408,6 +409,7 @@
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
+    <Compile Include="Assets\Scripts\ObjectScripts\Doors\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\EnemyShotDamage.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Experience.cs" />
@@ -442,6 +444,8 @@
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />
     <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />
+    <Compile Include="Assets\Scripts\Traps\TrapLever.cs" />
+    <Compile Include="Assets\Scripts\Traps\TrapTriggerEnterDmg.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Animation\Grass Animation Help.txt" />
@@ -516,6 +520,9 @@
     <None Include="Assets\BoughtAssetModels\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\GUI\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
+    <None Include="Assets\MutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color Alpha.shader" />
+    <None Include="Assets\MutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color Lit.shader" />
+    <None Include="Assets\MutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color.shader" />
     <None Include="Assets\POLY STYLE - Sci-Fi Characters\Readme.txt" />
     <None Include="Assets\Prefabs\Key\readME keys.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
