@@ -118,7 +118,6 @@ public class LibaryController : MonoBehaviour
                 StartCoroutine(InstantiateEnemies(stage * 5));
                 slimeParent.GetComponent<SlimeSpawner>().enabled = true;
                 stageCounter++;
-                print("Round 1");
                 break;
             case 2:
                 StartCoroutine(InstantiateTowers(5));

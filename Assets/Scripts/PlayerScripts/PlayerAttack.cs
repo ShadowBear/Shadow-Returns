@@ -40,6 +40,7 @@ public class PlayerAttack : MonoBehaviour {
     //Range AttackBoolen & Collider for Meele
     public bool rangeAttack;
     public Collider meeleHitbox;
+    public TrailRenderer trailRenderer;
 
     private Animator anim;
     public GameObject playerRotation;
@@ -61,6 +62,7 @@ public class PlayerAttack : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         meeleHitbox.enabled = false;
+        trailRenderer.enabled = false;
         rangeAttack = true;
         ammuAmount = maxAmmu;
 
@@ -74,11 +76,11 @@ public class PlayerAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //if(anim.GetBool("Fire") == false) { 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack Done")) {
-            print("FertigAngreifen");
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("AttackDone")) {
+            //print("FertigAngreifen");
             isAttacking = false;
             meeleHitbox.enabled = false;
+            trailRenderer.enabled = false;
         }
 
         //old
@@ -107,6 +109,7 @@ public class PlayerAttack : MonoBehaviour {
         {
             weapons[i] = null;
         }
+        anim.SetBool("Unarmed", true);
     }
 
     public void AddWeapon(string type)
@@ -116,7 +119,9 @@ public class PlayerAttack : MonoBehaviour {
             weapons[0] = sword;
             sword.SetActive(true);
             rangeAttack = false;
-            print("Sword added");
+            //print("Sword added");
+            anim.SetBool("Unarmed", false);
+            anim.SetBool("Axe", true);
         }
         else if(type == "gun")
         {
@@ -124,6 +129,9 @@ public class PlayerAttack : MonoBehaviour {
             sword.SetActive(false);
             gun.SetActive(true);
             rangeAttack = true;
+            anim.SetBool("Unarmed", false);
+            anim.SetBool("Axe", false);
+            anim.SetBool("Gun", true);
         }
         else if(type == "shield")
         {
@@ -158,28 +166,6 @@ public class PlayerAttack : MonoBehaviour {
 #endif
     }
 
-    //IEnumerator Fire()
-    //{
-    //    isAttacking = true;
-    //    anim.SetBool("Range", true);
-    //    anim.SetTrigger("Fire");
-        
-       
-    //    yield return new WaitForSeconds(0.25f);
-    //    GetComponent<AudioSource>().Play();
-    //    GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
-    //    GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
-    //    shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
-    //    //shotInstance.GetComponent<ParticleSystem>().Play();
-    //    //fireParticle.Play();
-    //    yield return new WaitForSeconds(fireRate - 0.25f);
-    //    GetComponent<AudioSource>().Stop();
-    //    isAttacking = false;
-    //    yield return null;
-        
-    //}
-
-    
 
     IEnumerator Shooting()
     {
@@ -221,25 +207,28 @@ public class PlayerAttack : MonoBehaviour {
 
     IEnumerator MeeleHit()
     {
-        isAttacking = true;
-        
         //print("MeleeActive");
+        isAttacking = true;        
         anim.SetBool("Range", false);
-        anim.SetTrigger("Fire");
+        anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.25f);
         meeleHitbox.enabled = true;
+        trailRenderer.enabled = true;
+
         //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(1)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[1], transform.position);
         //else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(2)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[2], transform.position);
         //else if (!playingSound) AudioSource.PlayClipAtPoint(swordSounds[0], transform.position);
         //playingSound = true;
         //yield return new WaitForSeconds(0.75f);
         //playingSound = false;
-            //Before Animation Controlled Finish
-            //yield return new WaitForSeconds(meleeAttackRate-0.25f);
-            //isAttacking = false;
-            //meeleHitbox.enabled = false;
-            ////print("Meleefinish");
-            yield return null;
+
+        //*** Before Animation Controlled Finish ***//
+        //yield return new WaitForSeconds(meleeAttackRate-0.25f);
+        //isAttacking = false;
+        //meeleHitbox.enabled = false;
+        ////print("Meleefinish");
+
+        yield return null;
 
     }
 
@@ -248,8 +237,38 @@ public class PlayerAttack : MonoBehaviour {
         weapons[weaponCount].SetActive(false);
         weaponCount = (weaponCount+1) % weapons.Length;
         weapons[weaponCount].SetActive(true);
-        rangeAttack = rangeAttack ? false : true;
-        anim.SetBool("Range", rangeAttack);
+        //rangeAttack = rangeAttack ? false : true;
+        //anim.SetBool("Range", rangeAttack);
+
+        //New Swap
+        anim.SetTrigger("SwitchWeapon");
+        isAttacking = false;
+        anim.SetBool("Shooting", false);
+        WeaponScript.WeaponType weapon = weapons[weaponCount].GetComponent<WeaponScript>().GetProperties();
+        if (weapon == WeaponScript.WeaponType.axe) {
+            anim.SetBool("Axe", true);
+            anim.SetBool("Gun", false);
+            anim.SetBool("Sword", false);
+            anim.SetBool("Unarmed", false);
+            anim.SetBool("Range", false);
+            rangeAttack = false;
+        }
+        else if (weapon == WeaponScript.WeaponType.gun) {
+            anim.SetBool("Gun", true);
+            anim.SetBool("Axe", false);
+            anim.SetBool("Sword", false);
+            anim.SetBool("Unarmed", false);
+            anim.SetBool("Range", true);
+            rangeAttack = true;
+        }
+        else if (weapon == WeaponScript.WeaponType.sword) {
+            anim.SetBool("Sword", true);
+            anim.SetBool("Axe", false);
+            anim.SetBool("Gun", false);
+            anim.SetBool("Unarmed", false);
+            anim.SetBool("Range", false);
+            rangeAttack = false;
+        }
     }
 
     public bool GetAttackStatus()

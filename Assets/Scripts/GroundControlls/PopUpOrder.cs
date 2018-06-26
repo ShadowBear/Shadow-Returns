@@ -35,7 +35,6 @@ public class PopUpOrder : MoveMe {
         {
             if (GetComponentInParent<PopUpGroundMaze>().NextTrigger(trigger)) correct = true;
             else correct = false;
-            //print("EnterTrigger");
         }
     }
 

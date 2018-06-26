@@ -18,7 +18,7 @@ public class CollectSword : MonoBehaviour {
             {
                 if (collectSword)
                 {
-                    GameManager.control.GetComponent<MenuController>().SetDialogText("You have found a Sword!!!");
+                    GameManager.control.GetComponent<MenuController>().SetDialogText("You have found an Axe!!!");
                     GameManager.control.GetComponent<MenuController>().Dialog();
                     GameManager.control.SwordCollect();
                     Destroy(this.gameObject);
@@ -30,7 +30,7 @@ public class CollectSword : MonoBehaviour {
                     Destroy(this.gameObject);
                 }
                 else if (collectShield) {
-                    GameManager.control.GetComponent<MenuController>().SetDialogText("You have found a Shield!!!");
+                    GameManager.control.GetComponent<MenuController>().SetDialogText("You have found a Shield Potion!!!");
                     GameManager.control.GetComponent<MenuController>().Dialog();
                     GameManager.control.ShieldCollect();
                     Destroy(this.gameObject);

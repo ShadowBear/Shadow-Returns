@@ -39,7 +39,6 @@ public class AndroidButtons : MonoBehaviour, IPointerUpHandler, IPointerDownHand
     public void OnPointerDown(PointerEventData eventData)
     {
         shallShoot = true;
-        print("Fire");
         //shootingScript.m_Fired = false;
     }
 }

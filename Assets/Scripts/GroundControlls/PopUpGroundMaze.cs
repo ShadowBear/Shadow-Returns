@@ -30,7 +30,6 @@ public class PopUpGroundMaze : MonoBehaviour {
         {
             if (trigger == triggerboxes[triggerCounter])
             {
-                //print("TriggerCorrect");
                 triggerCounter++;
                 if(triggerCounter == triggerboxes.Length)
                 {
@@ -49,7 +48,6 @@ public class PopUpGroundMaze : MonoBehaviour {
                 {
                     if (trigger == triggerboxes[i]) return true;
                 }
-                //print("TriggerFalsch");
                 triggerCounter = 0;
                 foreach(CapsuleCollider cap in triggerboxes)
                 {

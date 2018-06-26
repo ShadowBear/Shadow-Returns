@@ -309,6 +309,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BoughtAssetModels\POLY STYLE - Sci-Fi Characters\Script\AnimatorSwitch.cs" />
+    <Compile Include="Assets\BoughtAssetModels\POLY STYLE - Sci-Fi Characters\Script\CharactersSelection.cs" />
+    <Compile Include="Assets\BoughtAssetModels\POLY STYLE - Sci-Fi Characters\Script\ObjectRotate.cs" />
     <Compile Include="Assets\BoughtAssetModels\POLY STYLE - Vegetation Pack\Script\TakeScreenshot.cs" />
     <Compile Include="Assets\BoughtAssetModels\POLY STYLE - Vegetation Pack\Standard Assets\Effects\ImageEffects\Scripts\Antialiasing.cs" />
     <Compile Include="Assets\BoughtAssetModels\POLY STYLE - Vegetation Pack\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
@@ -353,9 +356,6 @@
     <Compile Include="Assets\BoughtAssetModels\TornadoBanditsStudio\Low Poly Free Pack\Scripts\TBS_CameraMovement.cs" />
     <Compile Include="Assets\BoughtAssetModels\TornadoBanditsStudio\Low Poly Free Pack\Water\TBS_Water.cs" />
     <Compile Include="Assets\GUI\Simple UI\Samples\IconPreview.cs" />
-    <Compile Include="Assets\POLY STYLE - Sci-Fi Characters\Script\AnimatorSwitch.cs" />
-    <Compile Include="Assets\POLY STYLE - Sci-Fi Characters\Script\CharactersSelection.cs" />
-    <Compile Include="Assets\POLY STYLE - Sci-Fi Characters\Script\ObjectRotate.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Misc\HueCube.cs" />
@@ -408,6 +408,7 @@
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
+    <Compile Include="Assets\Scripts\Items\Weapons\WeaponScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Doors\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
@@ -448,7 +449,11 @@
     <Compile Include="Assets\Scripts\Traps\TrapTriggerEnterDmg.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Animation\Grass Animation Help.txt" />
+    <None Include="Assets\Animations\AnimationDungeon\Grass Animation Help.txt" />
+    <None Include="Assets\BoughtAssetModels\GoblinMutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color Alpha.shader" />
+    <None Include="Assets\BoughtAssetModels\GoblinMutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color Lit.shader" />
+    <None Include="Assets\BoughtAssetModels\GoblinMutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color.shader" />
+    <None Include="Assets\BoughtAssetModels\POLY STYLE - Sci-Fi Characters\Readme.txt" />
     <None Include="Assets\BoughtAssetModels\POLY STYLE - Vegetation Pack\Readme.txt" />
     <None Include="Assets\BoughtAssetModels\POLY STYLE - Vegetation Pack\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\BoughtAssetModels\POLY STYLE - Vegetation Pack\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
@@ -520,10 +525,6 @@
     <None Include="Assets\BoughtAssetModels\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\GUI\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
-    <None Include="Assets\MutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color Alpha.shader" />
-    <None Include="Assets\MutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color Lit.shader" />
-    <None Include="Assets\MutinyBros\ShardSaga\Enemy Goblin Pack\Shaders\Vertex Color.shader" />
-    <None Include="Assets\POLY STYLE - Sci-Fi Characters\Readme.txt" />
     <None Include="Assets\Prefabs\Key\readME keys.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
@@ -548,6 +549,7 @@
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_VertexShader.shader" />
     <None Include="Assets\ProCore\ProBuilder\readme.txt" />
     <None Include="Assets\Shaders\ShadersToonLitDoubleSide.shader" />
+    <None Include="Assets\SimpleFantasy\ReadMe.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

@@ -29,7 +29,6 @@ public class ExplosionItems : HealthScript {
     // Update is called once per frame
     protected override void Dying()
     {
-        print("ExplosionDie");
         isExploding = true;
         Collider[] colliders;
         colliders = Physics.OverlapSphere(transform.position, explosionRadius, explosionMask);
@@ -51,7 +50,7 @@ public class ExplosionItems : HealthScript {
                 Rigidbody targetRigidbody = colliders[i].GetComponent<Rigidbody>();
                 if (!targetRigidbody) continue;
                 targetRigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius, -50f);
-                print("Explosion");
+                
             }            
         }
         explosionParticles.Play();

@@ -13,7 +13,7 @@ public class GoldCoins : MonoBehaviour {
         {
             GameManager.control.CollectCoins(coinValue);
             AudioSource.PlayClipAtPoint(collectSound, transform.position);
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 

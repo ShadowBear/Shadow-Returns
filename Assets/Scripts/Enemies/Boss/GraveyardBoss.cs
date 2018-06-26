@@ -95,7 +95,7 @@ public class GraveyardBoss : MonoBehaviour {
 
     public void Die()
     {
-        print("Sterbe");
+        //print("Sterbe");
         StartCoroutine(Dying());
     }
 

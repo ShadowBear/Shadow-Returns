@@ -24,7 +24,7 @@ public class HealthScript : MonoBehaviour {
 
     [SerializeField]
     protected float startHitDelay = 0.75f;
-    private float hitDelay = 0;
+    protected float hitDelay = 0;
     [SerializeField]
     protected bool hitable = true;
 
@@ -123,7 +123,7 @@ public class HealthScript : MonoBehaviour {
 
     protected virtual void Dying()
     {
-        print("DieParentHealth!!");
+        //print("DieParentHealth!!");
         //if (GameObject.FindGameObjectWithTag("Player") != gameObject) StartCoroutine(DieAnim());
         StartCoroutine(DieAnim());
     }

@@ -16,11 +16,14 @@ public class PlayerHealth : HealthScript {
     public Image dmgFrame;
     public Shield playerShieldScript;
     [SerializeField]
-    private Renderer playerRenderer;
+    private Renderer[] playerRenderer;
+    [SerializeField]
+    private float hitDelayTime = 1.5f;
 
     new void Start () {
    
         if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
+        startHitDelay = hitDelayTime;
         base.Start();
     }
 	
@@ -31,12 +34,16 @@ public class PlayerHealth : HealthScript {
 
     protected override void Dying()
     {
-        print("DiePlayer!!");
+        //print("DiePlayer!!");
         StartCoroutine(DieAnim());
     }
 
     new public void TakeDamage(float damage)
     {
+        if (!hitable) return;
+        hitable = false;
+        hitDelay = startHitDelay;
+
         if (!isDead && !isShielded)
         {
             health -= damage;
@@ -84,9 +91,11 @@ public class PlayerHealth : HealthScript {
     {
         for(int i = 0; i < 5; i++)
         {
-            playerRenderer.enabled = false;
+            playerRenderer[0].enabled = false;
+            playerRenderer[1].enabled = false;
             yield return new WaitForSeconds(0.1f);
-            playerRenderer.enabled = true;
+            playerRenderer[0].enabled = true;
+            playerRenderer[1].enabled = true;
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;

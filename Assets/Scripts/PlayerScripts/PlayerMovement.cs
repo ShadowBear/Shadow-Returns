@@ -246,14 +246,18 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Move(float h, float v)
     {
-        //moveDirection = new Vector3(h, 0, v); 
-        // Normalise the movement vector and make it proportional to the speed per second.
+        if (attackScript.isAttacking && !attackScript.rangeAttack)
+        {
+            return;
+        }
+            //moveDirection = new Vector3(h, 0, v); 
+            // Normalise the movement vector and make it proportional to the speed per second.
 
 
-        // Move the player to it's current position plus the movement.
+            // Move the player to it's current position plus the movement.
 
-        /** Had 2 Be Commented for Movement towards Camera Rotation **///
-        if (h != 0 || v != 0)
+            /** Had 2 Be Commented for Movement towards Camera Rotation **///
+            if (h != 0 || v != 0)
         {
             moveDirection = Vector3.zero;
             moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");

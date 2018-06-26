@@ -35,9 +35,7 @@ public class GhostText : MonoBehaviour {
                 {
                     menu.SetDialogText(dialogText);
                     menu.Dialog();
-                    print("Menu");
                 }
-                print("E gedrückt");
             }
         }        
     }

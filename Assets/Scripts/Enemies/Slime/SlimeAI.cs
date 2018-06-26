@@ -95,7 +95,7 @@ public class SlimeAI : MonoBehaviour
 
     public void TakeHit()
     {
-        print("I am Hit");
+        //print("I am Hit");
         if (!isHit)
         {
             if (hitCounter <= maxHitsTaken)
@@ -220,7 +220,7 @@ public class SlimeAI : MonoBehaviour
 
     IEnumerator RangeAttack()
     {
-        print("RangeAttack");
+        //print("RangeAttack");
         isAttacking = true;
         agent.isStopped = true;
         float waitAttackTime = Random.Range(minWaitAttackTime, maxWaitAttackTime);
@@ -241,7 +241,7 @@ public class SlimeAI : MonoBehaviour
 
     IEnumerator CounterAttack()
     {
-        print("I Will strike Back");
+        //print("I Will strike Back");
         if (Random.Range(1, 3) == 1) StartCoroutine(RangeAttack());
         else StartCoroutine(MeeleAttack());
         yield return new WaitForSeconds(hitDelayTime);

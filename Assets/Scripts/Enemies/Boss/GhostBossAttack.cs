@@ -64,7 +64,7 @@ public class GhostBossAttack : MonoBehaviour {
 
     IEnumerator MeleeAttack01()
     {
-        print("Attack 01");
+        //print("Attack 01");
         isAttacking = true;
         if (anim != null) anim.SetTrigger("attack");
         hitbox.enabled = true;
@@ -132,6 +132,6 @@ public class GhostBossAttack : MonoBehaviour {
 
     void Attack04()
     {
-        print("Attack 04");
+        //print("Attack 04");
     }
 }

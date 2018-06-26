@@ -17,12 +17,13 @@ public class PlayerRotation : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>();
-	}
+        playerAnim = GetComponentInChildren<Animator>();
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
         if (playerAttack.isAttacking && !playerAttack.rangeAttack) {
-            if (playerAnim.GetBool("Fire") && !turnbeforeAttack)
+            if (playerAnim.GetBool("Attack") && !turnbeforeAttack)
             {
                 Turning();
                 turnbeforeAttack = true;

@@ -28,7 +28,7 @@ public class GraveyardController : MonoBehaviour {
         {
             if(GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                print("ChamberCleared");
+                //print("ChamberCleared");
                 chainLock.SetActive(false);
                 slimeSpawner.enabled = false;
                 bossGhost.GetComponent<GraveyardBoss>().Die();
