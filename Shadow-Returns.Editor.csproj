@@ -458,6 +458,12 @@
     <None Include="Assets\BoughtAssetModels\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
     <None Include="Assets\GUI\Simple UI\Fonts\OFL.txt" />
     <None Include="Assets\Materials\TangyTextures Free Materials\about.txt.txt" />
+    <None Include="Assets\Polygon Arsenal\Polygon Arsenal - Readme.txt" />
+    <None Include="Assets\Polygon Arsenal\Shaders\PolyIntense.Shader" />
+    <None Include="Assets\Polygon Arsenal\Shaders\PolyLitSurface.shader" />
+    <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightSelective.shader" />
+    <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightSolid.shader" />
+    <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightTransparent.shader" />
     <None Include="Assets\Prefabs\Key\readME keys.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
