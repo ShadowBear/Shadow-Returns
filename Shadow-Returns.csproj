@@ -420,6 +420,7 @@
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
     <Compile Include="Assets\Scripts\Items\Weapons\WeaponScript.cs" />
+    <Compile Include="Assets\Scripts\KIController\Pedestrians.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Doors\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
