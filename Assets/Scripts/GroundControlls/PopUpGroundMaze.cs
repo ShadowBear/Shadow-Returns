@@ -51,7 +51,8 @@ public class PopUpGroundMaze : MonoBehaviour {
                 triggerCounter = 0;
                 foreach(CapsuleCollider cap in triggerboxes)
                 {
-                    if(cap.GetComponent<PopUpOrder>()) cap.GetComponent<PopUpOrder>().correct = false;
+                    //if(cap.GetComponent<PopUpOrder>()) cap.GetComponent<PopUpOrder>().correct = false;
+                    if (cap.GetComponent<PopUpOrder>()) cap.GetComponent<PopUpOrder>().ExitRiddle();
                 }
                 return false;
             }
@@ -64,7 +65,8 @@ public class PopUpGroundMaze : MonoBehaviour {
         foreach (CapsuleCollider cap in triggerboxes)
         {
             if (cap.GetComponent<PopUpOrder>()) {
-                cap.GetComponent<PopUpOrder>().correct = false;
+                //cap.GetComponent<PopUpOrder>().correct = false;
+                cap.GetComponent<PopUpOrder>().ExitRiddle();
                 Destroy(cap.GetComponent<PopUpOrder>(),1f);
             }
         }

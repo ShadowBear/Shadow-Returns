@@ -18,16 +18,10 @@ public class PopUpOrder : MoveMe {
         trigger = GetComponent<CapsuleCollider>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        if (correct)
-        {
-            MoveUp();
-        }else
-        {
-            MoveDown();
-        }
-	}
+	//// Update is called once per frame
+	//void Update () {
+        
+	//}
 
     void OnTriggerEnter(Collider col)
     {
@@ -35,6 +29,26 @@ public class PopUpOrder : MoveMe {
         {
             if (GetComponentInParent<PopUpGroundMaze>().NextTrigger(trigger)) correct = true;
             else correct = false;
+        }
+        if (correct)
+        {
+            MoveUp();
+        }
+        else
+        {
+            MoveDown();
+        }
+    }
+
+    public void ExitRiddle()
+    {
+        if (correct)
+        {
+            MoveUp();
+        }
+        else
+        {
+            MoveDown();
         }
     }
 
