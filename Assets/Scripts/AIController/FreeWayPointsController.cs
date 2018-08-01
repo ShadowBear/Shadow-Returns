@@ -13,19 +13,19 @@ public class FreeWayPointsController : MonoBehaviour {
     [SerializeField]
     private bool[] freeWP;
 
-    public static FreeWayPointsController wayPointsController;
+    //public static FreeWayPointsController wayPointsController;
 
-    void Awake()
-    {
-        //Unique GameManager
-        if (wayPointsController == null) wayPointsController = this;
-        else if (wayPointsController != this) Destroy(gameObject);
-    }
+    //void Awake()
+    //{
+    //    //Unique GameManager
+    //    if (wayPointsController == null) wayPointsController = this;
+    //    else if (wayPointsController != this) Destroy(gameObject);
+    //}
 
 
     // Use this for initialization
     void Start () {
-
+        patrolPointParent = this.gameObject;
         patrolPoints = patrolPointParent.GetComponentsInChildren<Transform>();
         freeWP = new bool[patrolPoints.Length];
         //first element is always false

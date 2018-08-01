@@ -12,7 +12,8 @@ public class PatrollingGuards : MonoBehaviour {
     public float minGuardingTime = 5f;
     public float maxGuardingTime = 10f;
 
-    //public FreeWayPointsController wayPointController;
+    [SerializeField]
+    private FreeWayPointsController wayPointController;
 
 
     private NavMeshAgent navMeshAgent;
@@ -28,9 +29,7 @@ public class PatrollingGuards : MonoBehaviour {
     private Animator animator;
     private int idleAnimation;
     private bool idleSet = false;
-    [SerializeField]
-    //private bool[] freeWP;
-
+    
     enum State
     {
         Guarding, Patrolling
@@ -39,21 +38,19 @@ public class PatrollingGuards : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        wayPointController = patrolPointParent.GetComponent<FreeWayPointsController>();
         patrolPoints = patrolPointParent.GetComponentsInChildren<Transform>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshObstacle = GetComponent<NavMeshObstacle>();
-        //wayPointController = GetComponentInParent<FreeWayPointsController>();
         currentState = State.Guarding;
         animator = GetComponent<Animator>();
-        animator.SetBool("Static_b", false);        
+        animator.SetBool("Static_b", false);
+        //CheckPathsReachable();
     }
 
 
 	// Update is called once per frame
 	void Update () {
-        //Obstacle Avoid Off Nav On
-        //navMeshObstacle.enabled = false;
-        //navMeshAgent.enabled = true;
         if (currentState == State.Guarding) {
 
             if (guardingTime <= 0) NextGuardPoint(false);
@@ -66,16 +63,12 @@ public class PatrollingGuards : MonoBehaviour {
         {
             if(navMeshAgent.remainingDistance < 2.0f && navMeshAgent.remainingDistance >= 0.5f)
             {
-                if (!FreeWayPointsController.wayPointsController.getFreeState(nextWP)) NextGuardPoint(true);
+                if (!wayPointController.getFreeState(nextWP)) NextGuardPoint(true);
             }
             else if (navMeshAgent.remainingDistance < 0.5f)
             {
-                //if (!FreeWayPointsController.wayPointsController.getFreeState(nextWP))NextGuardPoint(true);
-                //else
-                //{
-                    currentState = State.Guarding;
-                    navMeshAgent.isStopped = true;
-                //}
+                currentState = State.Guarding;
+                navMeshAgent.isStopped = true;
             }
             else navMeshAgent.isStopped = false;
         }
@@ -95,7 +88,8 @@ public class PatrollingGuards : MonoBehaviour {
                 int animation = Random.Range(0, 3);
                 animator.SetInteger("Animation_int", animation);                
             }
-            FreeWayPointsController.wayPointsController.SetFree(nextWP, false);
+            //FreeWayPointsController.wayPointsController.SetFree(nextWP, false);
+            wayPointController.SetFree(nextWP, false);
         }
     }
 
@@ -109,7 +103,8 @@ public class PatrollingGuards : MonoBehaviour {
             print("WP: " + nextPoint);
             nextTarget = patrolPoints[nextPoint];
             nextWP = nextPoint;
-            if (nextTarget == currentTarget || FreeWayPointsController.wayPointsController.getFreeState(nextPoint) == true) break;            
+            //if (nextTarget == currentTarget || FreeWayPointsController.wayPointsController.getFreeState(nextPoint) == true) break;
+            if (nextTarget == currentTarget || wayPointController.getFreeState(nextPoint) == true) break;
         }
         if (nextTarget != currentTarget)
         {
@@ -119,10 +114,34 @@ public class PatrollingGuards : MonoBehaviour {
 
         }
         //if(lastWP != nextWP && !wasSeated)
-        FreeWayPointsController.wayPointsController.SetFree(lastWP, true);
+        //FreeWayPointsController.wayPointsController.SetFree(lastWP, true);
+        wayPointController.SetFree(lastWP, true);
         currentTarget = patrolPoints[nextPoint];        
         lastWP = nextWP;
         guardingTime = Random.Range(minGuardingTime, maxGuardingTime);
         currentState = State.Patrolling;
     }
+
+
+    void CheckPathsReachable()
+    {
+        for (int i = 0; i < patrolPoints.Length; i++)
+        {
+            NavMeshPath path = new NavMeshPath();
+            navMeshAgent.CalculatePath(patrolPoints[i].position, path);
+            if (path.status == NavMeshPathStatus.PathPartial)
+            {
+                print("Cant Reach Path to: " + i);
+            }
+            if(path.status == NavMeshPathStatus.PathComplete)
+            {
+                print("Reached Path to: " + i);
+            }
+            if (path.status == NavMeshPathStatus.PathInvalid)
+            {
+                print("Invalide Path to: " + i);
+            }
+        }
+    }
+
 }
