@@ -303,6 +303,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UnityEditor.StandardEvents.csproj">
+      <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>
+      <Name>UnityEditor.StandardEvents</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{3A848AB7-9891-EDDA-D555-BF184C2F81F4}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
@@ -314,10 +318,6 @@
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{07A21C90-D344-AE1A-8456-9910C203B41A}</Project>
       <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.StandardEvents.csproj">
-      <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>
-      <Name>UnityEditor.StandardEvents</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +425,8 @@
     <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightSelective.shader" />
     <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightSolid.shader" />
     <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightTransparent.shader" />
+    <None Include="Assets\Polygonal Spiderling Venom\Read me.txt" />
+    <None Include="Assets\Polygonal Spiderling Venom\www.meshtint.com.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />

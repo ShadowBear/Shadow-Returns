@@ -93,9 +93,16 @@ public class PlayerHealth : HealthScript {
         {
             playerRenderer[0].enabled = false;
             playerRenderer[1].enabled = false;
+            playerRenderer[2].enabled = false;
+            playerRenderer[3].enabled = false;
+            playerRenderer[4].enabled = false;
+
             yield return new WaitForSeconds(0.1f);
             playerRenderer[0].enabled = true;
             playerRenderer[1].enabled = true;
+            playerRenderer[2].enabled = true;
+            playerRenderer[3].enabled = true;
+            playerRenderer[4].enabled = true;
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;

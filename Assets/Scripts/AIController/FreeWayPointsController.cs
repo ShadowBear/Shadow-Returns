@@ -8,7 +8,7 @@ public class FreeWayPointsController : MonoBehaviour {
     public Transform[] patrolPoints;
 
     private int lastWP = 0;
-    private int nextWP = 0;
+    //private int nextWP = 0;
 
     [SerializeField]
     private bool[] freeWP;

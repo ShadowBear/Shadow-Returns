@@ -100,7 +100,7 @@ public class PatrollingGuards : MonoBehaviour {
         {
             //Start with 1 for not using the parent transform
             nextPoint = Random.Range(1, patrolPoints.Length);
-            print("WP: " + nextPoint);
+            //print("WP: " + nextPoint);
             nextTarget = patrolPoints[nextPoint];
             nextWP = nextPoint;
             //if (nextTarget == currentTarget || FreeWayPointsController.wayPointsController.getFreeState(nextPoint) == true) break;

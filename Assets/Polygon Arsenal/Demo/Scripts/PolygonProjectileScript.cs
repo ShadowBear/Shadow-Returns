@@ -9,6 +9,7 @@ namespace PolygonArsenal
         public GameObject projectileParticle;
         public GameObject muzzleParticle;
         public GameObject[] trailParticles;
+        public int damage = 0;
         [Header("Adjust if not using Sphere Collider")]
         public float colliderRadius = 1f;
         [Range(0f, 1f)]
@@ -52,6 +53,10 @@ namespace PolygonArsenal
                 {
                     Destroy(hit.transform.gameObject);
                 }
+                if (hit.transform.tag == "Enemy") // Projectile will destroy objects tagged as Destructible
+                {
+                    hit.transform.GetComponent<EnemyHealth>().TakeDamage(damage);
+                }
 
                 foreach (GameObject trail in trailParticles)
                 {
@@ -77,6 +82,11 @@ namespace PolygonArsenal
                     }
                 }
             }
+        }
+
+        public void SetDamage(int damage)
+        {
+            this.damage = damage;
         }
 
         //private bool hasCollided = false;

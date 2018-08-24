@@ -46,6 +46,6 @@ public class EnemyHealth : HealthScript
 
             transform.SetPositionAndRotation(targetPosition, transform.rotation);
         }
-        aiController.TakeHit();
+        if(aiController != null) aiController.TakeHit();
     }
 }

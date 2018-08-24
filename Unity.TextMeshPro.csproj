@@ -481,6 +481,8 @@
     <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightSelective.shader" />
     <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightSolid.shader" />
     <None Include="Assets\Polygon Arsenal\Shaders\PolyRimLightTransparent.shader" />
+    <None Include="Assets\Polygonal Spiderling Venom\Read me.txt" />
+    <None Include="Assets\Polygonal Spiderling Venom\www.meshtint.com.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />

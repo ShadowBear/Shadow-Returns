@@ -10,11 +10,14 @@ public class DropRate : MonoBehaviour {
     //Amout of drops for later use
     //public int dropCounts;
 
+    private bool quitting = false;
+
     [SerializeField]
-    private GameObject ep;    
-    public int epValue;
-    public float explosionRadius;
-    public float explosionForce;
+    private GameObject ep;   
+    [SerializeField]
+    private int epValue = 11;
+    private float explosionRadius = 5;
+    private int explosionForce = 250;
     private Vector3 offset;
 
     //DropRate in Percent 0-1
@@ -31,8 +34,11 @@ public class DropRate : MonoBehaviour {
     {
         if(Random.Range(0, 1) <= dropRate)
         {
-            int item = (int)Random.Range(0, drops.Length);
-            Instantiate(drops[item], transform.position, transform.rotation);
+            if(drops.Length > 0)
+            {
+                int item = (int)Random.Range(0, drops.Length);
+                Instantiate(drops[item], transform.position, transform.rotation);
+            }            
         }
         GameObject epObject = Instantiate(ep, transform.position + offset, transform.rotation);
         //epObject.GetComponent<Experience>().experience = epValue;
@@ -40,4 +46,15 @@ public class DropRate : MonoBehaviour {
         Vector3 randomExplosionVector = new Vector3(Random.Range(-1f, 1f), 0.9f, Random.Range(-1f, 1f));
         epObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
     }
+
+    private void OnDestroy()
+    {
+        if(!quitting) DropItem();
+    }
+
+    private void OnApplicationQuit()
+    {
+        quitting = true;
+    }
+
 }

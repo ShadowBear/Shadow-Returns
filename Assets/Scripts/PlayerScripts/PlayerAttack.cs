@@ -58,6 +58,15 @@ public class PlayerAttack : MonoBehaviour {
     public AudioClip[] swordSounds;
     private bool playingSound = false;
 
+    //WeaponPackTest****************
+    RaycastHit hit;
+    public GameObject[] projectiles;
+    public Transform spawnPosition;
+    [HideInInspector]
+    public int currentProjectile = 0;
+    public float speed = 1000;
+
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
@@ -92,11 +101,13 @@ public class PlayerAttack : MonoBehaviour {
             fireTransform.LookAt(playRot.GetCursorPos() + offset);
         }
 
-        if (sword.activeSelf || gun.activeSelf) CheckFired();
+        //if (sword.activeSelf || gun.activeSelf) CheckFired();
+        CheckFired();
         
         if (Input.GetAxis("Mouse ScrollWheel") != 0 && GameManager.control.swordCollected && GameManager.control.gunCollected)
         {
             SwapWeapon();
+            nextEffect();
         }
 	}
 
@@ -151,11 +162,13 @@ public class PlayerAttack : MonoBehaviour {
             {
                 if (!isAttacking && !isShielded && !isReloading)
                 {
-                    if (ammuAmount > 0)
-                    {
-                        ammuAmount--;
-                        StartCoroutine(Shooting());    //StartCoroutine(Fire());
-                    }
+                    //if (ammuAmount > 0)
+                    //{
+                        //ammuAmount--;
+                        //StartCoroutine(Shooting());    //StartCoroutine(Fire());
+                        StartCoroutine(ArsenalShooting());
+                        print("Should Fire");
+                    //}
                 }                
             }
             else if(!isShielded) StartCoroutine(MeeleHit());
@@ -166,7 +179,7 @@ public class PlayerAttack : MonoBehaviour {
 #endif
     }
 
-
+    //old
     IEnumerator Shooting()
     {
         if (isReloading || isAttacking) yield break;
@@ -204,6 +217,49 @@ public class PlayerAttack : MonoBehaviour {
         }
         yield return null;
     }
+
+    //new Shooting ******************************************************/
+    IEnumerator ArsenalShooting()
+    {
+        if (isReloading || isAttacking) yield break;
+        isAttacking = true;
+        if (!anim.GetBool("Shooting"))
+        {
+            anim.SetBool("Range", true);
+            anim.SetBool("Shooting", true);
+            yield return new WaitForSeconds(0.25f);
+        }
+        GetComponentInChildren<Weapon>().Shoot();
+        
+        yield return new WaitForSeconds(fireRate - 0.25f);
+        isAttacking = false;
+        //WaitTime before Stop Shooting
+        yield return new WaitForSeconds(0.5f);
+        if (!isAttacking)
+        {
+            anim.SetBool("Shooting", false);
+            GetComponentInChildren<Weapon>().Reload();
+        }
+        yield return null;
+    }
+
+    public void nextEffect()
+    {
+        if (currentProjectile < projectiles.Length - 1)
+            currentProjectile++;
+        else
+            currentProjectile = 0;
+    }
+
+    public void previousEffect()
+    {
+        if (currentProjectile > 0)
+            currentProjectile--;
+        else
+            currentProjectile = projectiles.Length - 1;
+    }
+
+    /****************************************************/
 
     IEnumerator MeeleHit()
     {
@@ -244,8 +300,8 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetTrigger("SwitchWeapon");
         isAttacking = false;
         anim.SetBool("Shooting", false);
-        WeaponScript.WeaponType weapon = weapons[weaponCount].GetComponent<WeaponScript>().GetProperties();
-        if (weapon == WeaponScript.WeaponType.axe) {
+        Weapon.WeaponType weapon = weapons[weaponCount].GetComponent<Weapon>().GetProperties();
+        if (weapon == Weapon.WeaponType.axe) {
             anim.SetBool("Axe", true);
             anim.SetBool("Gun", false);
             anim.SetBool("Sword", false);
@@ -253,7 +309,7 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Range", false);
             rangeAttack = false;
         }
-        else if (weapon == WeaponScript.WeaponType.gun) {
+        else if (weapon == Weapon.WeaponType.gun) {
             anim.SetBool("Gun", true);
             anim.SetBool("Axe", false);
             anim.SetBool("Sword", false);
@@ -261,7 +317,7 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Range", true);
             rangeAttack = true;
         }
-        else if (weapon == WeaponScript.WeaponType.sword) {
+        else if (weapon == Weapon.WeaponType.sword) {
             anim.SetBool("Sword", true);
             anim.SetBool("Axe", false);
             anim.SetBool("Gun", false);
