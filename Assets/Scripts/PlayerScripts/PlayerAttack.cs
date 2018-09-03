@@ -107,8 +107,17 @@ public class PlayerAttack : MonoBehaviour {
         if (Input.GetAxis("Mouse ScrollWheel") != 0 && GameManager.control.swordCollected && GameManager.control.gunCollected)
         {
             SwapWeapon();
-            nextEffect();
+            //nextEffect();
         }
+
+
+        //************  TEST **************************//
+        // Moveforward while Attacking has 2 be fixed //
+        if (isAttacking && !rangeAttack)
+        {
+            //transform.parent.transform.parent.Translate(transform.parent.forward * Time.deltaTime*5);
+        }
+        /********************************************/
 	}
 
     private void DontSuitUp()
@@ -243,21 +252,21 @@ public class PlayerAttack : MonoBehaviour {
         yield return null;
     }
 
-    public void nextEffect()
-    {
-        if (currentProjectile < projectiles.Length - 1)
-            currentProjectile++;
-        else
-            currentProjectile = 0;
-    }
+    //public void nextEffect()
+    //{
+    //    if (currentProjectile < projectiles.Length - 1)
+    //        currentProjectile++;
+    //    else
+    //        currentProjectile = 0;
+    //}
 
-    public void previousEffect()
-    {
-        if (currentProjectile > 0)
-            currentProjectile--;
-        else
-            currentProjectile = projectiles.Length - 1;
-    }
+    //public void previousEffect()
+    //{
+    //    if (currentProjectile > 0)
+    //        currentProjectile--;
+    //    else
+    //        currentProjectile = projectiles.Length - 1;
+    //}
 
     /****************************************************/
 

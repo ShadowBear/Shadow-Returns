@@ -14,9 +14,11 @@ namespace PolygonArsenal
         public float colliderRadius = 1f;
         [Range(0f, 1f)]
         public float collideOffset = 0.15f;
+        public LayerMask layer;
 
         void Start()
         {
+            layer = LayerMask.NameToLayer("Everything");
             projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
             projectileParticle.transform.parent = transform;
             if (muzzleParticle)
@@ -42,8 +44,7 @@ namespace PolygonArsenal
             dir = dir.normalized;
 
             float dist = transform.GetComponent<Rigidbody>().velocity.magnitude * Time.deltaTime;
-
-            if (Physics.SphereCast(transform.position, rad, dir, out hit, dist))
+            if (Physics.SphereCast(transform.position, rad, dir, out hit, dist, layer,QueryTriggerInteraction.Ignore))
             {
                 transform.position = hit.point + (hit.normal * collideOffset);
 
@@ -53,7 +54,7 @@ namespace PolygonArsenal
                 {
                     Destroy(hit.transform.gameObject);
                 }
-                if (hit.transform.tag == "Enemy") // Projectile will destroy objects tagged as Destructible
+                if (hit.transform.tag == "Enemy" && !hit.collider.isTrigger) // Projectile will destroy objects tagged as Destructible
                 {
                     hit.transform.GetComponent<EnemyHealth>().TakeDamage(damage);
                 }

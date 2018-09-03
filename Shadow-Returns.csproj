@@ -453,6 +453,7 @@
     <Compile Include="Assets\Scripts\ControllScripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\LibaryController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\MenuController.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\NPCDialog.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\ShadowRoomController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GhostBossAttack.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GhostBossController.cs" />
@@ -482,6 +483,8 @@
     <Compile Include="Assets\Scripts\GroundControlls\PopUpGroundMaze.cs" />
     <Compile Include="Assets\Scripts\GroundControlls\PopUpOrder.cs" />
     <Compile Include="Assets\Scripts\GuI\DashImageControll.cs" />
+    <Compile Include="Assets\Scripts\GuI\DialogSystem.cs" />
+    <Compile Include="Assets\Scripts\GuI\RotateToCamera.cs" />
     <Compile Include="Assets\Scripts\Items\ExplosionItems.cs" />
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
     <Compile Include="Assets\Scripts\Items\Key.cs" />
@@ -521,6 +524,15 @@
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerRotation.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Shield.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ShotDirection.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Interfaces\IQuest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Interfaces\IQuestIdentifier.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Interfaces\IQuestInformation.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Interfaces\IQuestObject.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Objectives\CollectionObjective.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Objectives\LocationObjective.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Quest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\QuestIdentifier.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\QuestInformation.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />
     <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />
@@ -654,7 +666,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
-    <None Include="Assets\Prefabs\Key\readME keys.txt" />
+    <None Include="Assets\Prefabs\SimpleDungeon\Key\readME keys.txt" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\Font\SIL Open Font License.txt" />
     <None Include="Assets\ProCore\ProBuilder\About\ThirdPartyLicenses.txt" />

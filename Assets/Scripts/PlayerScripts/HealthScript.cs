@@ -59,7 +59,7 @@ public class HealthScript : MonoBehaviour {
         //      {
         //          Dying();
         //      }
-        if (useRelativeRotation) RotateHealthbar();
+        /*********TEST*****/ //if (useRelativeRotation) RotateHealthbar();
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
     }
 
