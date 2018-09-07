@@ -12,9 +12,9 @@ public class HealthScript : MonoBehaviour {
     public bool isShielded = false;
     //public Shield playerShieldScript;
 
-    public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
-    public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
-    public Quaternion relativeRotation;
+    //public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
+    //public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
+    //public Quaternion relativeRotation;
 
     //Header Beispiel für bessere Übersicht im Inspector
     [Header ("DMG")]
@@ -41,8 +41,8 @@ public class HealthScript : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
         if(healthbar != null) healthbar.fillAmount = health / maxHealth;
-        if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
-        anim = GetComponent<Animator>();
+        //if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
+        anim = GetComponentInChildren<Animator>();
         isDead = false;        
         //if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
     }
@@ -143,11 +143,11 @@ public class HealthScript : MonoBehaviour {
     }
 
 
-    public void RotateHealthbar()
-    {
-        rotationOffset = Camera.main.transform.position;
-        rotationOffset.y = player.transform.position.y;
-        relativeRotationTransform.LookAt(rotationOffset);
-        relativeRotationTransform.forward = -relativeRotationTransform.forward;
-    }
+    //public void RotateHealthbar()
+    //{
+    //    rotationOffset = Camera.main.transform.position;
+    //    rotationOffset.y = player.transform.position.y;
+    //    relativeRotationTransform.LookAt(rotationOffset);
+    //    relativeRotationTransform.forward = -relativeRotationTransform.forward;
+    //}
 }

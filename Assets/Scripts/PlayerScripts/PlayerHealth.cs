@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.PostProcessing;
 
 public class PlayerHealth : HealthScript {
 
-    //public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
-    //public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
-    //public Quaternion relativeRotation;
-    
-    //private Vector3 rotationOffset;
+     //private Vector3 rotationOffset;
 
     //Header Beispiel für bessere Übersicht im Inspector
     [Header ("DMG")]
     public Image dmgFrame;
+    public PostProcessingProfile processingProfile;
     public Shield playerShieldScript;
     [SerializeField]
     private Renderer[] playerRenderer;
     [SerializeField]
-    private float hitDelayTime = 1.5f;
+    private GameObject gameOverText;
+    private float hitDelayTime = 1.75f;
 
     new void Start () {
    
         if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
         startHitDelay = hitDelayTime;
+        processingProfile.vignette.enabled = false;
         base.Start();
     }
 	
@@ -34,7 +34,7 @@ public class PlayerHealth : HealthScript {
 
     protected override void Dying()
     {
-        //print("DiePlayer!!");
+        isDead = true;
         StartCoroutine(DieAnim());
     }
 
@@ -59,11 +59,6 @@ public class PlayerHealth : HealthScript {
         if (health <= 0 && !isDead) Dying();
     }
 
-    //protected override void TakeHit()
-    //{
-        
-    //}
-
     public void DrinkPotion(int potionValue)
     {
         if (GameManager.control.potionNmbr > 0)
@@ -76,33 +71,30 @@ public class PlayerHealth : HealthScript {
     }
 
     IEnumerator DieAnim()
-    {
-        isDead = true;
+    {        
         if (anim != null)
         {
-            anim.SetBool("die", true);
-            yield return new WaitForSeconds(1.2f);
+            anim.SetBool("Dead", true);
+            yield return new WaitForSeconds(3.2f);
         }
-
+        gameOverText.SetActive(true);
+        Time.timeScale = 0;
         yield return null;   
     }
 
     IEnumerator Blinking()
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 8; i++)
         {
-            playerRenderer[0].enabled = false;
-            playerRenderer[1].enabled = false;
-            playerRenderer[2].enabled = false;
-            playerRenderer[3].enabled = false;
-            playerRenderer[4].enabled = false;
-
+            for (int n = 0; n < playerRenderer.Length; n++)
+            {
+                playerRenderer[n].enabled = false;
+            }  
             yield return new WaitForSeconds(0.1f);
-            playerRenderer[0].enabled = true;
-            playerRenderer[1].enabled = true;
-            playerRenderer[2].enabled = true;
-            playerRenderer[3].enabled = true;
-            playerRenderer[4].enabled = true;
+            for (int n = 0; n < playerRenderer.Length; n++)
+            {
+                playerRenderer[n].enabled = true;
+            }
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;
@@ -110,23 +102,24 @@ public class PlayerHealth : HealthScript {
 
     IEnumerator DMGFrame()
     {
+
         if (dmgFrame)
         {
-            //dmgFrame.enabled = true;
             dmgFrame.CrossFadeAlpha(1, 0.5f, false);
-            yield return new WaitForSeconds(0.5f);
-            //dmgFrame.enabled = false;
-            dmgFrame.CrossFadeAlpha(0, 0.5f, false);            
+            yield return new WaitForSeconds(0.75f);
+            dmgFrame.CrossFadeAlpha(0, 0.5f, false);
         }
+
+        //Vignitte Testing *********************//
+        //processingProfile.vignette.enabled = true;
+        //VignetteModel.Settings settings = processingProfile.vignette.settings;
+        //settings.intensity = 0.6f;
+        //yield return new WaitForSeconds(1.5f);
+        //settings.intensity = 0.2f;
+        //yield return new WaitForSeconds(1.5f);
+        //processingProfile.vignette.enabled = false;
+
         yield return null;
     }
-
-    //public void RotateHealthbar()
-    //{
-    //    rotationOffset = Camera.main.transform.position;
-    //    rotationOffset.y = player.transform.position.y;
-    //    relativeRotationTransform.LookAt(rotationOffset);
-    //    relativeRotationTransform.forward = -relativeRotationTransform.forward;
-    //}
 
 }

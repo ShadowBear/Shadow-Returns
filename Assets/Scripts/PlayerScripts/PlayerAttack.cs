@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
 
-    public GameObject shot;
     public GameObject cursor;
 
     //true if u start without Weapons
     [SerializeField]
     private bool startNaked = false;
+
+    [SerializeField]
+    private PlayerMovement playerMovement;
 
     //Weapons
     public GameObject[] weapons;
@@ -20,7 +22,7 @@ public class PlayerAttack : MonoBehaviour {
     public float fireForce = 5;
     public int ammuAmount;
     private int maxAmmu = 5;
-    private static float reloadTime = 1.467f;
+    //private static float reloadTime = 1.467f;
     
     //Cursor Stuff
     private float cameraDistance;
@@ -29,8 +31,8 @@ public class PlayerAttack : MonoBehaviour {
     public float fireRate = 0.5f;
     public float meleeAttackRate = 0.5f;
 
-    public bool isAttacking = false;
-    public bool isReloading = false;
+    private bool isAttacking = false;
+    private bool isReloading = false;
     public bool fireStickDown = false;
     private bool isShielded = false;
     public PlayerHealth healthScript;
@@ -67,6 +69,8 @@ public class PlayerAttack : MonoBehaviour {
     public float speed = 1000;
 
 
+
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
@@ -76,7 +80,13 @@ public class PlayerAttack : MonoBehaviour {
         ammuAmount = maxAmmu;
 
         if (startNaked) DontSuitUp();
-        else GameManager.control.SuitUp();
+        else
+        {
+            GameManager.control.SuitUp();
+            SwapWeapon(1);
+        }
+
+
 
         playRot = GetComponentInParent<PlayerRotation>();
 
@@ -86,7 +96,6 @@ public class PlayerAttack : MonoBehaviour {
 	void Update () {
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("AttackDone")) {
-            //print("FertigAngreifen");
             isAttacking = false;
             meeleHitbox.enabled = false;
             trailRenderer.enabled = false;
@@ -101,22 +110,22 @@ public class PlayerAttack : MonoBehaviour {
             fireTransform.LookAt(playRot.GetCursorPos() + offset);
         }
 
-        //if (sword.activeSelf || gun.activeSelf) CheckFired();
         CheckFired();
-        
-        if (Input.GetAxis("Mouse ScrollWheel") != 0 && GameManager.control.swordCollected && GameManager.control.gunCollected)
+
+        //Change Weapon
+        if (GameManager.control.swordCollected && GameManager.control.gunCollected)
         {
-            SwapWeapon();
-            //nextEffect();
+            if(Input.GetAxis("Mouse ScrollWheel") > 0) SwapWeapon(1);
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0) SwapWeapon(-1);
         }
 
 
         //************  TEST **************************//
         // Moveforward while Attacking has 2 be fixed //
-        if (isAttacking && !rangeAttack)
-        {
-            //transform.parent.transform.parent.Translate(transform.parent.forward * Time.deltaTime*5);
-        }
+        //if (isAttacking && !rangeAttack)
+        //{
+        //    //transform.parent.transform.parent.Translate(transform.parent.forward * Time.deltaTime*5);
+        //}
         /********************************************/
 	}
 
@@ -162,79 +171,72 @@ public class PlayerAttack : MonoBehaviour {
 
     private void CheckFired()
     {
-        
-#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         if (Input.GetButtonDown("Fire1") && Time.timeScale != 0)
         {
             isShielded = healthScript.isShielded;
-            if (rangeAttack)
+            isReloading = weapons[weaponCount].GetComponent<Weapon>().GetReloadStatus();
+
+            if (!isShielded)
             {
-                if (!isAttacking && !isShielded && !isReloading)
+                if (rangeAttack)
                 {
-                    //if (ammuAmount > 0)
-                    //{
-                        //ammuAmount--;
-                        //StartCoroutine(Shooting());    //StartCoroutine(Fire());
+                    if (!isAttacking && !isReloading)
+                    {
                         StartCoroutine(ArsenalShooting());
-                        print("Should Fire");
-                    //}
-                }                
-            }
-            else if(!isShielded) StartCoroutine(MeeleHit());
+                    }
+                }
+                else StartCoroutine(MeeleHit());
+            }             
         }
-#else
-        //if (fireStickDown && rangeAttack && !isShooting) StartCoroutine(Fire());
-        //else if(fireStickDown && !rangeAttack && !isShooting) StartCoroutine(MeeleHit());
-#endif
     }
 
-    //old
-    IEnumerator Shooting()
-    {
-        if (isReloading || isAttacking) yield break;
-        isAttacking = true;
-        if (!anim.GetBool("Shooting")) {
-            anim.SetBool("Range", true);
-            anim.SetBool("Shooting", true);
-            yield return new WaitForSeconds(0.25f);
-        }
-        if (!isReloading)
-        {
-            GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
-            AudioSource.PlayClipAtPoint(fireSound, fireTransform.position);
-            //shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
-            shotInstance.GetComponent<Rigidbody>().AddForce(shotInstance.transform.forward * 1000);
-        }
-        if(ammuAmount <= 0 && !isReloading)
-        {
-            anim.SetTrigger("Reload");
-            isReloading = true;
-            // reloadTime Animtion + Puffer time 0.25
-            yield return new WaitForSeconds(reloadTime + 0.25f);
-            //yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(anim.GetLayerIndex("Reload-02")).Length);
-            ammuAmount = maxAmmu;
-            isReloading = false;
-        }
-        yield return new WaitForSeconds(fireRate - 0.25f);
-        isAttacking = false;
-        //WaitTime before Stop Shooting
-        yield return new WaitForSeconds(0.5f);
-        if (!isAttacking)
-        {
-            anim.SetBool("Shooting", false);
-            ammuAmount = maxAmmu;
-        }
-        yield return null;
-    }
+    ////old
+    //IEnumerator Shooting()
+    //{
+    //    if (isReloading || isAttacking) yield break;
+    //    isAttacking = true;
+    //    if (!anim.GetBool("Shooting")) {
+    //        anim.SetBool("Range", true);
+    //        anim.SetBool("Shooting", true);
+    //        yield return new WaitForSeconds(0.25f);
+    //    }
+    //    if (!isReloading)
+    //    {
+    //        GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
+    //        AudioSource.PlayClipAtPoint(fireSound, fireTransform.position);
+    //        //shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
+    //        shotInstance.GetComponent<Rigidbody>().AddForce(shotInstance.transform.forward * 1000);
+    //    }
+    //    if(ammuAmount <= 0 && !isReloading)
+    //    {
+    //        anim.SetTrigger("Reload");
+    //        isReloading = true;
+    //        // reloadTime Animtion + Puffer time 0.25
+    //        yield return new WaitForSeconds(reloadTime + 0.25f);
+    //        //yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(anim.GetLayerIndex("Reload-02")).Length);
+    //        ammuAmount = maxAmmu;
+    //        isReloading = false;
+    //    }
+    //    yield return new WaitForSeconds(fireRate - 0.25f);
+    //    isAttacking = false;
+    //    //WaitTime before Stop Shooting
+    //    yield return new WaitForSeconds(0.5f);
+    //    if (!isAttacking)
+    //    {
+    //        anim.SetBool("Shooting", false);
+    //        ammuAmount = maxAmmu;
+    //    }
+    //    yield return null;
+    //}
 
     //new Shooting ******************************************************/
     IEnumerator ArsenalShooting()
     {
         if (isReloading || isAttacking) yield break;
         isAttacking = true;
+        playerMovement.speed = playerMovement.GetSpeed(2);
         if (!anim.GetBool("Shooting"))
         {
-            anim.SetBool("Range", true);
             anim.SetBool("Shooting", true);
             yield return new WaitForSeconds(0.25f);
         }
@@ -242,39 +244,26 @@ public class PlayerAttack : MonoBehaviour {
         
         yield return new WaitForSeconds(fireRate - 0.25f);
         isAttacking = false;
+        //Test Speed slower
+        playerMovement.speed = playerMovement.GetSpeed(1);
         //WaitTime before Stop Shooting
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.5f);
+        //if (!isAttacking && !weapons[weaponCount].GetComponent<Weapon>().GetReloadStatus())
         if (!isAttacking)
-        {
+        {         
+            //AutoReload
+            //GetComponentInChildren<Weapon>().ReloadReset();
             anim.SetBool("Shooting", false);
-            GetComponentInChildren<Weapon>().Reload();
         }
+        
         yield return null;
     }
 
-    //public void nextEffect()
-    //{
-    //    if (currentProjectile < projectiles.Length - 1)
-    //        currentProjectile++;
-    //    else
-    //        currentProjectile = 0;
-    //}
-
-    //public void previousEffect()
-    //{
-    //    if (currentProjectile > 0)
-    //        currentProjectile--;
-    //    else
-    //        currentProjectile = projectiles.Length - 1;
-    //}
-
-    /****************************************************/
 
     IEnumerator MeeleHit()
     {
-        //print("MeleeActive");
         isAttacking = true;        
-        anim.SetBool("Range", false);
+        //anim.SetBool("Range", false);
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.25f);
         meeleHitbox.enabled = true;
@@ -287,23 +276,15 @@ public class PlayerAttack : MonoBehaviour {
         //yield return new WaitForSeconds(0.75f);
         //playingSound = false;
 
-        //*** Before Animation Controlled Finish ***//
-        //yield return new WaitForSeconds(meleeAttackRate-0.25f);
-        //isAttacking = false;
-        //meeleHitbox.enabled = false;
-        ////print("Meleefinish");
-
         yield return null;
 
     }
 
-    void SwapWeapon()
+    void SwapWeapon(int upOrDown)
     {
         weapons[weaponCount].SetActive(false);
-        weaponCount = (weaponCount+1) % weapons.Length;
+        weaponCount = (weaponCount + upOrDown + weapons.Length) % weapons.Length;
         weapons[weaponCount].SetActive(true);
-        //rangeAttack = rangeAttack ? false : true;
-        //anim.SetBool("Range", rangeAttack);
 
         //New Swap
         anim.SetTrigger("SwitchWeapon");
@@ -334,10 +315,22 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Range", false);
             rangeAttack = false;
         }
+        weapons[weaponCount].GetComponent<Weapon>().UpdateAmmuText();
     }
 
     public bool GetAttackStatus()
     {
         return isAttacking;
+    }
+
+    public bool GetReloadStatus()
+    {
+        isReloading = weapons[weaponCount].GetComponent<Weapon>().GetReloadStatus();
+        return isReloading;
+    }
+
+    public PlayerMovement GetPlayerMovement()
+    {
+        return playerMovement;
     }
 }

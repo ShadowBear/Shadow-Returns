@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     //Standart 8f
+    private float defaultSpeed = 8.0f;
+    private float shootingSpeed = 5.5f;
     public float speed = 8.0f;
     //Standart 8.5f
     [Range(1,10)]
@@ -57,34 +59,45 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
-        if (anim != null)
-        {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-            //CheckSpeed for Animation
-            animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
-            lastPosition = transform.position;
-            anim.SetFloat("Speed", animSpeed);
-            MoveAnimation(h, v);
-        }
+        //if (anim != null)
+        //{
+        //    float h = Input.GetAxisRaw("Horizontal");
+        //    float v = Input.GetAxisRaw("Vertical");
+        //    //CheckSpeed for Animation
+        //    animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
+        //    //animSpeed = playerRigidbody.velocity.magnitude;
+        //    lastPosition = transform.position;
+        //    anim.SetFloat("Speed", animSpeed);
+        //    MoveAnimation(h, v);
+        //}
     }
 
     void Update () {
-//#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        //#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //Vector3 inputs = Vector3.zero;
 
-        
+        if (anim != null && Time.frameCount % 15 == 0)
+        {
+            float h2 = Input.GetAxisRaw("Horizontal");
+            float v2 = Input.GetAxisRaw("Vertical");
+            //CheckSpeed for Animation
+            animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
+            //animSpeed = playerRigidbody.velocity.magnitude;
+            lastPosition = transform.position;
+            anim.SetFloat("Speed", animSpeed);
+            MoveAnimation(h2, v2);
+        }
 
-        RotateWithCamera();
+        //RotateWithCamera();
 
-//#else
-//        float h = vrStick.Horizontal();
-//        float v = vrStick.Vertical(); 
-//#endif
+        //#else
+        //        float h = vrStick.Horizontal();
+        //        float v = vrStick.Vertical(); 
+        //#endif
 
         //if (Input.GetButtonDown("Jump")) print("Springe");
         // Ground With Layers for later ToDo
-        
+
 
         //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         //moveDirection *= speed * Time.deltaTime;
@@ -94,7 +107,7 @@ public class PlayerMovement : MonoBehaviour {
         /* ******************** Shield *************************/
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if(!attackScript.isAttacking && !attackScript.isReloading) shield.ActivateShield();
+            if(!attackScript.GetAttackStatus() && !attackScript.GetReloadStatus()) shield.ActivateShield();
         }
         else
         {
@@ -107,6 +120,11 @@ public class PlayerMovement : MonoBehaviour {
             GetComponent<PlayerHealth>().DrinkPotion(GameManager.control.potionValue);
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (GetComponentInChildren<Weapon>()) GetComponentInChildren<Weapon>().Reload();
+            
+        }
         /* ********************** Dash *************************/
 
         //if (Input.GetButtonDown("Dash"))
@@ -246,7 +264,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Move(float h, float v)
     {
-        if (attackScript.isAttacking && !attackScript.rangeAttack)
+        if ((attackScript.GetAttackStatus() && !attackScript.rangeAttack) || attackScript.GetReloadStatus())
         {
             return;
         }
@@ -286,4 +304,20 @@ public class PlayerMovement : MonoBehaviour {
         //moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
         //transform.Translate(-moveDirection * Time.deltaTime * speed);
     }
+
+    /// <summary>
+    /// Return different movementspeed
+    /// 1 = Normal
+    /// 2 = Shooting
+    /// </summary>
+    /// <returns>
+    /// 1:NormalSpeed
+    /// 2: ShootingSpeed</returns>
+    public float GetSpeed(int i)
+    {
+        if (i == 1) return defaultSpeed;
+        else if (i == 2) return shootingSpeed;
+        return defaultSpeed;
+    }
+
 }

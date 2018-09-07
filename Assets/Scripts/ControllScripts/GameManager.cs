@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour {
     private int coinAmount;
     public Text coinText;
 
+    public Text ammuText;
+
     //Display Damage on Screen
     public Canvas canvas;
     public Text textTmp;

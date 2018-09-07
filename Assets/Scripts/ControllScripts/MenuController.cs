@@ -32,7 +32,7 @@ public class MenuController : MonoBehaviour {
 
     public void ContinueBtn()
     {
-        ToggleWindow(pauseMenu);
+        if(!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().isDead) ToggleWindow(pauseMenu);
     }
 
     public void QuitBtn()
@@ -43,12 +43,12 @@ public class MenuController : MonoBehaviour {
 
     public void SettingsBtn()
     {
-
+        print("Settings");
     }
 
     public void LoadBtn()
     {
-
+        print("Load");
     }
 
     public void Dialog()
@@ -66,7 +66,7 @@ public class MenuController : MonoBehaviour {
         //print("WechsleFenster");
         //print("TimeScale: " + Time.timeScale);
         
-        if (window.activeSelf)
+        if (window.activeSelf && !GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().isDead)
         {
             Time.timeScale = 1;
             window.SetActive(false);

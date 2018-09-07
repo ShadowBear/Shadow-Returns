@@ -13,16 +13,18 @@ public class PlayerRotation : MonoBehaviour {
     public LayerMask floorMask;
     bool turnbeforeAttack = false;
     public Animator playerAnim;
+    private PlayerHealth playerHealth;
  
     // Use this for initialization
     void Start () {
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>();
         playerAnim = GetComponentInChildren<Animator>();
+        playerHealth = GetComponentInParent<PlayerHealth>();
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (playerAttack.isAttacking && !playerAttack.rangeAttack) {
+        if (playerAttack.GetAttackStatus() && !playerAttack.rangeAttack) {
             if (playerAnim.GetBool("Attack") && !turnbeforeAttack)
             {
                 Turning();
@@ -30,7 +32,7 @@ public class PlayerRotation : MonoBehaviour {
             }
             else turnbeforeAttack = false;
         }
-        else Turning();
+        else if(!playerHealth.isDead)Turning();
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)

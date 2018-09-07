@@ -37,11 +37,11 @@ public class SlimeHealthChild : HealthScript
         //}
         base.Update();
         //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
-        if (useRelativeRotation)
-        {
-            Vector3 cam = new Vector3(Camera.main.transform.position.x,0,Camera.main.transform.position.z);
-            relativeRotationTransform.LookAt(cam);            
-        }
+        //if (useRelativeRotation)
+        //{
+        //    Vector3 cam = new Vector3(Camera.main.transform.position.x,0,Camera.main.transform.position.z);
+        //    relativeRotationTransform.LookAt(cam);            
+        //}
     }
        
     public void SetLifeState(int life, int startLife)
