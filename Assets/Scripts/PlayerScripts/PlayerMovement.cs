@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
         //#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //Vector3 inputs = Vector3.zero;
 
-        if (anim != null && Time.frameCount % 15 == 0)
+        if (anim != null && Time.frameCount % 5 == 0)
         {
             float h2 = Input.GetAxisRaw("Horizontal");
             float v2 = Input.GetAxisRaw("Vertical");

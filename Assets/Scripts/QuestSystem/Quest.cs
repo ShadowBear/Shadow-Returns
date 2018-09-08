@@ -1,51 +1,26 @@
-﻿using System.Collections.Generic;
-namespace QuestSystem
-{
-    public class Quest
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+public class Quest : MonoBehaviour {
+
+    public List<Goal> Goals { get; set; } = new List<Goal>();
+    public string QuestName { get; set; }
+    public string Description { get; set; }
+    public int ExperienceReward { get; set; }
+    public GameObject ItemReward { get; set; }
+    public bool Completed { get; set; }
+
+    public void CheckGoals()
     {
-        private IQuestInformation information;
-        public IQuestInformation Information
-        {
-            get { return information; }
-        }
-
-        
-
-        //Name
-        //DescriptionSummary
-        //Quest Hint
-        //Quest Dialog
-        //SourceId
-        //QuestId
-        //chain Quest and next
-        //chainQuestID
-        //Objectives
-        private List<IQuestObject> objectives;
-            //Collection Objectives
-                //kill 4 ...
-                //5 feathers
-            //Location Objective
-                // a to b
-                // Timebased
-
-        //bonusObjectives
-        //rewards
-        //events
-        //    on completetion
-        //    on failed
-        //    on update
-
-        private bool CheckOverallProgress()
-        {
-            for (int i = 0; i < objectives.Count; i++)
-            {
-                if(!objectives[i].IsComplete && objectives[i].IsBonus == false)
-                {
-                    return false;
-                }
-            }
-            return true; //get Reward!
-        }
+        Completed = Goals.All(g => g.Completed);
+        //Direct Reward -> Comment if Questgiver gives reward
+        //if (Completed) GiveReward();
+    }
+    
+    public void GiveReward()
+    {
+        if (ItemReward != null) print("Reward von Quest bekommen");
     }
 }
-

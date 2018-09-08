@@ -6,8 +6,8 @@ public class NPCDialog : MonoBehaviour {
 
     public string[] dialog;
     public string npcName;
-    public GameObject interactSymbol;
-    public Canvas interactCanvasSymbol;
+    //public GameObject interactSymbol;
+    private Canvas interactCanvasSymbol;
 
 
 	// Use this for initialization
@@ -37,7 +37,7 @@ public class NPCDialog : MonoBehaviour {
         }
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         DialogSystem.Dialog.AddNewDialog(dialog, npcName);
     }

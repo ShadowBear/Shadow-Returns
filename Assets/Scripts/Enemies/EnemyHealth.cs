@@ -8,6 +8,7 @@ public class EnemyHealth : HealthScript
     private ZombieAIController aiController;
     public float dashDistance = 2f;
     public LayerMask ground;
+    private int EnemyID;
 
     new void Start()
     {
@@ -47,5 +48,37 @@ public class EnemyHealth : HealthScript
             transform.SetPositionAndRotation(targetPosition, transform.rotation);
         }
         if(aiController != null) aiController.TakeHit();
+    }
+
+    protected override void Dying()
+    {
+        StartCoroutine(DieAnim());
+        //Update Quest Status
+        if (GameObject.FindGameObjectWithTag("Quest").GetComponent<KillQuest>())
+        {
+            foreach (KillGoal g in GameObject.FindGameObjectWithTag("Quest").GetComponent<KillQuest>().Goals)
+            {
+                g.EnemyDied(EnemyID);
+                print("Enemy mit ID " + EnemyID + " ist Gestorben");
+            }
+        }
+
+    }
+
+    IEnumerator DieAnim()
+    {
+        isDead = true;
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+            yield return new WaitForSeconds(3.5f);
+        }        
+        Destroy(gameObject);
+        yield return null;
+    }
+
+    public void SetEnemyID(int ID)
+    {
+        EnemyID = ID;
     }
 }

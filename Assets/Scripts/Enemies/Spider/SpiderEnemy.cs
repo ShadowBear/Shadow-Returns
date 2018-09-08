@@ -7,7 +7,9 @@ public class SpiderEnemy : EnemyAIController {
     
     // Use this for initialization
 	new void Start () {
+        ID = 0;
         base.Start();
+        
 	}
 	
 	// Update is called once per frame

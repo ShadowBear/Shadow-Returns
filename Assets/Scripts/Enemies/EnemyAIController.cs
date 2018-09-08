@@ -14,6 +14,8 @@ public class EnemyAIController : MonoBehaviour {
     protected bool canshoot = true;
     protected bool isCircling = false;
 
+    public int ID { get; set; }
+
     public float rangeAttackWaitTime = 2f;
 
     [Header("OnlyMeleeAttack")]
@@ -70,6 +72,7 @@ public class EnemyAIController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         hitbox.enabled = false;
+        GetComponent<EnemyHealth>().SetEnemyID(ID);
         //Patrol();
     }
 
