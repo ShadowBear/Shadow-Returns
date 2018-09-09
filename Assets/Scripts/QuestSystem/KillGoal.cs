@@ -19,7 +19,7 @@ public class KillGoal : Goal {
         base.Init();
     }
 
-    public void EnemyDied(int ID)
+    public override void EnemyDied(int ID)
     {
         if(ID == EnemyID)
         {

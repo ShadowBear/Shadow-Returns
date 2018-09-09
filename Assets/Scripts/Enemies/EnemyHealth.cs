@@ -54,15 +54,29 @@ public class EnemyHealth : HealthScript
     {
         StartCoroutine(DieAnim());
         //Update Quest Status
-        if (GameObject.FindGameObjectWithTag("Quest").GetComponent<KillQuest>())
-        {
-            foreach (KillGoal g in GameObject.FindGameObjectWithTag("Quest").GetComponent<KillQuest>().Goals)
-            {
-                g.EnemyDied(EnemyID);
-                print("Enemy mit ID " + EnemyID + " ist Gestorben");
-            }
-        }
+        //if (GameObject.FindGameObjectWithTag("Quest").GetComponent<KillQuest>())
+        //{
+        //    foreach (Goal g in GameObject.FindGameObjectWithTag("Quest").GetComponent<KillQuest>().Goals)
+        //    {
+        //        g.EnemyDied(EnemyID);
+        //        print("Enemy mit ID " + EnemyID + " ist Gestorben");
+        //    }
+        //}
 
+        if (GameObject.FindGameObjectWithTag("Quest"))
+        {
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Quest"))
+            {
+                if (go.GetComponent<KillQuest>())
+                {
+                    foreach (Goal g in go.GetComponent<KillQuest>().Goals)
+                    {
+                        g.EnemyDied(EnemyID);
+                        print("Enemy mit ID " + EnemyID + " ist Gestorben");
+                    }
+                }
+            }            
+        }
     }
 
     IEnumerator DieAnim()

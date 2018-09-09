@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour {
         {
             ammuCount--;
             UpdateAmmuText();
-            print("Schuss");
+            //print("Schuss");
             GameObject projectile = Instantiate(ammuType, fireTransform.position, Quaternion.identity) as GameObject;
             projectile.transform.rotation = fireTransform.rotation;
             projectile.GetComponent<PolygonArsenal.PolygonProjectileScript>().SetDamage(damageAmount);

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class QuestGiver : NPCDialog {
 
-    public bool AssignedQuest { get; set; }
-    public bool Helped { get; set; }
+    //public bool AssignedQuest { get; set; }
+    //public bool Helped { get; set; }
+    public bool AssignedQuest;
+    public bool Helped;
 
     //TalkStrings
     public string[] afterCompletedText;
     public string[] getRewardText;
     public string[] onGoingText;
+
+    public Quest questTypeToGive;
 
     [SerializeField]
     private GameObject quest;
@@ -18,7 +22,15 @@ public class QuestGiver : NPCDialog {
     private string questType;
     private Quest Quest { get; set; }
 
-    
+
+    new public void Start()
+    {
+        base.Start();
+        AssignedQuest = false;
+        Helped = false;
+        print("QuestStart");
+    }
+
     public override void Interact()
     {
         if (!AssignedQuest && !Helped)
@@ -34,7 +46,7 @@ public class QuestGiver : NPCDialog {
         else
         {
             //Thanks for helped
-            DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, name);
+            DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, npcName);
         }
     }
 
@@ -42,7 +54,9 @@ public class QuestGiver : NPCDialog {
     {
         AssignedQuest = true;
         //Takes the Quest as String -> KillQuest in questType
-        Quest = (Quest)quest.AddComponent(System.Type.GetType(questType));
+        //Quest = (Quest)quest.AddComponent(System.Type.GetType(questType));
+        GameManager.control.GetComponent<QuestLog>().AddQuest(questTypeToGive);
+        Quest = questTypeToGive;
     }
 
     void CheckQuest()
@@ -52,11 +66,12 @@ public class QuestGiver : NPCDialog {
             Quest.GiveReward();
             Helped = true;
             AssignedQuest = false;
-            DialogSystem.Dialog.AddNewDialog(new string[] { "Thanks for that Here´s your reward.", "More Dialog" }, name);
+            GameManager.control.GetComponent<QuestLog>().RemoveQuest(Quest);
+            DialogSystem.Dialog.AddNewDialog(new string[] { "Thanks for that Here´s your reward.", "More Dialog" }, npcName);
         }
         else
         {
-            DialogSystem.Dialog.AddNewDialog(new string[] { "What are you waiting for??", "Go Help!" }, name);
+            DialogSystem.Dialog.AddNewDialog(new string[] { "What are you waiting for??", "Go Help!" }, npcName);
         }
     }
 }

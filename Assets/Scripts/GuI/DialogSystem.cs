@@ -36,13 +36,13 @@ public class DialogSystem : MonoBehaviour {
         dialogLines.AddRange(lines);
         this.npcName = npcName;
         CreateDialog();
-        Debug.Log(dialogLines.Count);
+        //Debug.Log(dialogLines.Count);
     }
 
     public void CreateDialog()
     {
-        print(dialogIndex);
-        print(dialogLines.Count);
+        //print(dialogIndex);
+        //print(dialogLines.Count);
         dialogText.text = dialogLines[dialogIndex];
         npcNameText.text = npcName;
         dialogPanel.SetActive(true);

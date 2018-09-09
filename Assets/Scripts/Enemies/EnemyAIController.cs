@@ -209,7 +209,7 @@ public class EnemyAIController : MonoBehaviour {
     {
         if (col.CompareTag("Player"))
         {
-            print("MeeleDamage");
+            //print("MeeleDamage");
             col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG);
         }
     }

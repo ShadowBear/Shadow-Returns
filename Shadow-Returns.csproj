@@ -885,6 +885,7 @@
     <Compile Include="Assets\Scripts\ControllScripts\EnemyInstantiateTrigger.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\GraveyardController.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\LibaryController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\MenuController.cs" />
@@ -924,8 +925,11 @@
     <Compile Include="Assets\Scripts\GuI\DashImageControll.cs" />
     <Compile Include="Assets\Scripts\GuI\DialogSystem.cs" />
     <Compile Include="Assets\Scripts\GuI\RotateToCamera.cs" />
+    <Compile Include="Assets\Scripts\Items\ActionItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Carrot.cs" />
     <Compile Include="Assets\Scripts\Items\ExplosionItems.cs" />
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
+    <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
     <Compile Include="Assets\Scripts\Items\Weapons\Weapon.cs" />
@@ -962,6 +966,8 @@
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerRotation.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Shield.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\ShotDirection.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\CarrotQuest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\CollectionGoal.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Goal.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\KillGoal.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\KillQuest.cs" />
@@ -976,6 +982,7 @@
     <Compile Include="Assets\Scripts\QuestSystem\Old\QuestInformation.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\QuestGiver.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\QuestLog.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />
     <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />

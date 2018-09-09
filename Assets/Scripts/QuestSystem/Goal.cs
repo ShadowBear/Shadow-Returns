@@ -29,4 +29,14 @@ public class Goal{
         Quest.CheckGoals();
     }
 
+    public virtual void EnemyDied(int EnemyID)
+    {
+
+    }
+
+    public virtual void ItemCollected(string ItemID)
+    {
+
+    }
+
 }

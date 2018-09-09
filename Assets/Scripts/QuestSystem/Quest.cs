@@ -7,6 +7,7 @@ public class Quest : MonoBehaviour {
 
     public List<Goal> Goals { get; set; } = new List<Goal>();
     public string QuestName { get; set; }
+    //Description max 30 Letters
     public string Description { get; set; }
     public int ExperienceReward { get; set; }
     public GameObject ItemReward { get; set; }
