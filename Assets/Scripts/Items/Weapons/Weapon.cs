@@ -14,8 +14,10 @@ public class Weapon : MonoBehaviour {
     private bool isReloading = false;
     private PlayerAttack playerAttack;
 
+
     public Transform fireTransform;
     public int damageAmount;
+    private int damageVarianz = 5;
     public float speed = 1000;
 
     public enum WeaponType { gun, sword, axe };
@@ -47,7 +49,7 @@ public class Weapon : MonoBehaviour {
             //print("Schuss");
             GameObject projectile = Instantiate(ammuType, fireTransform.position, Quaternion.identity) as GameObject;
             projectile.transform.rotation = fireTransform.rotation;
-            projectile.GetComponent<PolygonArsenal.PolygonProjectileScript>().SetDamage(damageAmount);
+            projectile.GetComponent<PolygonArsenal.PolygonProjectileScript>().SetDamage(damageAmount + Random.Range(-damageVarianz, (damageVarianz+1)));
             projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * speed);
         }
         // AutoRealoding

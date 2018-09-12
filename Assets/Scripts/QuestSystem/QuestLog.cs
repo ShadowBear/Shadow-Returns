@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class QuestLog : MonoBehaviour {
 
-    private List<Quest> activeQuests = new List<Quest>();
+    public static QuestLog questLog;
+    public List<Quest> activeQuests = new List<Quest>();
     private int maxActiveQuests = 9;
     private string questLogString;
     public Text questlogText;
-    public GameObject questLog;
+    public GameObject questLogWindow;
 
     // Use this for initialization
     void Start () {
+        if (questLog == null) questLog = this;
+        else if (questLog != this) Destroy(gameObject);
         questLogString = "";
         UpdateQuestLogText();
 	}
@@ -20,7 +23,7 @@ public class QuestLog : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.L)) ToggleWindow(questLog);
+        if (Input.GetKeyDown(KeyCode.L)) ToggleWindow(questLogWindow);
         
 	}
 
@@ -47,15 +50,17 @@ public class QuestLog : MonoBehaviour {
     public void CloseQuestlog()
     {
         //Close Questlog
-        ToggleWindow(questLog);
+        ToggleWindow(questLogWindow);
     }
 
     private void UpdateQuestLogText()
     {
         questLogString = "";
+        int questCount = 1;
         foreach(Quest q in activeQuests)
         {
-            questLogString += q.Description + "\n";
+            questLogString += questCount + ". " + q.QuestGiverName + " : "+ q.Description + "\n";
+            questCount++;
         }
         //Delete the last return
         if (questLogString.Length > 2) questLogString = questLogString.Substring(0, questLogString.Length - 2);
@@ -74,6 +79,28 @@ public class QuestLog : MonoBehaviour {
         {
             Time.timeScale = 0;
             window.SetActive(true);
+        }
+    }
+
+    public void ItemCollected(string itemID)
+    {
+        foreach (Quest q in activeQuests)
+        {
+            foreach (Goal g in q.Goals)
+            {
+                g.ItemCollected(itemID);
+            }
+        }
+    }
+
+    public void EnemyDied(int enemyID)
+    {
+        foreach (Quest q in activeQuests)
+        {
+            foreach (Goal g in q.Goals)
+            {
+                g.EnemyDied(enemyID);
+            }
         }
     }
 

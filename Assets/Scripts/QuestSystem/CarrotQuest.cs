@@ -9,6 +9,7 @@ public class CarrotQuest : Quest {
 	// Use this for initialization
 	void Start () {
         QuestName = "Carrot Hunt";
+        QuestGiverName = "Farmer Bill";
         Description = "Collect a bunch of stuff.";
         ItemReward = reward;
         ExperienceReward = 100;

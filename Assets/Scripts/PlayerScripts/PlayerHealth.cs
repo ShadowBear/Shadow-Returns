@@ -15,6 +15,7 @@ public class PlayerHealth : HealthScript {
     public Shield playerShieldScript;
     [SerializeField]
     private Renderer[] playerRenderer;
+
     [SerializeField]
     private GameObject gameOverText;
     private float hitDelayTime = 1.75f;
@@ -24,7 +25,8 @@ public class PlayerHealth : HealthScript {
         if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
         startHitDelay = hitDelayTime;
         processingProfile.vignette.enabled = false;
-        base.Start();
+        base.Start();        
+        
     }
 	
 	// Update is called once per frame
@@ -89,7 +91,7 @@ public class PlayerHealth : HealthScript {
             for (int n = 0; n < playerRenderer.Length; n++)
             {
                 playerRenderer[n].enabled = false;
-            }  
+            }
             yield return new WaitForSeconds(0.1f);
             for (int n = 0; n < playerRenderer.Length; n++)
             {

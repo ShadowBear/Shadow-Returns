@@ -35,7 +35,8 @@ public class Shield : MonoBehaviour {
     // Blau voll Geladen -> Grün -> Gelb -> Orange -> Rot Fast leer
 	void Update () {
         playerHealth.isShielded = gameObject.GetComponent<MeshRenderer>().enabled ? true : false;
-
+        //if (Time.frameCount % 5 == 0) playerHealth.isShielded = transform.GetChild(0).gameObject.activeSelf ? true : false;
+        
         ShieldColor();
 
         //playerShoot.shielded = rend.enabled ? true : false;
@@ -56,6 +57,8 @@ public class Shield : MonoBehaviour {
         {
             power = maxPower;
             gameObject.GetComponent<MeshRenderer>().enabled = true;
+            //transform.GetChild(0).gameObject.SetActive(true);
+
             gameObject.GetComponent<Light>().enabled = true;
             death = false;
         }
@@ -95,8 +98,8 @@ public class Shield : MonoBehaviour {
         }
         else if (power <= 0)
         {
-            //gameObject.GetComponent<MeshRenderer>().enabled = false;
-            //gameObject.GetComponent<Light>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Light>().enabled = false;
             rend.enabled = false;
             lightColor.enabled = false;
         }
@@ -123,13 +126,13 @@ public class Shield : MonoBehaviour {
     public void ActivateShield()
     {
         rend.enabled = true;
-        GetComponent<Light>().enabled = true;
+        if (GetComponent<Light>()) GetComponent<Light>().enabled = true;
     }
 
     public void DeActivateShield()
     {
         rend.enabled = false;
-        GetComponent<Light>().enabled = false;
+        if(GetComponent<Light>()) GetComponent<Light>().enabled = false;
     }
 
 }

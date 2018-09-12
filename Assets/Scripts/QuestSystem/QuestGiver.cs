@@ -16,10 +16,10 @@ public class QuestGiver : NPCDialog {
 
     public Quest questTypeToGive;
 
-    [SerializeField]
-    private GameObject quest;
-    [SerializeField]
-    private string questType;
+    //[SerializeField]
+    //private GameObject quest;
+    //[SerializeField]
+    //private string questType;
     private Quest Quest { get; set; }
 
 
@@ -46,7 +46,8 @@ public class QuestGiver : NPCDialog {
         else
         {
             //Thanks for helped
-            DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, npcName);
+            //DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, npcName);
+            DialogSystem.Dialog.AddNewDialog(afterCompletedText, npcName);
         }
     }
 
@@ -55,7 +56,8 @@ public class QuestGiver : NPCDialog {
         AssignedQuest = true;
         //Takes the Quest as String -> KillQuest in questType
         //Quest = (Quest)quest.AddComponent(System.Type.GetType(questType));
-        GameManager.control.GetComponent<QuestLog>().AddQuest(questTypeToGive);
+        //GameManager.control.GetComponent<QuestLog>().AddQuest(questTypeToGive);
+        QuestLog.questLog.AddQuest(questTypeToGive);
         Quest = questTypeToGive;
     }
 
@@ -67,11 +69,12 @@ public class QuestGiver : NPCDialog {
             Helped = true;
             AssignedQuest = false;
             GameManager.control.GetComponent<QuestLog>().RemoveQuest(Quest);
-            DialogSystem.Dialog.AddNewDialog(new string[] { "Thanks for that Here´s your reward.", "More Dialog" }, npcName);
+            DialogSystem.Dialog.AddNewDialog(getRewardText, npcName);
         }
         else
         {
-            DialogSystem.Dialog.AddNewDialog(new string[] { "What are you waiting for??", "Go Help!" }, npcName);
+            //DialogSystem.Dialog.AddNewDialog(new string[] { "What are you waiting for??", "Go Help!" }, npcName);
+            DialogSystem.Dialog.AddNewDialog(onGoingText, npcName);
         }
     }
 }

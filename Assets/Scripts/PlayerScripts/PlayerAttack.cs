@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour {
 
     //Weapons
     public GameObject[] weapons;
+    public GameObject weaponAttackParent;
     private int weaponCount;
 
     
@@ -41,7 +42,8 @@ public class PlayerAttack : MonoBehaviour {
 
     //Range AttackBoolen & Collider for Meele
     public bool rangeAttack;
-    public Collider meeleHitbox;
+    [SerializeField]
+    private Collider meeleHitbox;
     public TrailRenderer trailRenderer;
 
     private Animator anim;
@@ -50,6 +52,7 @@ public class PlayerAttack : MonoBehaviour {
 
     public GameObject sword;
     public GameObject gun;
+    private GameObject equipedWeapon;
 
     PlayerRotation playRot;
     private Vector3 offset = new Vector3(0, 1, 0);
@@ -74,10 +77,26 @@ public class PlayerAttack : MonoBehaviour {
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
-        meeleHitbox.enabled = false;
+        equipedWeapon = GetComponentInChildren<Weapon>().gameObject;
+        if (equipedWeapon.GetComponent<BoxCollider>())
+        {
+            meeleHitbox = equipedWeapon.GetComponent<BoxCollider>();
+            meeleHitbox.enabled = false;
+        }
         trailRenderer.enabled = false;
         rangeAttack = true;
         ammuAmount = maxAmmu;
+
+        int weaponsSize = weaponAttackParent.GetComponentsInChildren<Weapon>().Length;
+        weapons = new GameObject[weaponsSize];
+        int i = 0;
+        foreach(Weapon w in weaponAttackParent.GetComponentsInChildren<Weapon>())
+        {
+            weapons[i] = w.gameObject;
+            weapons[i].SetActive(false);
+            i++;
+        }
+        weapons[0].SetActive(true);
 
         if (startNaked) DontSuitUp();
         else
@@ -190,45 +209,6 @@ public class PlayerAttack : MonoBehaviour {
         }
     }
 
-    ////old
-    //IEnumerator Shooting()
-    //{
-    //    if (isReloading || isAttacking) yield break;
-    //    isAttacking = true;
-    //    if (!anim.GetBool("Shooting")) {
-    //        anim.SetBool("Range", true);
-    //        anim.SetBool("Shooting", true);
-    //        yield return new WaitForSeconds(0.25f);
-    //    }
-    //    if (!isReloading)
-    //    {
-    //        GameObject shotInstance = Instantiate(shot, fireTransform.position, fireTransform.rotation);
-    //        AudioSource.PlayClipAtPoint(fireSound, fireTransform.position);
-    //        //shotInstance.GetComponent<Rigidbody>().velocity = fireForce * fireTransform.forward;
-    //        shotInstance.GetComponent<Rigidbody>().AddForce(shotInstance.transform.forward * 1000);
-    //    }
-    //    if(ammuAmount <= 0 && !isReloading)
-    //    {
-    //        anim.SetTrigger("Reload");
-    //        isReloading = true;
-    //        // reloadTime Animtion + Puffer time 0.25
-    //        yield return new WaitForSeconds(reloadTime + 0.25f);
-    //        //yield return new WaitForSeconds(anim.GetCurrentAnimatorClipInfo(anim.GetLayerIndex("Reload-02")).Length);
-    //        ammuAmount = maxAmmu;
-    //        isReloading = false;
-    //    }
-    //    yield return new WaitForSeconds(fireRate - 0.25f);
-    //    isAttacking = false;
-    //    //WaitTime before Stop Shooting
-    //    yield return new WaitForSeconds(0.5f);
-    //    if (!isAttacking)
-    //    {
-    //        anim.SetBool("Shooting", false);
-    //        ammuAmount = maxAmmu;
-    //    }
-    //    yield return null;
-    //}
-
     //new Shooting ******************************************************/
     IEnumerator ArsenalShooting()
     {
@@ -285,6 +265,11 @@ public class PlayerAttack : MonoBehaviour {
         weapons[weaponCount].SetActive(false);
         weaponCount = (weaponCount + upOrDown + weapons.Length) % weapons.Length;
         weapons[weaponCount].SetActive(true);
+        if (weapons[weaponCount].GetComponent<BoxCollider>())
+        {
+            meeleHitbox = weapons[weaponCount].GetComponent<BoxCollider>();
+            meeleHitbox.enabled = false;
+        }        
 
         //New Swap
         anim.SetTrigger("SwitchWeapon");

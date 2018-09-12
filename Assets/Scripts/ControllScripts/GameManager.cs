@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour {
     //Display Damage on Screen
     public Canvas canvas;
     public Text textTmp;
-    private float scaleRate = 0.005f;
+    public GameObject damageTextObject;
+    private float scaleRate = 1;
 
     //Sword, Shield and Pistol 
     public bool swordCollected = false;
@@ -71,15 +72,31 @@ public class GameManager : MonoBehaviour {
 
     public void ShowDmgText(float damage, Transform displayTrans)
     {
-        Component dmgText = Instantiate(textTmp, displayTrans.position, Quaternion.identity) as Component;
-        dmgText.transform.SetParent(canvas.transform);
-        dmgText.GetComponent<Text>().text = ((int)damage).ToString();
-        dmgText.transform.localScale = new Vector3(scaleRate, scaleRate, scaleRate);
-        if (damage > 15) dmgText.GetComponent<Text>().color = Color.red;
-        dmgText.gameObject.SetActive(true);
-        
-        dmgText.transform.GetComponent<Text>().transform.position = displayTrans.position + new Vector3(0,1,0);
+        ///******Test old*******///
+        //Component dmgText = Instantiate(textTmp, displayTrans.position, Quaternion.identity) as Component;
+        //dmgText.transform.SetParent(canvas.transform);
+        //dmgText.GetComponent<Text>().text = ((int)damage).ToString();
+        //dmgText.transform.localScale = new Vector3(scaleRate, scaleRate, scaleRate);
+        //if (damage > 15) dmgText.GetComponent<Text>().color = Color.red;
+        //dmgText.gameObject.SetActive(true);
+
+        //dmgText.transform.GetComponent<Text>().transform.position = displayTrans.position + new Vector3(0,1,0);
         //dmgText.transform.GetComponent<Text>().transform.position = Camera.main.WorldToScreenPoint(displayTrans.position);
+
+        ////********* NEW ***********///
+
+        GameObject dmgText = Instantiate(damageTextObject);
+        if (!GameObject.FindGameObjectWithTag("Canvas")) Debug.Log("Canvas nicht gefunden");
+        dmgText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        dmgText.GetComponentInChildren<Text>().text = ((int)damage).ToString();
+        dmgText.transform.localScale = new Vector3(scaleRate, scaleRate, 1);
+        if (damage > 25) dmgText.GetComponentInChildren<Text>().color = Color.red;
+        dmgText.gameObject.SetActive(true);
+
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(displayTrans.position);
+        dmgText.transform.position = screenPosition + new Vector2(0, 1.5f);
+        //dmgText.transform.position = displayTrans.position + new Vector3(0,1.5f,0);
+
     }
 
     public void ReceiveExperience(int experience)

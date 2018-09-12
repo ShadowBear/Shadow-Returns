@@ -7,11 +7,15 @@ public class Quest : MonoBehaviour {
 
     public List<Goal> Goals { get; set; } = new List<Goal>();
     public string QuestName { get; set; }
+    public string QuestGiverName { get; set; }
     //Description max 30 Letters
     public string Description { get; set; }
     public int ExperienceReward { get; set; }
     public GameObject ItemReward { get; set; }
     public bool Completed { get; set; }
+
+    private float explosionRadius = 5;
+    private int explosionForce = 250;
 
     public void CheckGoals()
     {
@@ -22,6 +26,16 @@ public class Quest : MonoBehaviour {
     
     public void GiveReward()
     {
-        if (ItemReward != null) print("Reward von Quest bekommen");
+        GameManager.control.ReceiveExperience(ExperienceReward);
+        if (ItemReward != null)
+        {
+            print("Reward von Quest bekommen");
+            GameObject rewardObject = Instantiate(ItemReward, transform.position + new Vector3(0,1,0), transform.rotation);
+            if (rewardObject.GetComponent<Rigidbody>())
+            {
+                Vector3 randomExplosionVector = new Vector3(0, 0.9f, 0.5f);
+                rewardObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
+            }
+        }
     }
 }
