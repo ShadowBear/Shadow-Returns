@@ -971,6 +971,7 @@
     <Compile Include="Assets\Scripts\QuestSystem\CarrotQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\CollectionGoal.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Goal.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\HelpingQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\KillGoal.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\KillQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Old\Interfaces\IQuest.cs" />
@@ -984,6 +985,7 @@
     <Compile Include="Assets\Scripts\QuestSystem\Old\QuestInformation.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\QuestGiver.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\QuestGoal.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\QuestLog.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />

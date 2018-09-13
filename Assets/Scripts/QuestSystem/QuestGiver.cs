@@ -47,7 +47,8 @@ public class QuestGiver : NPCDialog {
         {
             //Thanks for helped
             //DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, npcName);
-            DialogSystem.Dialog.AddNewDialog(afterCompletedText, npcName);
+            if (afterCompletedText.Length > 0) DialogSystem.Dialog.AddNewDialog(afterCompletedText, npcName);
+            else DialogSystem.Dialog.AddNewDialog(new string[] { "I am busy go away!" }, npcName);
         }
     }
 
@@ -69,12 +70,14 @@ public class QuestGiver : NPCDialog {
             Helped = true;
             AssignedQuest = false;
             GameManager.control.GetComponent<QuestLog>().RemoveQuest(Quest);
-            DialogSystem.Dialog.AddNewDialog(getRewardText, npcName);
+            if(getRewardText.Length > 0) DialogSystem.Dialog.AddNewDialog(getRewardText, npcName);
+            else DialogSystem.Dialog.AddNewDialog(new string[] { "Thank you this is for you!" }, npcName);
         }
         else
         {
             //DialogSystem.Dialog.AddNewDialog(new string[] { "What are you waiting for??", "Go Help!" }, npcName);
-            DialogSystem.Dialog.AddNewDialog(onGoingText, npcName);
+            if (onGoingText.Length > 0) DialogSystem.Dialog.AddNewDialog(onGoingText, npcName);
+            else DialogSystem.Dialog.AddNewDialog(new string[] { "What are you waiting for? Help me now!" }, npcName);
         }
     }
 }

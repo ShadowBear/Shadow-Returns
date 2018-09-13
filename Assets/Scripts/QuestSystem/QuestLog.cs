@@ -104,4 +104,15 @@ public class QuestLog : MonoBehaviour {
         }
     }
 
+    public void QuestCompleted(string questID)
+    {
+        foreach (Quest q in activeQuests)
+        {
+            foreach (Goal g in q.Goals)
+            {
+                g.QuestGoalCompleted(questID);
+            }
+        }
+    }
+
 }

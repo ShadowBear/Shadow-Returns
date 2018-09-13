@@ -16,6 +16,8 @@ public class Quest : MonoBehaviour {
 
     private float explosionRadius = 5;
     private int explosionForce = 250;
+    [SerializeField]
+    private string QuestID;
 
     public void CheckGoals()
     {
@@ -27,6 +29,7 @@ public class Quest : MonoBehaviour {
     public void GiveReward()
     {
         GameManager.control.ReceiveExperience(ExperienceReward);
+        QuestLog.questLog.QuestCompleted(QuestID);
         if (ItemReward != null)
         {
             print("Reward von Quest bekommen");

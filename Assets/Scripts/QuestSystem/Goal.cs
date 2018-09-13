@@ -23,20 +23,21 @@ public class Goal{
         }
     }
 
+    public void EvaluateQuest()
+    {
+        Complete();        
+    }
+
     public void Complete()
     {
         Completed = true;
         Quest.CheckGoals();
     }
 
-    public virtual void EnemyDied(int EnemyID)
-    {
+    public virtual void EnemyDied(int EnemyID){ }
 
-    }
+    public virtual void ItemCollected(string ItemID){ }
 
-    public virtual void ItemCollected(string ItemID)
-    {
-
-    }
+    public virtual void QuestGoalCompleted(string quest) { }
 
 }
