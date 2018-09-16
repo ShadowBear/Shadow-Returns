@@ -41,4 +41,9 @@ public class Quest : MonoBehaviour {
             }
         }
     }
+
+    public string GetQuestID()
+    {
+        return QuestID;
+    }
 }

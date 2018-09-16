@@ -71,6 +71,11 @@ public class PlayerAttack : MonoBehaviour {
     public int currentProjectile = 0;
     public float speed = 1000;
 
+    [Header("GUI")]
+    public GameObject swordIcon;
+    public GameObject ammuIcon;
+
+
 
 
 
@@ -82,6 +87,12 @@ public class PlayerAttack : MonoBehaviour {
         {
             meeleHitbox = equipedWeapon.GetComponent<BoxCollider>();
             meeleHitbox.enabled = false;
+            ammuIcon.SetActive(false);
+            swordIcon.SetActive(true);
+        }else
+        {
+            ammuIcon.SetActive(true);
+            swordIcon.SetActive(false);
         }
         trailRenderer.enabled = false;
         rangeAttack = true;
@@ -283,6 +294,8 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Unarmed", false);
             anim.SetBool("Range", false);
             rangeAttack = false;
+            ammuIcon.SetActive(false);
+            swordIcon.SetActive(true);
         }
         else if (weapon == Weapon.WeaponType.gun) {
             anim.SetBool("Gun", true);
@@ -291,6 +304,8 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Unarmed", false);
             anim.SetBool("Range", true);
             rangeAttack = true;
+            ammuIcon.SetActive(true);
+            swordIcon.SetActive(false);
         }
         else if (weapon == Weapon.WeaponType.sword) {
             anim.SetBool("Sword", true);
@@ -299,6 +314,8 @@ public class PlayerAttack : MonoBehaviour {
             anim.SetBool("Unarmed", false);
             anim.SetBool("Range", false);
             rangeAttack = false;
+            ammuIcon.SetActive(false);
+            swordIcon.SetActive(true);
         }
         weapons[weaponCount].GetComponent<Weapon>().UpdateAmmuText();
     }

@@ -10,6 +10,7 @@ public class QuestGiver : NPCDialog {
     public bool Helped;
 
     //TalkStrings
+    public string[] beforQuestText;
     public string[] afterCompletedText;
     public string[] getRewardText;
     public string[] onGoingText;
@@ -22,6 +23,13 @@ public class QuestGiver : NPCDialog {
     //private string questType;
     private Quest Quest { get; set; }
 
+    //Condition to be true before other Quest can start
+    public string previousQuestID;
+    private bool hasQuestActive = false;
+    public bool needQuestToContinue;
+
+
+
 
     new public void Start()
     {
@@ -33,33 +41,56 @@ public class QuestGiver : NPCDialog {
 
     public override void Interact()
     {
-        if (!AssignedQuest && !Helped)
+        if (!needQuestToContinue || hasQuestActive)
         {
-            //assign
-            base.Interact();
-            AssignQuest();
-        }else if(AssignedQuest && !Helped)
-        {
-            //Check
-            CheckQuest();
+            if (!AssignedQuest && !Helped)
+            {
+                //assign
+                base.Interact();
+                AssignQuest();
+            }
+            else if (AssignedQuest && !Helped)
+            {
+                //Check
+                CheckQuest();
+            }
+            else
+            {
+                //Thanks for helped
+                //DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, npcName);
+                if (afterCompletedText.Length > 0) DialogSystem.Dialog.AddNewDialog(afterCompletedText, npcName);
+                else DialogSystem.Dialog.AddNewDialog(new string[] { "I am busy go away!" }, npcName);
+            }
         }
         else
         {
-            //Thanks for helped
-            //DialogSystem.Dialog.AddNewDialog(new string[] { "Come back later i am busy now"}, npcName);
-            if (afterCompletedText.Length > 0) DialogSystem.Dialog.AddNewDialog(afterCompletedText, npcName);
-            else DialogSystem.Dialog.AddNewDialog(new string[] { "I am busy go away!" }, npcName);
+            foreach (Quest q in QuestLog.questLog.activeQuests)
+            {
+                if (q.GetQuestID() == previousQuestID) hasQuestActive = true;
+            }
+            if (!hasQuestActive)
+            {
+                if (beforQuestText.Length > 0) DialogSystem.Dialog.AddNewDialog(beforQuestText, npcName);
+                else DialogSystem.Dialog.AddNewDialog(new string[] { "This is not the time to talk come back later" }, npcName);
+            }
+            else Interact();
         }
     }
 
     void AssignQuest()
     {
-        AssignedQuest = true;
-        //Takes the Quest as String -> KillQuest in questType
-        //Quest = (Quest)quest.AddComponent(System.Type.GetType(questType));
-        //GameManager.control.GetComponent<QuestLog>().AddQuest(questTypeToGive);
-        QuestLog.questLog.AddQuest(questTypeToGive);
-        Quest = questTypeToGive;
+        // 8 is the max amount of quests a player can store at a time.
+        if(QuestLog.questLog.activeQuests.Count < 8)
+        {
+            AssignedQuest = true;
+            //Takes the Quest as String -> KillQuest in questType
+            //Quest = (Quest)quest.AddComponent(System.Type.GetType(questType));
+            //GameManager.control.GetComponent<QuestLog>().AddQuest(questTypeToGive);
+            QuestLog.questLog.AddQuest(questTypeToGive);
+            Quest = questTypeToGive;
+        }
+        else DialogSystem.Dialog.AddNewDialog(new string[] { "Ohh you have already enough todo. Come back if u have done some of your other taks." }, npcName);
+
     }
 
     void CheckQuest()

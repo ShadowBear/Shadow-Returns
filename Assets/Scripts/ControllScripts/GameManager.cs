@@ -102,12 +102,14 @@ public class GameManager : MonoBehaviour {
     public void ReceiveExperience(int experience)
     {
         experiencePoints += experience;
-        if(experiencePoints > nextLvlExperience)
+        if(experiencePoints >= nextLvlExperience)
         {
             playerLvl++;
             experiencePoints -= nextLvlExperience;
             nextLvlExperience = (int)(nextLvlExperience * lvlScale);
             lvlText.text = playerLvl.ToString();
+            //if u get More Exp than the next level also needed do it again
+            if (experiencePoints >= nextLvlExperience) ReceiveExperience(0);
         }
         experienceText.text = experiencePoints + "/" + nextLvlExperience;
         experienceImage.fillAmount = (float)experiencePoints / nextLvlExperience;

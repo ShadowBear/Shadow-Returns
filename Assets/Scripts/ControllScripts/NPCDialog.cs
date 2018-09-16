@@ -13,7 +13,7 @@ public class NPCDialog : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
         interactCanvasSymbol = GetComponentInChildren<Canvas>();
-        interactCanvasSymbol.enabled = false;
+        if(interactCanvasSymbol) interactCanvasSymbol.enabled = false;
 	}
 
 
