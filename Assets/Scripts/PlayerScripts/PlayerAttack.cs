@@ -14,7 +14,8 @@ public class PlayerAttack : MonoBehaviour {
     private PlayerMovement playerMovement;
 
     //Weapons
-    public GameObject[] weapons;
+    //public GameObject[] weapons;
+    private List<GameObject> weapons;
     public GameObject weaponAttackParent;
     private int weaponCount;
 
@@ -89,23 +90,25 @@ public class PlayerAttack : MonoBehaviour {
             meeleHitbox.enabled = false;
             ammuIcon.SetActive(false);
             swordIcon.SetActive(true);
-        }else
+            rangeAttack = false;
+        }
+        else
         {
             ammuIcon.SetActive(true);
+            rangeAttack = true;
             swordIcon.SetActive(false);
         }
-        trailRenderer.enabled = false;
-        rangeAttack = true;
+        if(trailRenderer) trailRenderer.enabled = false;
+        
         ammuAmount = maxAmmu;
 
         int weaponsSize = weaponAttackParent.GetComponentsInChildren<Weapon>().Length;
-        weapons = new GameObject[weaponsSize];
-        int i = 0;
+        weapons = new List<GameObject>();
+        //int i = 0;
         foreach(Weapon w in weaponAttackParent.GetComponentsInChildren<Weapon>())
         {
-            weapons[i] = w.gameObject;
-            weapons[i].SetActive(false);
-            i++;
+            weapons.Add(w.gameObject);
+            w.gameObject.SetActive(false);
         }
         weapons[0].SetActive(true);
 
@@ -128,7 +131,7 @@ public class PlayerAttack : MonoBehaviour {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("AttackDone")) {
             isAttacking = false;
             meeleHitbox.enabled = false;
-            trailRenderer.enabled = false;
+            if (trailRenderer) trailRenderer.enabled = false;
         }
 
         //old
@@ -164,7 +167,7 @@ public class PlayerAttack : MonoBehaviour {
         gun.SetActive(false);
         sword.SetActive(false);
         rangeAttack = false;
-        for (int i = 0; i < weapons.Length; i++)
+        for (int i = 0; i < weapons.Count; i++)
         {
             weapons[i] = null;
         }
@@ -198,6 +201,27 @@ public class PlayerAttack : MonoBehaviour {
         }
     }
 
+    //Only collects the new weapon to the weaponinventary
+    public void CollectWeapon(GameObject weapon)
+    {
+        weapons.Add(weapon);
+    }
+
+    //Swaps the active weapon with the collected one
+    public void CollectAndSwapWeapon(GameObject weapon)
+    {
+        weapons.Add(weapon);
+        weapons.Remove(equipedWeapon);
+        equipedWeapon.transform.SetParent(GameObject.FindGameObjectWithTag("WeaponDepot").transform);
+        equipedWeapon.SetActive(false);
+        equipedWeapon = weapon;
+        if (equipedWeapon.GetComponent<BoxCollider>())
+        {
+            meeleHitbox = equipedWeapon.GetComponent<BoxCollider>();
+            meeleHitbox.enabled = false;
+        }
+        equipedWeapon.SetActive(true);
+    }
 
     private void CheckFired()
     {
@@ -258,7 +282,7 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.25f);
         meeleHitbox.enabled = true;
-        trailRenderer.enabled = true;
+        if (trailRenderer) trailRenderer.enabled = true;
 
         //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(1)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[1], transform.position);
         //else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(2)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[2], transform.position);
@@ -274,7 +298,7 @@ public class PlayerAttack : MonoBehaviour {
     void SwapWeapon(int upOrDown)
     {
         weapons[weaponCount].SetActive(false);
-        weaponCount = (weaponCount + upOrDown + weapons.Length) % weapons.Length;
+        weaponCount = (weaponCount + upOrDown + weapons.Count) % weapons.Count;
         weapons[weaponCount].SetActive(true);
         if (weapons[weaponCount].GetComponent<BoxCollider>())
         {

@@ -20,6 +20,8 @@ public class DoorScript : MonoBehaviour {
 
     public AudioClip doorSound;
 
+    private int AntiPrell = 0;
+
     // Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
@@ -30,8 +32,10 @@ public class DoorScript : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetButtonDown("Action"))
+            if (Input.GetButtonDown("Action") && AntiPrell == 0)
             {
+                AntiPrell++;
+                Debug.Log("ActionToDo");
                 if (!keyNeededBool)
                 {
                     doorStatus = anim.GetBool("Open")? false: true;
@@ -58,7 +62,8 @@ public class DoorScript : MonoBehaviour {
                     }
                     else
                     {
-                        GameManager.control.GetComponent<MenuController>().SetDialogText(keyNeededText);
+                        if (keyNeededText.Length > 0) GameManager.control.GetComponent<MenuController>().SetDialogText(keyNeededText);
+                        else GameManager.control.GetComponent<MenuController>().SetDialogText("Ohne Schlüssel wird das nichts!");
                         GameManager.control.GetComponent<MenuController>().Dialog();
                     }
                 }
@@ -81,18 +86,21 @@ public class DoorScript : MonoBehaviour {
                         }
                         else
                         {
-                            GameManager.control.GetComponent<MenuController>().SetDialogText(swordNeededText);
+                            if (keyNeededText.Length > 0) GameManager.control.GetComponent<MenuController>().SetDialogText(keyNeededText);
+                            else GameManager.control.GetComponent<MenuController>().SetDialogText("Ohne Schlüssel wird das nichts!");
                             GameManager.control.GetComponent<MenuController>().Dialog();
                         }
                     }
                     else
                     {
-                        GameManager.control.GetComponent<MenuController>().SetDialogText(keyNeededText);
+                        if(keyNeededText.Length > 0) GameManager.control.GetComponent<MenuController>().SetDialogText(keyNeededText);
+                        else GameManager.control.GetComponent<MenuController>().SetDialogText("Ohne Schlüssel wird das nichts!");
                         GameManager.control.GetComponent<MenuController>().Dialog();
                     }
 
                 }
             }
+            AntiPrell = 0;
             
         }
     }

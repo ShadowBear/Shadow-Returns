@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GolemEnemy : EnemyAIController {
 
+    [SerializeField]
+    private bool patrolGolem = false;
+    public GameObject patrolParent;
+
     // Use this for initialization
     new void Start()
     {
@@ -19,7 +23,11 @@ public class GolemEnemy : EnemyAIController {
     protected override void CalculateState()
     {
         if (!gameObject.activeSelf) return;
-        if (distanceToPlayer > followDistance) agent.isStopped = true;
+        if (distanceToPlayer > followDistance)
+        {
+            if (!patrolGolem) agent.isStopped = true;
+            else Patroling();
+        }
         else if (distanceToPlayer > minDistanceToRange) WalkToPlayer();
         else if (distanceToPlayer > minDistanceToMelee && !meleeOnly)
         {
@@ -37,6 +45,14 @@ public class GolemEnemy : EnemyAIController {
             else transform.LookAt(player.transform.position);
         }
     }
+
+    void Patroling()
+    {
+        //Todo
+        Debug.Log("Patrol");
+        agent.isStopped = true;
+    }
+
 
     new protected IEnumerator RangeAttack()
     {

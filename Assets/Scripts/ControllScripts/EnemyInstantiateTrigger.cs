@@ -10,15 +10,6 @@ public class EnemyInstantiateTrigger : MonoBehaviour {
     public int enemyStartHealth = 50;
 
 
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void Triggered()
     {
         StartCoroutine(SpawnEnemies());

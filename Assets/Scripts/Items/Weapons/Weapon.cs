@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour {
     public float speed = 1000;
 
     public enum WeaponType { gun, sword, axe };
+    public string weaponID;
 
     public WeaponType weapon;
 

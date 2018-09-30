@@ -934,6 +934,7 @@
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
     <Compile Include="Assets\Scripts\Items\Weapons\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Items\Weapons\WeaponCollect.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\CollectSword.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\Doors\TrapDoor.cs" />
     <Compile Include="Assets\Scripts\ObjectScripts\DoorScript.cs" />
@@ -978,6 +979,7 @@
     <Compile Include="Assets\Scripts\QuestSystem\Quests\CarrotQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\HelpingQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\KillQuest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Quests\MelQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\SmithQuest.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />

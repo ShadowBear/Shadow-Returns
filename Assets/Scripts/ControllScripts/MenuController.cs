@@ -59,6 +59,7 @@ public class MenuController : MonoBehaviour {
     public void SetDialogText(string dialog)
     {
         dialogText.text = dialog;
+        //Text bei Türen ändern
     }
 
     void ToggleWindow(GameObject window)

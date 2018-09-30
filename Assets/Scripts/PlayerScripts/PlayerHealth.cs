@@ -15,6 +15,7 @@ public class PlayerHealth : HealthScript {
     public Shield playerShieldScript;
     [SerializeField]
     private Renderer[] playerRenderer;
+    private Renderer weaponRenderer;
 
     [SerializeField]
     private GameObject gameOverText;
@@ -86,16 +87,19 @@ public class PlayerHealth : HealthScript {
 
     IEnumerator Blinking()
     {
-        for(int i = 0; i < 8; i++)
+        weaponRenderer = GameObject.FindGameObjectWithTag("WeaponArm").GetComponentInChildren<Renderer>();
+        for (int i = 0; i < 8; i++)
         {
             for (int n = 0; n < playerRenderer.Length; n++)
             {
                 playerRenderer[n].enabled = false;
+                weaponRenderer.enabled = false; 
             }
             yield return new WaitForSeconds(0.1f);
             for (int n = 0; n < playerRenderer.Length; n++)
             {
                 playerRenderer[n].enabled = true;
+                weaponRenderer.enabled = true;
             }
             yield return new WaitForSeconds(0.1f);
         }

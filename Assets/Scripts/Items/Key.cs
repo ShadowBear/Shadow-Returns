@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour {
+public class Key : Item {
 
-    private void OnTriggerEnter(Collider other)
+    new private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             GameManager.control.CollectKey();
+            if(ItemID.Length > 0) QuestLog.questLog.ItemCollected(ItemID);
+            else QuestLog.questLog.ItemCollected("Key");
             Destroy(this.gameObject);
         }
     }

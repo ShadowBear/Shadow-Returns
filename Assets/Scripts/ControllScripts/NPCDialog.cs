@@ -6,6 +6,7 @@ public class NPCDialog : MonoBehaviour {
 
     public string[] dialog;
     public string npcName;
+    public bool reapeatSpeak = true;
     //public GameObject interactSymbol;
     private Canvas interactCanvasSymbol;
 
@@ -40,5 +41,6 @@ public class NPCDialog : MonoBehaviour {
     public virtual void Interact()
     {
         DialogSystem.Dialog.AddNewDialog(dialog, npcName);
+        if (!reapeatSpeak) dialog = new string[] { "Lass mich, ich hab dir nichts mehr zusagen." };
     }
 }
