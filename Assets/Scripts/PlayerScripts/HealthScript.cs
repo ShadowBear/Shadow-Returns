@@ -10,12 +10,7 @@ public class HealthScript : MonoBehaviour {
     protected float health;
     public Image healthbar;
     public bool isShielded = false;
-    //public Shield playerShieldScript;
-
-    //public bool useRelativeRotation = true;       // Use relative rotation should be used for this gameobject?
-    //public Transform relativeRotationTransform;          // The local rotatation at the start of the scene.
-    //public Quaternion relativeRotation;
-
+    
     //Header Beispiel für bessere Übersicht im Inspector
     [Header ("DMG")]
     public bool isDead = false;
@@ -28,11 +23,6 @@ public class HealthScript : MonoBehaviour {
     [SerializeField]
     protected bool hitable = true;
 
-    //Test Vererbung ************ //
-    //public Image dmgFrame;
-
-    /************************************/
-
     protected Animator anim;
     private Vector3 rotationOffset;
     protected GameObject player;
@@ -41,10 +31,8 @@ public class HealthScript : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
         if(healthbar != null) healthbar.fillAmount = health / maxHealth;
-        //if(relativeRotationTransform != null) relativeRotation = relativeRotationTransform.rotation;
         anim = GetComponentInChildren<Animator>();
-        isDead = false;        
-        //if (dmgFrame != null) dmgFrame.CrossFadeAlpha(0, 0.1f, false);
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -54,23 +42,16 @@ public class HealthScript : MonoBehaviour {
             hitDelay -= Time.deltaTime;
             if (hitDelay <= 0) hitable = true;
         }
-
-        //if(health <= 0 && !isDead)
-        //      {
-        //          Dying();
-        //      }
-        /*********TEST*****/ //if (useRelativeRotation) RotateHealthbar();
-        //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
     }
 
     public void SetHealth(int value)
     {
         maxHealth = value;
         Start();
-        //print(health);
     }
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
+        
         if (!isDead && !isShielded)
         {
             hitable = false;
@@ -89,7 +70,7 @@ public class HealthScript : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(float damage, bool melee)
+    public virtual void TakeDamage(float damage, bool melee)
     {
         if (!hitable) return;
         if (!isDead && !isShielded)

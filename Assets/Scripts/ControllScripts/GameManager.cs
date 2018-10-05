@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour {
 
     //Potions, Keys and Coins
     public int potionNmbr;
-    private int maxPotionsNmbr = 10;
+    private int maxPotionsNmbr = 6;
     public Text potionText;
-    public int potionValue = 40;
+    public int potionValue = 65;
 
     public int keyNmbr;
     public Text keyText;
@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour {
     private float scaleRate = 1;
 
     //Sword, Shield and Pistol 
-    public bool swordCollected = false;
-    public bool gunCollected = false;
+    //public bool swordCollected = false;
+    //public bool gunCollected = false;
     public bool shieldCollected = false;
 
     public static GameManager control;    
@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
 	void Awake () {
         //Unique GameManager
+        DontDestroyOnLoad(gameObject);
         if (control == null) control = this;
         else if (control != this) Destroy(gameObject);
 	}
@@ -65,8 +66,8 @@ public class GameManager : MonoBehaviour {
 
     public void SuitUp()
     {
-        swordCollected = true;
-        gunCollected = true;
+        //swordCollected = true;
+        //gunCollected = true;
         shieldCollected = true;
     }
 
@@ -110,6 +111,7 @@ public class GameManager : MonoBehaviour {
             lvlText.text = playerLvl.ToString();
             //if u get More Exp than the next level also needed do it again
             if (experiencePoints >= nextLvlExperience) ReceiveExperience(0);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().LevelUpHealth();
         }
         experienceText.text = experiencePoints + "/" + nextLvlExperience;
         experienceImage.fillAmount = (float)experiencePoints / nextLvlExperience;
@@ -149,22 +151,22 @@ public class GameManager : MonoBehaviour {
         coinText.text = coinAmount.ToString();
     }
 
-    public void SwordCollect()
-    {
-        swordCollected = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("sword");
-    }
+    //public void SwordCollect()
+    //{
+    //    swordCollected = true;
+    //    GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("sword");
+    //}
 
-    public void GunCollect()
-    {
-        gunCollected = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("gun");
-    }
+    //public void GunCollect()
+    //{
+    //    gunCollected = true;
+    //    GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("gun");
+    //}
 
-    public void ShieldCollect()
-    {
-        shieldCollected = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("shield");
-    }
+    //public void ShieldCollect()
+    //{
+    //    shieldCollected = true;
+    //    GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().AddWeapon("shield");
+    //}
 
 }

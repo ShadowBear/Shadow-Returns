@@ -17,13 +17,15 @@ public class Weapon : MonoBehaviour {
 
     public Transform fireTransform;
     public int damageAmount;
-    private int damageVarianz = 5;
+    public int damageVarianz = 5;
     public float speed = 1000;
 
     public enum WeaponType { gun, sword, axe };
+    public enum WeaponEffect { standart, fire, light, magic, frozen};
     public string weaponID;
 
     public WeaponType weapon;
+    public WeaponEffect weaponEffect;
 
 
     private void Start()
@@ -33,6 +35,7 @@ public class Weapon : MonoBehaviour {
         //Animation Lenght 3.3f
         reloadTime = 3.3f;
         ammuCount = maxAmmu;
+        //weaponEffect = WeaponEffect.standart;
         GameManager.control.ammuText.text = ammuCount.ToString();
     }
 
@@ -40,6 +43,11 @@ public class Weapon : MonoBehaviour {
     {
         return weapon;
     }    
+
+    public WeaponEffect GetWeaponEffect()
+    {
+        return weaponEffect;
+    }
 
     public void Shoot()
     {
@@ -53,6 +61,7 @@ public class Weapon : MonoBehaviour {
             projectile.GetComponent<PolygonArsenal.PolygonProjectileScript>().SetDamage(damageAmount + Random.Range(-damageVarianz, (damageVarianz+1)));
             projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * speed);
         }
+
         // AutoRealoding
         //else if(!isReloading)
         //{

@@ -6,7 +6,7 @@ public class Pedestrians : MonoBehaviour {
 
 
 
-    Animator anim;
+    protected Animator anim;
     private float delayTime;
     public float maxDelayTime = 35f;
     public float minDelayTime = 20f;
@@ -19,7 +19,7 @@ public class Pedestrians : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
         delayTime -= Time.deltaTime;
         if(delayTime <= 0)
         {
@@ -40,7 +40,7 @@ public class Pedestrians : MonoBehaviour {
         8 = Leaning against wall
         9 = Sitting on Ground */
 
-    void AnimationControl()
+    protected void AnimationControl()
     {
         int animation = Random.Range(0, 4);
         if (animation == 3) animation = 9;

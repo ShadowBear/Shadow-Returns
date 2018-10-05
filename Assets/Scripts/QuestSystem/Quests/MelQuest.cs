@@ -12,7 +12,7 @@ public class MelQuest : Quest {
         QuestGiverName = "Mel";
         Description = "Finde Mel´s Schlüssel";
         ItemReward = reward;
-        ExperienceReward = 100;
+        ExperienceReward = 190;
 
         Goals.Add(new CollectionGoal(this, "Key", "Collect 1 Key", false, 0, 1));
         Goals.ForEach(g => g.Init());

@@ -26,7 +26,7 @@ public class Quest : MonoBehaviour {
         //if (Completed) GiveReward();
     }
     
-    public void GiveReward()
+    public virtual void GiveReward()
     {
         GameManager.control.ReceiveExperience(ExperienceReward);
         QuestLog.questLog.QuestCompleted(QuestID);

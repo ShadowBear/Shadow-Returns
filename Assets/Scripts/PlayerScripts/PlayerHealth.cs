@@ -20,6 +20,14 @@ public class PlayerHealth : HealthScript {
     [SerializeField]
     private GameObject gameOverText;
     private float hitDelayTime = 1.75f;
+    private static PlayerHealth playerHealth;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        if (playerHealth == null) playerHealth = this;
+        else if (playerHealth != this) Destroy(gameObject);
+    }
 
     new void Start () {
    
@@ -104,6 +112,13 @@ public class PlayerHealth : HealthScript {
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;
+    }
+
+    public void LevelUpHealth()
+    {
+        maxHealth += 50;
+        health = maxHealth;
+        if (healthbar != null) healthbar.fillAmount = health / maxHealth;
     }
 
     IEnumerator DMGFrame()

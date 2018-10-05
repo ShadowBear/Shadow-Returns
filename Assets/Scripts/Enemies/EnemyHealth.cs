@@ -8,6 +8,7 @@ public class EnemyHealth : HealthScript
     private ZombieAIController aiController;
     public float dashDistance = 2f;
     public LayerMask ground;
+    [SerializeField]
     private int EnemyID;
 
     new void Start()
@@ -54,7 +55,11 @@ public class EnemyHealth : HealthScript
     {
         StartCoroutine(DieAnim());
         //Update Quest Status
-        QuestLog.questLog.EnemyDied(EnemyID);        
+        QuestLog.questLog.EnemyDied(EnemyID);
+        if (GetComponent<DropRate>())
+        {
+            GetComponent<DropRate>().DropItem();
+        }
     }
 
     IEnumerator DieAnim()
@@ -73,4 +78,5 @@ public class EnemyHealth : HealthScript
     {
         EnemyID = ID;
     }
+
 }

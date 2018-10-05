@@ -127,17 +127,9 @@ public class PlayerAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("AttackDone")) {
-            isAttacking = false;
-            meeleHitbox.enabled = false;
-            if (trailRenderer) trailRenderer.enabled = false;
-        }
-
-        //old
+        
         if (Mathf.Abs((playerRotation.transform.position - playRot.GetCursorPos()).magnitude) < distanceForCursor)
             fireTransform.forward = playerRotation.transform.forward;
-        //new
         else
         {
             fireTransform.LookAt(playRot.GetCursorPos() + offset);
@@ -146,12 +138,8 @@ public class PlayerAttack : MonoBehaviour {
         CheckFired();
 
         //Change Weapon
-        if (GameManager.control.swordCollected && GameManager.control.gunCollected)
-        {
-            if(Input.GetAxis("Mouse ScrollWheel") > 0) SwapWeapon(1);
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0) SwapWeapon(-1);
-        }
-
+        if (Input.GetAxis("Mouse ScrollWheel") > 0) SwapWeapon(1);
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0) SwapWeapon(-1);
 
         //************  TEST **************************//
         // Moveforward while Attacking has 2 be fixed //
@@ -160,7 +148,7 @@ public class PlayerAttack : MonoBehaviour {
         //    //transform.parent.transform.parent.Translate(transform.parent.forward * Time.deltaTime*5);
         //}
         /********************************************/
-	}
+    }
 
     private void DontSuitUp()
     {
@@ -174,32 +162,32 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetBool("Unarmed", true);
     }
 
-    public void AddWeapon(string type)
-    {
-        if(type == "sword")
-        {
-            weapons[0] = sword;
-            sword.SetActive(true);
-            rangeAttack = false;
-            //print("Sword added");
-            anim.SetBool("Unarmed", false);
-            anim.SetBool("Axe", true);
-        }
-        else if(type == "gun")
-        {
-            weapons[1] = gun;
-            sword.SetActive(false);
-            gun.SetActive(true);
-            rangeAttack = true;
-            anim.SetBool("Unarmed", false);
-            anim.SetBool("Axe", false);
-            anim.SetBool("Gun", true);
-        }
-        else if(type == "shield")
-        {
-            //can shield
-        }
-    }
+    //public void AddWeapon(string type)
+    //{
+    //    if(type == "sword")
+    //    {
+    //        weapons[0] = sword;
+    //        sword.SetActive(true);
+    //        rangeAttack = false;
+    //        //print("Sword added");
+    //        anim.SetBool("Unarmed", false);
+    //        anim.SetBool("Axe", true);
+    //    }
+    //    else if(type == "gun")
+    //    {
+    //        weapons[1] = gun;
+    //        sword.SetActive(false);
+    //        gun.SetActive(true);
+    //        rangeAttack = true;
+    //        anim.SetBool("Unarmed", false);
+    //        anim.SetBool("Axe", false);
+    //        anim.SetBool("Gun", true);
+    //    }
+    //    else if(type == "shield")
+    //    {
+    //        //can shield
+    //    }
+    //}
 
     //Only collects the new weapon to the weaponinventary
     public void CollectWeapon(GameObject weapon)
@@ -281,7 +269,7 @@ public class PlayerAttack : MonoBehaviour {
         //anim.SetBool("Range", false);
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.25f);
-        meeleHitbox.enabled = true;
+        //meeleHitbox.enabled = true;
         if (trailRenderer) trailRenderer.enabled = true;
 
         //if (anim.GetCurrentAnimatorStateInfo(0).IsName("Great Sword Slash(1)") && !playingSound) AudioSource.PlayClipAtPoint(swordSounds[1], transform.position);
@@ -300,6 +288,7 @@ public class PlayerAttack : MonoBehaviour {
         weapons[weaponCount].SetActive(false);
         weaponCount = (weaponCount + upOrDown + weapons.Count) % weapons.Count;
         weapons[weaponCount].SetActive(true);
+        equipedWeapon = weapons[weaponCount];
         if (weapons[weaponCount].GetComponent<BoxCollider>())
         {
             meeleHitbox = weapons[weaponCount].GetComponent<BoxCollider>();
@@ -359,4 +348,22 @@ public class PlayerAttack : MonoBehaviour {
     {
         return playerMovement;
     }
+
+    public Weapon GetEquipedWeapon()
+    {
+        return equipedWeapon.GetComponent<Weapon>();
+    }
+
+    public void TriggerHitbox(int i)
+    {
+        //Hitbox activate
+        if (i == 1) meeleHitbox.enabled = true;
+        else
+        {
+            meeleHitbox.enabled = false;
+            isAttacking = false;
+            if (trailRenderer) trailRenderer.enabled = false;
+        }
+    }
+
 }

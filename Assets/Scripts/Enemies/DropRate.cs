@@ -49,7 +49,7 @@ public class DropRate : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(!quitting) DropItem();
+        //if(!quitting) DropItem();
     }
 
     private void OnApplicationQuit()

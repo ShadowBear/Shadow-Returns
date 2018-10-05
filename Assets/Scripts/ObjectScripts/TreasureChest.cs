@@ -63,7 +63,7 @@ public class TreasureChest : MonoBehaviour {
             GameObject rewardObject = Instantiate(chestItem, transform.position + new Vector3(0,1,0), transform.rotation);
             if (rewardObject.GetComponent<Rigidbody>())
             {
-                Vector3 randomExplosionVector = new Vector3(0, 0.9f, 0.5f);
+                Vector3 randomExplosionVector = new Vector3(0, 0.9f, 0f);
                 rewardObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
             }
         }

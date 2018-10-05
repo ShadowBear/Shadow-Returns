@@ -72,7 +72,7 @@ public class EnemyAIController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         hitbox.enabled = false;
-        GetComponent<EnemyHealth>().SetEnemyID(ID);
+        //GetComponent<EnemyHealth>().SetEnemyID(ID);
         //Patrol();
     }
 
@@ -124,7 +124,13 @@ public class EnemyAIController : MonoBehaviour {
 
     protected void WalkToPlayer()
     {
-        agent.SetDestination(player.transform.position);
+        if(Time.frameCount % 10 == 0)
+        {
+            //Debug.Log("Follow");
+            agent.isStopped = false;
+            agent.SetDestination(player.transform.position);
+        }
+        
     }
 
     public void TakeHit()

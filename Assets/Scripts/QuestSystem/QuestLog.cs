@@ -104,6 +104,17 @@ public class QuestLog : MonoBehaviour {
         }
     }
 
+    public void DialogDone(string itemID, bool done)
+    {
+        foreach (Quest q in activeQuests)
+        {
+            foreach (Goal g in q.Goals)
+            {
+                g.SpokenTo(itemID,done);
+            }
+        }
+    }
+
     public void QuestCompleted(string questID)
     {
         foreach (Quest q in activeQuests)

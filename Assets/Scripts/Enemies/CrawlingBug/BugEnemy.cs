@@ -7,6 +7,7 @@ public class BugEnemy : EnemyAIController {
     new void Start()
     {
         base.Start();
+        ID = 2;
     }
 
     // Update is called once per frame

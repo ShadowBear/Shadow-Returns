@@ -39,5 +39,6 @@ public class Goal{
     public virtual void ItemCollected(string ItemID){ }
 
     public virtual void QuestGoalCompleted(string quest) { }
+    public virtual void SpokenTo(string ID, bool done) { }
 
 }

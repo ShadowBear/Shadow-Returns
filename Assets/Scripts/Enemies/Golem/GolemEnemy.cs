@@ -7,17 +7,37 @@ public class GolemEnemy : EnemyAIController {
     [SerializeField]
     private bool patrolGolem = false;
     public GameObject patrolParent;
+    [SerializeField]
+    private Transform[] patrolPoints;
+    private Vector3 destination;
+    private int destinationCounter = 0;
+
+    private State currentState;
+    private float guardTime = 2.5f;
+
+    enum State { Guard, Chase, Attack, Patrol};
 
     // Use this for initialization
     new void Start()
     {
         base.Start();
+        patrolPoints = patrolParent.GetComponentsInChildren<Transform>();
+        if (patrolPoints.Length > 0)
+        {
+            destinationCounter = ((destinationCounter) % (patrolPoints.Length - 1)) + 1;
+            destination = patrolPoints[destinationCounter].position;
+            agent.SetDestination(destination);
+            currentState = State.Patrol;
+        }
+        ID = 1;
+
     }
 
     // Update is called once per frame
     new void Update()
     {
         base.Update();
+
     }
     
     protected override void CalculateState()
@@ -48,9 +68,24 @@ public class GolemEnemy : EnemyAIController {
 
     void Patroling()
     {
-        //Todo
-        Debug.Log("Patrol");
-        agent.isStopped = true;
+        if (agent.remainingDistance < 1.25f && currentState == State.Patrol)
+        {
+            currentState = State.Guard;
+            agent.isStopped = true;
+            guardTime = Random.Range(3f, 7f);
+        }
+        else if (currentState == State.Guard)
+        {
+            guardTime -= Time.deltaTime;
+
+            if (guardTime <= 0)
+            {
+                destinationCounter = ((destinationCounter) % (patrolPoints.Length - 1)) + 1;
+                agent.SetDestination(patrolPoints[destinationCounter].position);
+                currentState = State.Patrol;
+                agent.isStopped = false;
+            }
+        }
     }
 
 

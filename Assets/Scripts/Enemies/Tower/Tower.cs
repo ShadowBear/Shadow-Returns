@@ -19,13 +19,16 @@ public class Tower : MonoBehaviour {
 	}
 	
 
-	// Update is called once per frame
-	void Update () {
-        if (!isAttacking)
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            StartCoroutine(RangeAttack());
+            if (!isAttacking)
+            {
+                StartCoroutine(RangeAttack());
+            }
         }
-	}
+    }
 
     IEnumerator RangeAttack()
     {

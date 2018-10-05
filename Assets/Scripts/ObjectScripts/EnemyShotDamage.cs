@@ -14,6 +14,8 @@ public class EnemyShotDamage : MonoBehaviour
         {
             //Apply Damage
             col.GetComponent<PlayerHealth>().TakeDamage(damage);
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
 
         if (!col.CompareTag("Enemy") && !col.CompareTag("Light") && !col.CompareTag("Boss") && !col.isTrigger)

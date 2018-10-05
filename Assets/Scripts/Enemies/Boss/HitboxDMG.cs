@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HitboxDMG : MonoBehaviour {
 
-    public int meeleDMG = 35;
+    public int meleeDMG = 35;
     //Chance to Make Crit Values between 0-1f : 0 = 0%  and 1 = 100%
     public float criticalChance = 0.15f;
-    private int critMultiplier = 0;
+    private float critMultiplier = 1;
     bool meleeAttack = true;
     void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG, meleeAttack);
+            col.GetComponent<PlayerHealth>().TakeDamage(meleeDMG, meleeAttack);
         }
         if (col.CompareTag("Enemy") || col.CompareTag("Destroyable"))
         {
@@ -38,9 +38,11 @@ public class HitboxDMG : MonoBehaviour {
 
     int CalculateDmg()
     {
-        int dmgVarianz = Random.Range(1, 11) - 6;
-        if (Random.Range(0f, 1f) < criticalChance) critMultiplier = 2;
+        int weaponVarianz = GetComponent<Weapon>().damageVarianz;
+        meleeDMG = GetComponent<Weapon>().damageAmount;
+        int dmgVarianz = Random.Range(-weaponVarianz, weaponVarianz);
+        if (Random.Range(0f, 1f) < criticalChance) critMultiplier = 1.5f;
         else critMultiplier = 1;
-        return (meeleDMG + dmgVarianz) + ((critMultiplier * meeleDMG) - meeleDMG);
+        return (int)((meleeDMG + dmgVarianz) * critMultiplier);
     }
 }

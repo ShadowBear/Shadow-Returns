@@ -7,7 +7,7 @@ public class MagmaEnemy : EnemyAIController {
     // Use this for initialization
     new void Start()
     {
-        ID = 1;
+        ID = 4;
         base.Start();
     }
 
@@ -33,7 +33,6 @@ public class MagmaEnemy : EnemyAIController {
 
     new protected IEnumerator MeeleAttack()
     {
-        print("Punch");
         isAttacking = true;
         if (anim != null)
         {
