@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HitboxDMG : MonoBehaviour {
 
-    public int meleeDMG = 35;
+    [SerializeField]
+    private int meleeDMG = 10;
     //Chance to Make Crit Values between 0-1f : 0 = 0%  and 1 = 100%
     public float criticalChance = 0.15f;
     private float critMultiplier = 1;

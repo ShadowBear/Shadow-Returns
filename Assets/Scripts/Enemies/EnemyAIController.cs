@@ -72,7 +72,7 @@ public class EnemyAIController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         hitbox.enabled = false;
-        //GetComponent<EnemyHealth>().SetEnemyID(ID);
+        GetComponent<EnemyHealth>().SetEnemyID(ID);
         //Patrol();
     }
 

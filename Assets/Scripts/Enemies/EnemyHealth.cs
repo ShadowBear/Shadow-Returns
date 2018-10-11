@@ -76,7 +76,7 @@ public class EnemyHealth : HealthScript
 
     public void SetEnemyID(int ID)
     {
-        EnemyID = ID;
+        if(EnemyID == 0) EnemyID = ID;
     }
 
 }

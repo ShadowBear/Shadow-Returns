@@ -892,6 +892,7 @@
     <Compile Include="Assets\Scripts\ControllScripts\LibaryController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\NPCDialog.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\NPCDialogTrigger.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\ShadowRoomController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GhostBossAttack.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GhostBossController.cs" />
@@ -934,6 +935,7 @@
     <Compile Include="Assets\Scripts\Items\ExplosionItems.cs" />
     <Compile Include="Assets\Scripts\Items\GoldCoins.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
+    <Compile Include="Assets\Scripts\Items\Item_Healing.cs" />
     <Compile Include="Assets\Scripts\Items\ItemHealth.cs" />
     <Compile Include="Assets\Scripts\Items\Key.cs" />
     <Compile Include="Assets\Scripts\Items\Potion.cs" />
@@ -982,6 +984,7 @@
     <Compile Include="Assets\Scripts\QuestSystem\QuestGiver.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\QuestGiverTrigger.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\QuestLog.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Quests\BenQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\CabbageQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\CarrotQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\FisherWillQuest.cs" />
@@ -989,10 +992,13 @@
     <Compile Include="Assets\Scripts\QuestSystem\Quests\KillQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\LeasMedizinQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\MelQuest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Quests\MilaQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\PhilsQuest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Quests\RalphsQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\RandellQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\SmithQuest.cs" />
     <Compile Include="Assets\Scripts\QuestSystem\Quests\SvensonQuest.cs" />
+    <Compile Include="Assets\Scripts\QuestSystem\Quests\TomQuest.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\SceneManager\SceneManagerScript.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />

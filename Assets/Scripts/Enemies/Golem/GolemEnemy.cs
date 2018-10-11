@@ -21,13 +21,16 @@ public class GolemEnemy : EnemyAIController {
     new void Start()
     {
         base.Start();
-        patrolPoints = patrolParent.GetComponentsInChildren<Transform>();
-        if (patrolPoints.Length > 0)
+        if (patrolGolem)
         {
-            destinationCounter = ((destinationCounter) % (patrolPoints.Length - 1)) + 1;
-            destination = patrolPoints[destinationCounter].position;
-            agent.SetDestination(destination);
-            currentState = State.Patrol;
+            patrolPoints = patrolParent.GetComponentsInChildren<Transform>();
+            if (patrolPoints.Length > 0)
+            {
+                destinationCounter = ((destinationCounter) % (patrolPoints.Length - 1)) + 1;
+                destination = patrolPoints[destinationCounter].position;
+                agent.SetDestination(destination);
+                currentState = State.Patrol;
+            }
         }
         ID = 1;
 

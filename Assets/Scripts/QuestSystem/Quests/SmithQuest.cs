@@ -9,8 +9,8 @@ public class SmithQuest : Quest {
 	// Use this for initialization
 	void Start () {
         QuestName = "Copper for the Smith";
-        QuestGiverName = "Smith Bertha";
-        Description = "Find 8 Copperblocks";
+        QuestGiverName = "Schmied Bertha";
+        Description = "Finde 8 Kupferbarren";
         ItemReward = reward;
         ExperienceReward = 200;
 

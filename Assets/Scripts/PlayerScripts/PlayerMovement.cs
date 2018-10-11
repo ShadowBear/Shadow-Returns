@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     //Standart 8f
-    private float defaultSpeed = 8.0f;
+    private float defaultSpeed = 12.0f;
     private float shootingSpeed = 5.5f;
     public float speed = 8.0f;
     //Standart 8.5f

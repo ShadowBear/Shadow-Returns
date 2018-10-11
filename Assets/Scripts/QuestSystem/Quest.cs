@@ -36,7 +36,7 @@ public class Quest : MonoBehaviour {
             GameObject rewardObject = Instantiate(ItemReward, transform.position + new Vector3(0,1,0), transform.rotation);
             if (rewardObject.GetComponent<Rigidbody>())
             {
-                Vector3 randomExplosionVector = new Vector3(0, 0.9f, 0.5f);
+                Vector3 randomExplosionVector = new Vector3(-0.25f, 0f, 0f);
                 rewardObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
             }
         }

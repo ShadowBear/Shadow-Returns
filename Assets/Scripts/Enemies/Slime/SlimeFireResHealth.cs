@@ -17,6 +17,10 @@ public class SlimeFireResHealth : EnemyHealth {
         base.Update();
     }
 
+    public override void TakeDamage(float damage)
+    {
+        
+    }
 
     public override void TakeDamage(float damage, bool melee)
     {

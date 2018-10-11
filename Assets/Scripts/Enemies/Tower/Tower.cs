@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-	}
+    }
 	
 
     private void OnTriggerStay(Collider other)

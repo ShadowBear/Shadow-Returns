@@ -81,6 +81,13 @@ public class PlayerHealth : HealthScript {
         }
     }
 
+    public void ConsumeHealth(int amount)
+    {
+        if (health >= maxHealth) return;
+        health = (health + amount) > maxHealth ? maxHealth : (health + amount);
+        if (healthbar != null) healthbar.fillAmount = health / maxHealth;
+    }
+
     IEnumerator DieAnim()
     {        
         if (anim != null)
