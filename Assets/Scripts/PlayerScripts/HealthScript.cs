@@ -60,7 +60,7 @@ public class HealthScript : MonoBehaviour {
 
             health -= damage;
             if (healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
-            if (anim != null) anim.SetTrigger("damaged");
+            if (anim != null) anim.SetTrigger("Take Damage");
             if (damage > 1) GameManager.control.ShowDmgText(damage, transform);
 
             if (health <= 0 && !isDead)
@@ -81,7 +81,7 @@ public class HealthScript : MonoBehaviour {
             
             health -= damage;
             if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
-            if(anim != null) anim.SetTrigger("damaged");
+            if(anim != null) anim.SetTrigger("Take Damage");
             if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
 
             //Pushing Back On Hit

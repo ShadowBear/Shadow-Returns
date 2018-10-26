@@ -50,14 +50,12 @@ public class SlimeFireEnemy : EnemyAIController {
     void Patroling()
     {
         //Todo
-        Debug.Log("Patrol");
         agent.isStopped = true;
     }
 
 
     new protected IEnumerator RangeAttack()
     {
-        //print("SpiderRange");
         isAttacking = true;
         agent.isStopped = true;
         canshoot = false;
@@ -77,7 +75,6 @@ public class SlimeFireEnemy : EnemyAIController {
 
     new protected IEnumerator MeeleAttack()
     {
-        print("Punch");
         isAttacking = true;
         if (anim != null) anim.SetTrigger("Attack");
         hitbox.enabled = true;
@@ -93,8 +90,8 @@ public class SlimeFireEnemy : EnemyAIController {
         {
             speed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
             lastPosition = transform.position;
-            if (speed > 0.1f) anim.SetBool("Speed", true);
-            else anim.SetBool("Speed", false);
+            if (speed > 0.1f) anim.SetFloat("Speed", speed);
+            else anim.SetFloat("Speed", speed);
         }
     }
 }

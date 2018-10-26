@@ -21,7 +21,6 @@ public class LibaryController : MonoBehaviour
     [SerializeField]
     private Transform[] towerSP;
     public GameObject slimeParent;
-    private Transform[] slimeSP;
     public GameObject otherParent;
     private Transform[] othersSP;
 
@@ -29,7 +28,6 @@ public class LibaryController : MonoBehaviour
     void Start()
     {
         towerSP = towerParent.GetComponentsInChildren<Transform>();
-        slimeSP = slimeParent.GetComponentsInChildren<Transform>();
         othersSP = otherParent.GetComponentsInChildren<Transform>();
         ghostRageScript.enabled = false;
         SetChains(false);
@@ -72,9 +70,9 @@ public class LibaryController : MonoBehaviour
         for (int i = 0; i < numbers; i++)
         {
             //Start with 1 not 0 because 0 is the parent object
-            int pos = (int)Random.Range(1, othersSP.Length - 1);
+            //int pos = (int)Random.Range(1, othersSP.Length - 1);
 
-            GameObject enemy = Instantiate(zombie, othersSP[i].position, othersSP[i].rotation);
+            Instantiate(zombie, othersSP[i].position, othersSP[i].rotation);
             //enemy.GetComponent<HealthScript>().SetHealth(towerDamage * stageCounter);
         }
         gamePaused = false;

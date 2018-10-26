@@ -11,18 +11,22 @@ public class BrokenWalls : MonoBehaviour {
     public string brokenWallText;
     private MenuController menu;
 
+    private Canvas interactCanvasSymbol;
 
 
     private void Start()
     {
         menu = GameManager.control.GetComponent<MenuController>();
         secretCorridor.SetActive(false);
+        interactCanvasSymbol = GetComponentInChildren<Canvas>();
+        if (interactCanvasSymbol) interactCanvasSymbol.enabled = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            if (interactCanvasSymbol.enabled == false) interactCanvasSymbol.enabled = true;
             if (Input.GetButtonDown("Action") && Time.timeScale == 1)
             {
                 //Time.timeScale = 0;
@@ -33,13 +37,24 @@ public class BrokenWalls : MonoBehaviour {
         }
     }
 
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!enabled) return;
+        if (other.CompareTag("Player"))
+        {
+            if (interactCanvasSymbol.enabled == true) interactCanvasSymbol.enabled = false;
+        }
+    }
+
     public void BreakIt()
     {
         secretCorridor.SetActive(true);  
         wall.SetActive(false);
-        //menu.Dialog();
         menu.dialogButton.onClick.RemoveListener(BreakIt);
-        //Time.timeScale = 1;
+
+        if (interactCanvasSymbol.enabled == true) interactCanvasSymbol.enabled = false;
+        Destroy(this);
     }
 
 }

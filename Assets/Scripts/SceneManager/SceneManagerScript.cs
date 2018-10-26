@@ -14,7 +14,7 @@ public class SceneManagerScript : MonoBehaviour {
         if(other.CompareTag("Player") && Input.GetButtonDown("Action") && !AntiPrell)
         {
             AntiPrell = true;
-            Debug.Log("ChangeScene");
+            //Debug.Log("ChangeScene");
             SceneManager.LoadScene(NextSceneToLoad);
         }
     }

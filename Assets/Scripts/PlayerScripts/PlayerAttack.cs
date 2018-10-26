@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour {
     //Sounds
     public AudioClip fireSound;
     public AudioClip[] swordSounds;
-    private bool playingSound = false;
+    //private bool playingSound = false;
 
     //WeaponPackTest****************
     RaycastHit hit;

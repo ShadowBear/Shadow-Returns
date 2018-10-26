@@ -21,20 +21,22 @@ public class Shield : MonoBehaviour {
 
     public Image shieldImage;
     public Text shieldText;
+    private MeshRenderer shieldMeshRenderer;
+    private Light renderLight;
 
 
 	// Use this for initialization
 	void Start () {
         power = maxPower;
         DeActivateShield();
-        //playerShoot = GameObject.FindGameObjectWithTag("Player").GetComponent<TankShooting>();
-        //matColor = mat.GetColor("MainColor");
+        shieldMeshRenderer = GetComponent<MeshRenderer>();
+        renderLight = GetComponent<Light>();
     }
 
     // Farbe ändert sich je nach Stärke des Schildes von 
     // Blau voll Geladen -> Grün -> Gelb -> Orange -> Rot Fast leer
 	void Update () {
-        playerHealth.isShielded = gameObject.GetComponent<MeshRenderer>().enabled ? true : false;
+        playerHealth.isShielded = shieldMeshRenderer.enabled ? true : false;
         //if (Time.frameCount % 5 == 0) playerHealth.isShielded = transform.GetChild(0).gameObject.activeSelf ? true : false;
         
         ShieldColor();
@@ -48,18 +50,14 @@ public class Shield : MonoBehaviour {
 
         if (power < maxPower && power > 0 && resetTimer <= 0 && !death)
         {
-
-            //print("Regeneriere Mich");
             power += ((maxPower / 3) * Time.deltaTime);
             if (power > maxPower) power = maxPower;
         }
         else if (resetTimer <= 0 && death)
         {
             power = maxPower;
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
-            //transform.GetChild(0).gameObject.SetActive(true);
-
-            gameObject.GetComponent<Light>().enabled = true;
+            shieldMeshRenderer.enabled = true;
+            renderLight.enabled = true;
             death = false;
         }
     }

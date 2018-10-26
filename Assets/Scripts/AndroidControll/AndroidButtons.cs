@@ -6,29 +6,9 @@ using UnityEngine.EventSystems;
 public class AndroidButtons : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
 
-    GameObject player;
-    //TankShooting shootingScript;
-    //private float m_CurrentLaunchForce;
-    //private float m_ChargeSpeed;
 
     public bool shallShoot = false;
 
-
-    // Use this for initialization
-    void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
-        //shootingScript = player.GetComponent<TankShooting>();
-        //m_ChargeSpeed = shootingScript.m_ChargeSpeed;
-        //m_CurrentLaunchForce = shootingScript.m_MinLaunchForce;
-}
-	
-	// Update is called once per frame
-	void Update () {
-        //if (shallShoot && shootingScript.m_Fired == false && shootingScript.canShoot)
-        //{
-        //    shootingScript.LoadShoot();
-        //}
-    }
 
     public void OnPointerUp(PointerEventData eventData)
     {

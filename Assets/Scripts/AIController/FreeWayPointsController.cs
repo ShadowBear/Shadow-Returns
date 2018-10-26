@@ -7,7 +7,7 @@ public class FreeWayPointsController : MonoBehaviour {
     public GameObject patrolPointParent;
     public Transform[] patrolPoints;
 
-    private int lastWP = 0;
+    //private int lastWP = 0;
     //private int nextWP = 0;
 
     [SerializeField]
@@ -25,7 +25,7 @@ public class FreeWayPointsController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        patrolPointParent = this.gameObject;
+        patrolPointParent = gameObject;
         patrolPoints = patrolPointParent.GetComponentsInChildren<Transform>();
         freeWP = new bool[patrolPoints.Length];
         //first element is always false

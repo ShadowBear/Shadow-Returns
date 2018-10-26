@@ -9,16 +9,16 @@ public class FireLight : MonoBehaviour {
 	public float maxVariationX = 0.1f;
 	public float maxVariationZ = 0.1f;
 	public float secondsRate = 0.3f;
-	private Light light = null;
+	private Light lights = null;
 	private float initialX = 0f;
 	private float initialZ = 0f;
 	private Vector3 newPosition = Vector3.zero;
 
 
 	void Start () {
-		light = GetComponent <Light> ();
-		initialX = light.transform.localPosition.x;
-		initialZ = light.transform.localPosition.z;
+        lights = GetComponent <Light> ();
+		initialX = lights.transform.localPosition.x;
+		initialZ = lights.transform.localPosition.z;
 		StartCoroutine(flickerLight());
 	}
 
@@ -27,13 +27,13 @@ public class FireLight : MonoBehaviour {
 	{
 		while(true)
 		{
-			// randomize the intensity of the light
-			light.intensity = Random.Range (minIntensity, maxIntensity);
+            // randomize the intensity of the light
+            lights.intensity = Random.Range (minIntensity, maxIntensity);
 			// randomize the X,Z position of the light
 			newPosition = new Vector3(initialX+(Random.Range (-maxVariationX,maxVariationX)),
-			                          light.transform.localPosition.y,
+                                      lights.transform.localPosition.y,
 			                          initialZ+(Random.Range (-maxVariationZ,maxVariationZ)));
-			light.transform.localPosition = newPosition;
+            lights.transform.localPosition = newPosition;
 			yield return new WaitForSeconds(secondsRate);
 		}
 	}

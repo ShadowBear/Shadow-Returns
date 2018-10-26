@@ -14,37 +14,37 @@ public class CharactersSelection : MonoBehaviour {
 
 	void setCharacter01 (){
 		onActiveFalse ();
-		character1.active=true;
+		character1.SetActive(true);
 	}
 	void setCharacter02 (){
 		onActiveFalse ();
-		character2.active=true;
-	}
+		character2.SetActive(true);
+    }
 	void setCharacter03 (){
 		onActiveFalse ();
-		character3.active=true;
-	}
+		character3.SetActive(true);
+    }
 	void setCharacter04 (){
 		onActiveFalse ();
-		character4.active=true;
-	}
+		character4.SetActive(true);
+    }
 	void setCharacter05 (){
 		onActiveFalse ();
-		character5.active=true;
-	}
+		character5.SetActive(true);
+    }
 	void setCharacter06 (){
 		onActiveFalse ();
-		character6.active=true;
-	}
+		character6.SetActive(true);
+    }
 
 	void onActiveFalse()
 	{
-		character1.active=false;
-		character2.active=false;
-		character3.active=false;
-		character4.active=false;
-		character5.active=false;
-		character6.active=false;
+		character1.SetActive(false);
+        character2.SetActive(false);
+        character3.SetActive(false);
+        character4.SetActive(false);
+        character5.SetActive(false);
+        character6.SetActive(false);
 
-	}
+    }
 }

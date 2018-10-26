@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveLight : MonoBehaviour {
 
-    private GameObject moveObject;
+    //private GameObject moveObject;
     public Transform[] movePoints;
     private Vector3 nextPosition;
     public float speed = 0.5f;
@@ -12,7 +12,7 @@ public class MoveLight : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        moveObject = gameObject;
+        //moveObject = gameObject;
         nextPosition = movePoints[0].transform.position;
 	}
 	

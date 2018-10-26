@@ -29,10 +29,10 @@ public class QuestLog : MonoBehaviour {
 
     public void AddQuest(Quest q)
     {
-        if (activeQuests.Count >= maxActiveQuests) Debug.Log("Questlog Voll");
+        if (activeQuests.Count >= maxActiveQuests) { } //Debug.Log("Questlog Voll");
         else
         {
-            Debug.Log("Quest added");
+            //Debug.Log("Quest added");
             activeQuests.Add(q);
             //Update Questlog Text
             UpdateQuestLogText();
@@ -41,7 +41,7 @@ public class QuestLog : MonoBehaviour {
 
     public void RemoveQuest(Quest q)
     {
-        Debug.Log("Quest removed");
+        //Debug.Log("Quest removed");
         activeQuests.Remove(q);
         UpdateQuestLogText();
     }

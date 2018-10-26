@@ -10,7 +10,7 @@ public class ZombieAIController : MonoBehaviour {
     private GameObject player;
     private Animator anim;
     private bool isAttacking = false;
-    private bool isMoving = false;
+    //private bool isMoving = false;
     private bool canshoot = true;
     private bool isCircling = false;
 

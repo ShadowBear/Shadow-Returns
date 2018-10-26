@@ -51,8 +51,9 @@ namespace TornadoBanditsStudio.LowPolyFreePack
 			{
 	            Vector3 vertex = baseHeight[i];
 				//Move the current vertex on x and y.
-	            Random.seed = (int)((vertex.x + noiseOffset) * (vertex.x + noiseOffset) + (vertex.y + noiseOffset) * (vertex.y + noiseOffset));
-	            vertex.y += Mathf.Sin(Time.time * speed + baseHeight[i].x * waveLength + baseHeight[i].y * waveLength) * waveHeight;
+	            //Random.seed = (int)((vertex.x + noiseOffset) * (vertex.x + noiseOffset) + (vertex.y + noiseOffset) * (vertex.y + noiseOffset));
+                Random.InitState((int)((vertex.x + noiseOffset) * (vertex.x + noiseOffset) + (vertex.y + noiseOffset) * (vertex.y + noiseOffset)));
+                vertex.y += Mathf.Sin(Time.time * speed + baseHeight[i].x * waveLength + baseHeight[i].y * waveLength) * waveHeight;
 	            vertex.y += Mathf.Sin(Mathf.Cos(Random.value * 1.0f) * randomHeight * Mathf.Cos (Time.time * randomSpeed * Mathf.Sin(Random.value * 1.0f)));
 
                 vertices[i] = vertex;

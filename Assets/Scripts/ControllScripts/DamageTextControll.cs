@@ -10,7 +10,6 @@ public class DamageTextControll : MonoBehaviour {
     private float scaleRate = 0.005f;
     private Vector3 scaleVector;
     private Vector3 rotationToCam;
-    private Transform cameraTrans;
 
     //TEST
     //private float lifeTime = 5.5f;
@@ -24,7 +23,6 @@ public class DamageTextControll : MonoBehaviour {
     void Start () {
         //parentTrans = transform.parent;
         scaleVector = new Vector3(scaleRate, scaleRate, scaleRate);
-        cameraTrans = Camera.main.transform;
 
     }
 	
@@ -36,13 +34,6 @@ public class DamageTextControll : MonoBehaviour {
         {
             //transform.LookAt(Camera.main.transform);
             transform.localScale += scaleVector;
-            //transform.parent.transform.LookAt(Camera.main.transform);
-            //transform.forward = -transform.parent.transform.forward;
-            //itselfTrans.LookAt(Camera.main.transform);
-            //rotationToCam.Set(cameraTrans.position.x, 0, cameraTrans.position.z);
-            //parentTrans.LookAt(rotationToCam);
-            //parentTrans.forward = -parentTrans.forward;
-            //itselfTrans.forward = parentTrans.forward;
         }
     }
 }

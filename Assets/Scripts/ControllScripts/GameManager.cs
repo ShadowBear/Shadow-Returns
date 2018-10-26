@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour {
         //dmgText.transform.GetComponent<Text>().transform.position = Camera.main.WorldToScreenPoint(displayTrans.position);
 
         ////********* NEW ***********///
-
         GameObject dmgText = Instantiate(damageTextObject);
         if (!GameObject.FindGameObjectWithTag("Canvas")) Debug.Log("Canvas nicht gefunden");
         dmgText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);

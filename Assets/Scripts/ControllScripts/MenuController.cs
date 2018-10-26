@@ -10,11 +10,11 @@ public class MenuController : MonoBehaviour {
     public GameObject dialogMenu;
     public Text dialogText;
     public Button dialogButton;
-    private AudioSource audio;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -43,12 +43,12 @@ public class MenuController : MonoBehaviour {
 
     public void SettingsBtn()
     {
-        print("Settings");
+        //print("Settings");
     }
 
     public void LoadBtn()
     {
-        print("Load");
+        //print("Load");
     }
 
     public void Dialog()
@@ -76,7 +76,7 @@ public class MenuController : MonoBehaviour {
         {
             Time.timeScale = 0;
             window.SetActive(true);
-            audio.Play();
+            audioSource.Play();
         }
     }
 

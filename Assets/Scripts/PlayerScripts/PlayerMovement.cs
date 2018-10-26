@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public LayerMask ground;
 
     private Vector3 moveDirection = Vector3.zero;
+    private Vector3 movement = Vector3.zero;
     private Rigidbody playerRigidbody;
     [SerializeField]
     private bool isGrounded = true;
@@ -59,6 +60,11 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
+
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Move(h, v);
+
         //if (anim != null)
         //{
         //    float h = Input.GetAxisRaw("Horizontal");
@@ -160,11 +166,10 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         /* ********************* End *******************/
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Move(h, v);
+
 
     }
+
 
     private void MoveAnimation(float h, float v)
     {
@@ -280,10 +285,11 @@ public class PlayerMovement : MonoBehaviour {
             moveDirection = Vector3.zero;
             moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
             moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
-
             moveDirection = moveDirection.normalized * speed * Time.deltaTime;
 
-            playerRigidbody.MovePosition(new Vector3(transform.position.x + moveDirection.x, transform.position.y, transform.position.z + moveDirection.z));
+            movement.Set(transform.position.x + moveDirection.x, transform.position.y, transform.position.z + moveDirection.z);
+
+            playerRigidbody.MovePosition(movement);
         }
 
         //Jumping Code
@@ -292,18 +298,18 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    private void RotateWithCamera()
-    {
-        //rotationOffset = Camera.main.transform.position;
-        //rotationOffset.y = transform.position.y;
-        //Vector3.RotateTowards(transform.position, rotationOffset, (speed * Time.deltaTime), 0.0f);
-        //Debug.Log("Rotate");
+    //private void RotateWithCamera()
+    //{
+    //    //rotationOffset = Camera.main.transform.position;
+    //    //rotationOffset.y = transform.position.y;
+    //    //Vector3.RotateTowards(transform.position, rotationOffset, (speed * Time.deltaTime), 0.0f);
+    //    //Debug.Log("Rotate");
 
-        //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
-        //moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
-        //transform.Translate(-moveDirection * Time.deltaTime * speed);
-    }
+    //    //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    //    //moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
+    //    //moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
+    //    //transform.Translate(-moveDirection * Time.deltaTime * speed);
+    //}
 
     /// <summary>
     /// Return different movementspeed

@@ -65,6 +65,8 @@ public class EnemyAIController : MonoBehaviour {
     public int maxHitsTaken = 3;
     public float hitDelayTime = 0.5f;
 
+    private EnemyHealth health;
+
     // Use this for initialization
     protected void Start () {
         agent = GetComponent<NavMeshAgent>();
@@ -72,13 +74,15 @@ public class EnemyAIController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         hitbox.enabled = false;
-        GetComponent<EnemyHealth>().SetEnemyID(ID);
+        health = GetComponent<EnemyHealth>();
+        health.SetEnemyID(ID);
+        
         //Patrol();
     }
 
     // Update is called once per frame
     protected void Update() {
-        if (GetComponent<HealthScript>().isDead)
+        if (health.isDead)
         {
             agent.isStopped = true;
             return;
@@ -135,7 +139,6 @@ public class EnemyAIController : MonoBehaviour {
 
     public void TakeHit()
     {
-        //print("I am Hit");
         if (!isHit)
         {
             if (hitCounter <= maxHitsTaken)
@@ -166,7 +169,6 @@ public class EnemyAIController : MonoBehaviour {
 
     protected IEnumerator MeeleAttack()
     {
-        print("ParentClass MeeleAttack");
         isAttacking = true;
         if (anim != null) anim.SetTrigger("attack");
         hitbox.enabled = true;
@@ -197,7 +199,6 @@ public class EnemyAIController : MonoBehaviour {
 
     protected IEnumerator CounterAttack()
     {
-        //print("I Will strike Back");
         if (Random.Range(1, 3) == 1) StartCoroutine(RangeAttack());
         else StartCoroutine(MeeleAttack());
         yield return new WaitForSeconds(hitDelayTime);
@@ -215,7 +216,6 @@ public class EnemyAIController : MonoBehaviour {
     {
         if (col.CompareTag("Player"))
         {
-            //print("MeeleDamage");
             col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG);
         }
     }

@@ -894,6 +894,7 @@
     <Compile Include="Assets\Scripts\ControllScripts\NPCDialog.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\NPCDialogTrigger.cs" />
     <Compile Include="Assets\Scripts\ControllScripts\ShadowRoomController.cs" />
+    <Compile Include="Assets\Scripts\ControllScripts\TestShortCuts.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GhostBossAttack.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GhostBossController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss\GraveyardBoss.cs" />

@@ -17,7 +17,6 @@ public class PatrollingGuards : MonoBehaviour {
 
 
     private NavMeshAgent navMeshAgent;
-    private NavMeshObstacle navMeshObstacle;
     private Transform nextTarget;
     private Transform currentTarget;
 
@@ -41,7 +40,6 @@ public class PatrollingGuards : MonoBehaviour {
         wayPointController = patrolPointParent.GetComponent<FreeWayPointsController>();
         patrolPoints = patrolPointParent.GetComponentsInChildren<Transform>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshObstacle = GetComponent<NavMeshObstacle>();
         currentState = State.Guarding;
         animator = GetComponent<Animator>();
         animator.SetBool("Static_b", false);
@@ -129,18 +127,18 @@ public class PatrollingGuards : MonoBehaviour {
         {
             NavMeshPath path = new NavMeshPath();
             navMeshAgent.CalculatePath(patrolPoints[i].position, path);
-            if (path.status == NavMeshPathStatus.PathPartial)
-            {
-                print("Cant Reach Path to: " + i);
-            }
-            if(path.status == NavMeshPathStatus.PathComplete)
-            {
-                print("Reached Path to: " + i);
-            }
-            if (path.status == NavMeshPathStatus.PathInvalid)
-            {
-                print("Invalide Path to: " + i);
-            }
+            //if (path.status == NavMeshPathStatus.PathPartial)
+            //{
+            //    print("Cant Reach Path to: " + i);
+            //}
+            //if(path.status == NavMeshPathStatus.PathComplete)
+            //{
+            //    print("Reached Path to: " + i);
+            //}
+            //if (path.status == NavMeshPathStatus.PathInvalid)
+            //{
+            //    print("Invalide Path to: " + i);
+            //}
         }
     }
 

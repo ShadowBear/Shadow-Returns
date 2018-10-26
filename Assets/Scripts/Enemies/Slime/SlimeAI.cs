@@ -12,9 +12,9 @@ public class SlimeAI : MonoBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private bool isAttacking = false;
-    private bool isMoving = false;
+    //private bool isMoving = false;
     private bool isCircling = false;
-    private bool hasDodged = false;
+    //private bool hasDodged = false;
 
     //Animation Speed
     private float speed = 0;
@@ -186,7 +186,7 @@ public class SlimeAI : MonoBehaviour
 
     IEnumerator DodgeAttack()
     {
-        hasDodged = true;
+        //hasDodged = true;
         int dodgeDirection = Random.Range(0, 3);
         switch (dodgeDirection)
         {
@@ -201,7 +201,7 @@ public class SlimeAI : MonoBehaviour
         }
         rigid.AddForce(-transform.forward.normalized * dodgeForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dodgeWaitTime);
-        hasDodged = false;
+        //hasDodged = false;
         yield return null;
     }
 
@@ -241,7 +241,6 @@ public class SlimeAI : MonoBehaviour
 
     IEnumerator CounterAttack()
     {
-        //print("I Will strike Back");
         if (Random.Range(1, 3) == 1) StartCoroutine(RangeAttack());
         else StartCoroutine(MeeleAttack());
         yield return new WaitForSeconds(hitDelayTime);

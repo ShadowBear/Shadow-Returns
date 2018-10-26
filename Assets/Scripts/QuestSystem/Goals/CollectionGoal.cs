@@ -24,7 +24,7 @@ public class CollectionGoal : Goal {
         if(ID == ItemID)
         {
             this.CurrentAmount++;
-            Debug.Log("Yeah ich hab " + this.CurrentAmount + " von " + this.RequiredAmount + " gesammelt");
+            //Debug.Log("Yeah ich hab " + this.CurrentAmount + " von " + this.RequiredAmount + " gesammelt");
             Evaluate();
         }
     }

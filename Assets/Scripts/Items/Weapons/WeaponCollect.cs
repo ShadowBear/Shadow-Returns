@@ -20,7 +20,7 @@ public class WeaponCollect : MonoBehaviour {
         {
             if (Input.GetButtonDown("Action"))
             {
-                Debug.Log("ActionButton");
+                //Debug.Log("ActionButton");
                 foreach(Weapon w in weaponDepot.GetComponentsInChildren<Weapon>(true))
                 {
                     if (w.weaponID == weaponToCollectID)
@@ -32,7 +32,7 @@ public class WeaponCollect : MonoBehaviour {
                         
                         //For Swaping Weapon old weapon gets lost
                         //GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>().CollectAndSwapWeapon(w.gameObject);
-                        Debug.Log("ActionButton");
+                        //Debug.Log("ActionButton");
                         Destroy(gameObject);
                     }
                     

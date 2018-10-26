@@ -25,11 +25,11 @@ public class SlimeFireResHealth : EnemyHealth {
     public override void TakeDamage(float damage, bool melee)
     {
 
-        Debug.Log("FireResHealth");
+        //Debug.Log("FireResHealth");
         if (!isDead && !isShielded)
         {
             Weapon.WeaponEffect weaponEffect = playerAttack.GetEquipedWeapon().GetWeaponEffect();
-            Debug.Log("WeaponEffect : " + weaponEffect);            
+            //Debug.Log("WeaponEffect : " + weaponEffect);            
             hitable = false;
             hitDelay = startHitDelay;
             TakeHit(melee);

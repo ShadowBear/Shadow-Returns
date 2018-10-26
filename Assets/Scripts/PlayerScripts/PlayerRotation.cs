@@ -14,12 +14,14 @@ public class PlayerRotation : MonoBehaviour {
     bool turnbeforeAttack = false;
     public Animator playerAnim;
     private PlayerHealth playerHealth;
+    private new Rigidbody rigidbody;
  
     // Use this for initialization
     void Start () {
         playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerAttack>();
         playerAnim = GetComponentInChildren<Animator>();
         playerHealth = GetComponentInParent<PlayerHealth>();
+        rigidbody = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Rigidbody>();
     }
 	
 	// Update is called once per frame
@@ -53,7 +55,8 @@ public class PlayerRotation : MonoBehaviour {
             Vector3 playerToMouse = floorHit.point - transform.position;
             playerToMouse.y = 0f;
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            transform.rotation = newRotation;            
+            //transform.rotation = newRotation;            
+            rigidbody.MoveRotation(newRotation);
         }       
       
     }
@@ -72,7 +75,7 @@ public class PlayerRotation : MonoBehaviour {
         // Left = 2
         // Backward = -1
         Vector3 localRotate = transform.InverseTransformDirection(Camera.main.transform.forward);
-        float movementAngle = Mathf.Atan(localRotate.z / localRotate.z);
+        //float movementAngle = Mathf.Atan(localRotate.z / localRotate.z);
 
         if(Mathf.Abs(localRotate.z) > Mathf.Abs(localRotate.x))
         {

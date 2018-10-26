@@ -12,7 +12,6 @@ public class GhostBossController : MonoBehaviour {
     NavMeshAgent navAgent;
     public LayerMask layer;
     float testCounter = 0f;
-    bool left = false;
     private float distanceToPlayer;
     public float minDistanceBeforeAttack = 5;
     public int minDistanceBeforeDodge = 8;
@@ -26,7 +25,6 @@ public class GhostBossController : MonoBehaviour {
     public Transform shotTransform;
 
     private GhostBossAttack attackScript;
-    private bool hasDodged = false;
     
 
     
@@ -89,7 +87,6 @@ public class GhostBossController : MonoBehaviour {
 
     IEnumerator Dodge(bool sidewards)
     {
-        hasDodged = true;
         NavMeshHit hit;
         if (sidewards)
         {
@@ -114,7 +111,6 @@ public class GhostBossController : MonoBehaviour {
                 navAgent.Warp(hit.position);
         }
         yield return new WaitForSeconds(waitDodgeTime);
-        hasDodged = false;
         yield return null;
 
     }

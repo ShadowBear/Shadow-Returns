@@ -41,8 +41,6 @@ public class DialogSystem : MonoBehaviour {
 
     public void CreateDialog()
     {
-        //print(dialogIndex);
-        //print(dialogLines.Count);
         dialogText.text = dialogLines[dialogIndex];
         npcNameText.text = npcName;
         dialogPanel.SetActive(true);

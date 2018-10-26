@@ -24,7 +24,7 @@ public class DialogGoal : Goal {
         if(ID == DialogID)
         {
             if (done) RequiredAmount = CurrentAmount;
-            Debug.Log("Yeah ich hab mit xyz gesprochen");
+            //Debug.Log("Yeah ich hab mit xyz gesprochen");
             Evaluate();
         }
     }

@@ -32,7 +32,6 @@ public class BugEnemy : EnemyAIController {
 
     new protected IEnumerator MeeleAttack()
     {
-        print("Punch");
         isAttacking = true;
         if (anim != null) anim.SetTrigger("Attack 01");
         hitbox.enabled = true;

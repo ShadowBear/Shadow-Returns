@@ -36,7 +36,7 @@ public class CamerController : MonoBehaviour {
         {
             TurnCameraLook();
         }
-        Debug.DrawRay(this.transform.position, (cameraPoint.position - transform.position), Color.magenta);
+        //Debug.DrawRay(this.transform.position, (cameraPoint.position - transform.position), Color.magenta);
         if(hits != null) HideObjects(true);        
         desiredPosition = follow.transform.position + offset;
         smoothedPosition = Vector3.Slerp(transform.position, desiredPosition, smoothSpeed);

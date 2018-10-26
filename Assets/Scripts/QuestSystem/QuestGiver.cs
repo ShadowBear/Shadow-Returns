@@ -96,7 +96,7 @@ public class QuestGiver : NPCDialog {
     {
         if (Quest.Completed)
         {
-            Debug.Log("QuestDone");
+            //Debug.Log("QuestDone");
             Quest.GiveReward();
             Helped = true;
             AssignedQuest = false;

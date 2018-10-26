@@ -10,7 +10,7 @@ public class DropRate : MonoBehaviour {
     //Amout of drops for later use
     //public int dropCounts;
 
-    private bool quitting = false;
+    //private bool quitting = false;
 
     [SerializeField]
     private GameObject ep;   
@@ -47,14 +47,14 @@ public class DropRate : MonoBehaviour {
         epObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
     }
 
-    private void OnDestroy()
-    {
-        //if(!quitting) DropItem();
-    }
+    //private void OnDestroy()
+    //{
+    //    //if(!quitting) DropItem();
+    //}
 
-    private void OnApplicationQuit()
-    {
-        quitting = true;
-    }
+    //private void OnApplicationQuit()
+    //{
+    //    quitting = true;
+    //}
 
 }

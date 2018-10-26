@@ -18,10 +18,10 @@ public class ItemHealth : HealthScript{
         if (spawnItem)
         {
             GameObject item = Instantiate(spawnItem, transform.position + new Vector3(0, 1, 0), transform.rotation);
-            if (spawnItem.GetComponent<Rigidbody>())
+            if (item.GetComponent<Rigidbody>())
             {
                 Vector3 randomExplosionVector = new Vector3(0, 0.9f, 0.5f);
-                spawnItem.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
+                item.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
             }
         }
         Destroy(gameObject);

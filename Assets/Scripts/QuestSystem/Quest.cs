@@ -32,7 +32,6 @@ public class Quest : MonoBehaviour {
         QuestLog.questLog.QuestCompleted(QuestID);
         if (ItemReward != null)
         {
-            print("Reward von Quest bekommen");
             GameObject rewardObject = Instantiate(ItemReward, transform.position + new Vector3(0,1,0), transform.rotation);
             if (rewardObject.GetComponent<Rigidbody>())
             {

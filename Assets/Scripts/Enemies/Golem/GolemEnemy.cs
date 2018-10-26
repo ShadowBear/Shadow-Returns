@@ -114,7 +114,6 @@ public class GolemEnemy : EnemyAIController {
 
     new protected IEnumerator MeeleAttack()
     {
-        print("Punch");
         isAttacking = true;
         if (anim != null) anim.SetTrigger("Punch Attack");
         hitbox.enabled = true;
