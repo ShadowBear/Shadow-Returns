@@ -14,6 +14,8 @@ public class CamerController : MonoBehaviour {
 
     public Transform cameraPoint;
 
+    private List<string> renderList;
+
     public bool rotateAroundPlayer = true;
     public float rotationSpeed = 5.0f;
 
@@ -27,6 +29,7 @@ public class CamerController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         follow = player;
         StartCoroutine(LateCameraPositionStart());
+        renderList = new List<string>();
     }
 	
 	// Update is called once per frame
@@ -55,6 +58,31 @@ public class CamerController : MonoBehaviour {
         //player.GetComponent<PlayerHealth>().RotateHealthbar();
     }
 
+    /**************** OLD ***********************/
+    //void HideObjects(bool state)
+    //{
+    //    foreach (RaycastHit hit in hits)
+    //    {
+    //        Renderer r = null;
+    //        if (hit.transform != null && !hit.collider.isTrigger && !hit.collider.CompareTag("Invisible")) r = hit.collider.GetComponent<Renderer>();
+    //        if (r)
+    //        {
+    //            //r.enabled = state;
+    //            Color temp = r.material.color;
+    //            temp.a = state ? 1f : 0.5f;
+    //            r.material.color = temp;
+    //            if (!state)
+    //            {
+    //                shaderName = r.material.shader.name;
+    //                r.material.shader = Shader.Find("Transparent/Diffuse");
+    //            }
+    //            else r.material.shader = Shader.Find(shaderName);
+    //            //else r.material.shader = Shader.Find("Standart");
+    //            //else r.material.shader = Shader.Find("Toon/Lit");
+    //        }
+    //    }
+    //}
+
 
     void HideObjects(bool state)
     {
@@ -67,14 +95,38 @@ public class CamerController : MonoBehaviour {
                 //r.enabled = state;
                 Color temp = r.material.color;
                 temp.a = state ? 1f : 0.5f;
-                r.material.color = temp;
+                r.material.color = Color.Lerp(r.material.color, temp, 0.2f);
+                //print(r.material.shader);
+                //r.material.color = temp;
                 if (!state)
                 {
-                    shaderName = r.material.shader.name;
-                    r.material.shader = Shader.Find("Transparent/Diffuse");
+                    //shaderName = r.material.shader.name;
+                    //renderList.Add(shaderName);
+                    //r.material.EnableKeyword("_ALPHABLEND_ON");
+                    //r.material.shader = Shader.Find("Transparent/Diffuse");
+                    r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                    r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    r.material.SetInt("_ZWrite", 0);
+                    r.material.DisableKeyword("_ALPHATEST_ON");
+                    r.material.DisableKeyword("_ALPHABLEND_ON");
+                    r.material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+                    r.material.renderQueue = 3000;
+                    
+                    //r.material.shader = Shader.Find("Standard/Transparent");
                 }
-                else r.material.shader = Shader.Find(shaderName);
-                //else r.material.shader = Shader.Find("Standart");
+                else
+                {
+                    r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                    r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                    r.material.SetInt("_ZWrite", 1);
+                    r.material.DisableKeyword("_ALPHATEST_ON");
+                    r.material.DisableKeyword("_ALPHABLEND_ON");
+                    r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    r.material.renderQueue = -1;
+                }
+                //else r.material.DisableKeyword("_ALPHABLEND_ON");
+                //else r.material.shader = Shader.Find("Standard");
+                //else r.material.shader = Shader.Find();
                 //else r.material.shader = Shader.Find("Toon/Lit");
             }
         }

@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour {
     public GameObject pauseMenu;
     public GameObject dialogMenu;
     public Text dialogText;
+    public Text headerText;
     public Button dialogButton;
     private AudioSource audioSource;
 
@@ -62,6 +63,12 @@ public class MenuController : MonoBehaviour {
         //Text bei Türen ändern
     }
 
+    public void SetHeaderText(string head)
+    {
+        headerText.text = head;
+        //Text bei Türen ändern
+    }
+
     void ToggleWindow(GameObject window)
     {
         //print("WechsleFenster");
@@ -76,7 +83,7 @@ public class MenuController : MonoBehaviour {
         {
             Time.timeScale = 0;
             window.SetActive(true);
-            audioSource.Play();
+            //audioSource.Play();
         }
     }
 

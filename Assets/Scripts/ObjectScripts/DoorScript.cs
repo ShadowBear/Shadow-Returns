@@ -33,6 +33,7 @@ public class DoorScript : MonoBehaviour {
             {
                 AntiPrell++;
                 StartCoroutine(StopPrelling());
+                GameManager.control.GetComponent<MenuController>().SetHeaderText("Tür");
                 //Debug.Log("ActionToDo");
                 if (keyNeededBool)
                 {
@@ -40,7 +41,6 @@ public class DoorScript : MonoBehaviour {
                     {
                         GameManager.control.UseKey();
                         anim.SetBool("Open", true);
-                        //Debug.Log("Schlüsseltür " + anim.GetBool("Open"));
                         keyNeededBool = false;
                         if (doorSound != null) AudioSource.PlayClipAtPoint(doorSound, transform.position);
                         if (triggersEnemys)

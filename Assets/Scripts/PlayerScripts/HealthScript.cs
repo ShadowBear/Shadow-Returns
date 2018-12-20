@@ -60,8 +60,11 @@ public class HealthScript : MonoBehaviour {
 
             health -= damage;
             if (healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
-            if (anim != null) anim.SetTrigger("Take Damage");
-            if (damage > 1) GameManager.control.ShowDmgText(damage, transform);
+            if (anim != null && !isDead)
+            {
+                anim.SetTrigger("Take Damage");
+            }
+            if (damage >= 0) GameManager.control.ShowDmgText(damage, transform);
 
             if (health <= 0 && !isDead)
             {
@@ -81,8 +84,10 @@ public class HealthScript : MonoBehaviour {
             
             health -= damage;
             if(healthbar != null) healthbar.fillAmount = (float)health / maxHealth;
-            if(anim != null) anim.SetTrigger("Take Damage");
-            if(damage > 1) GameManager.control.ShowDmgText(damage, transform);
+            if (anim != null && !isDead) {
+                anim.SetTrigger("Take Damage");
+            }
+            if(damage >= 0) GameManager.control.ShowDmgText(damage, transform);
 
             //Pushing Back On Hit
             //if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().AddForce(-transform.forward * pushForce);
@@ -114,7 +119,7 @@ public class HealthScript : MonoBehaviour {
         isDead = true;
         if (anim != null)
         {
-            anim.SetBool("die", true);
+            anim.SetBool("Die", true);
             yield return new WaitForSeconds(1.2f);
         }
         if (GetComponent<HidingGhostTomb>() != null) GetComponent<HidingGhostTomb>().Die();

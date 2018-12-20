@@ -8,10 +8,12 @@ public class Key : Item {
     {
         if (other.CompareTag("Player"))
         {
+            if (antiPrell != 0) return;
+            antiPrell++;
             GameManager.control.CollectKey();
             if(ItemID.Length > 0) QuestLog.questLog.ItemCollected(ItemID);
             else QuestLog.questLog.ItemCollected("Key");
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

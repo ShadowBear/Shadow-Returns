@@ -57,8 +57,9 @@ public class PlayerRotation : MonoBehaviour {
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
             //transform.rotation = newRotation;            
             rigidbody.MoveRotation(newRotation);
-        }       
-      
+
+        }
+
     }
 
     //Maybefor Later Use

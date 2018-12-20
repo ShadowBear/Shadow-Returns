@@ -56,7 +56,7 @@ public class SpiderEnemy : EnemyAIController {
         isAttacking = true;
         agent.isStopped = true;
         canshoot = false;
-        if (anim != null) anim.SetTrigger("Cast Spell");
+        if (anim != null && !GetComponent<EnemyHealth>().isDead) anim.SetTrigger("Cast Spell");
         float animationDelay = 0.5f;
         yield return new WaitForSeconds(animationDelay);
         shotTransform.LookAt(player.transform);
@@ -73,7 +73,7 @@ public class SpiderEnemy : EnemyAIController {
     new protected IEnumerator MeeleAttack()
     {        
         isAttacking = true;
-        if (anim != null) anim.SetTrigger("Claw Attack");
+        if (anim != null && !GetComponent<EnemyHealth>().isDead) anim.SetTrigger("Claw Attack");
         hitbox.enabled = true;
         yield return new WaitForSeconds(attackRateTime);
         hitbox.enabled = false;

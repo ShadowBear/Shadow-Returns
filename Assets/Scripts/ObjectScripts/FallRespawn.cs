@@ -11,7 +11,7 @@ public class FallRespawn : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.position = respawnPos.position;
+            if(respawnPos) other.transform.position = respawnPos.position;
             other.GetComponent<PlayerHealth>().TakeDamage(fallDMG);
         }
     }

@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour {
     public int potionNmbr;
     private int maxPotionsNmbr = 6;
     public Text potionText;
-    public int potionValue = 65;
+
+    //PotionValue in Percent of Fulllife//
+    [Range(0,1)]
+    public float potionValue = 0.4f;
 
     public int keyNmbr;
     public Text keyText;

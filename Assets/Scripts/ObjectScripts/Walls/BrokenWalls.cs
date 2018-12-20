@@ -31,6 +31,7 @@ public class BrokenWalls : MonoBehaviour {
             {
                 //Time.timeScale = 0;
                 menu.SetDialogText(brokenWallText);
+                menu.SetHeaderText("Rissige Wand");
                 menu.Dialog();
                 menu.dialogButton.onClick.AddListener(BreakIt);
             }

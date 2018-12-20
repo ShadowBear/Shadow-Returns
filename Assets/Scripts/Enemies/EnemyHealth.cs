@@ -56,10 +56,7 @@ public class EnemyHealth : HealthScript
         StartCoroutine(DieAnim());
         //Update Quest Status
         QuestLog.questLog.EnemyDied(EnemyID);
-        if (GetComponent<DropRate>())
-        {
-            GetComponent<DropRate>().DropItem();
-        }
+        
     }
 
     IEnumerator DieAnim()
@@ -68,7 +65,12 @@ public class EnemyHealth : HealthScript
         if (anim != null)
         {
             anim.SetTrigger("Die");
+            anim.SetBool("Dead", true);
             yield return new WaitForSeconds(3.5f);
+            if (GetComponent<DropRate>())
+            {
+                GetComponent<DropRate>().DropItem();
+            }
         }        
         Destroy(gameObject);
         yield return null;

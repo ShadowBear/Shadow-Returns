@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrapTriggerEnterDmg : MonoBehaviour
 {
-
+    //Standart DMG 35
     public int trapDMG = 35;
 
     public void SetTrapDmg(int dmg)

@@ -70,12 +70,12 @@ public class PlayerHealth : HealthScript {
         if (health <= 0 && !isDead) Dying();
     }
 
-    public void DrinkPotion(int potionValue)
+    public void DrinkPotion(float potionValue)
     {
         if (GameManager.control.potionNmbr > 0)
         {
             if (health >= maxHealth) return;
-            health = (health + potionValue) > maxHealth ? maxHealth : (health + potionValue);
+            health = (health + (potionValue * maxHealth)) > maxHealth ? maxHealth : (health + (potionValue * maxHealth));
             if (healthbar != null) healthbar.fillAmount = health / maxHealth;
             GameManager.control.DrinkPotion();
         }

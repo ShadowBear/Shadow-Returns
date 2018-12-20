@@ -1002,10 +1002,15 @@
     <Compile Include="Assets\Scripts\QuestSystem\Quests\TomQuest.cs" />
     <Compile Include="Assets\Scripts\RandomizeAnimatorParameter.cs" />
     <Compile Include="Assets\Scripts\SceneManager\SceneManagerScript.cs" />
+    <Compile Include="Assets\Scripts\Sounds\NextTrackTrigger.cs" />
+    <Compile Include="Assets\Scripts\Sounds\Soundmanager.cs" />
+    <Compile Include="Assets\Scripts\Sounds\SoundTrigger.cs" />
     <Compile Include="Assets\Scripts\Sounds\SwingingAxt.cs" />
     <Compile Include="Assets\Scripts\Traps\SpikeBlock.cs" />
     <Compile Include="Assets\Scripts\Traps\TrapLever.cs" />
     <Compile Include="Assets\Scripts\Traps\TrapTriggerEnterDmg.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\KeyCollectedTut.cs" />
+    <Compile Include="Assets\Scripts\Tutorials\TutorialText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Animations\AnimationDungeon\Grass Animation Help.txt" />

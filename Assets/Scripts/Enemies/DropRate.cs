@@ -36,7 +36,7 @@ public class DropRate : MonoBehaviour {
         {
             if(drops.Length > 0)
             {
-                int item = (int)Random.Range(0, drops.Length);
+                int item = Random.Range(0, drops.Length);
                 Instantiate(drops[item], transform.position, transform.rotation);
             }            
         }

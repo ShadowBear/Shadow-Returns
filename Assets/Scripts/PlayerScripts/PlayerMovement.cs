@@ -11,12 +11,15 @@ public class PlayerMovement : MonoBehaviour {
     //Standart 8.5f
     [Range(1,10)]
     public float jumpHeight = 8.5f;
+
+    [Range(0,5)]
+    public float jumpTime = 1;
+    public Vector3 jumpVector = new Vector3(0,100,0);
     public float groundDistance = 0.2f;
     public float dashDistance = 5f;
     public LayerMask ground;
 
     private Vector3 moveDirection = Vector3.zero;
-    private Vector3 movement = Vector3.zero;
     private Rigidbody playerRigidbody;
     [SerializeField]
     private bool isGrounded = true;
@@ -31,6 +34,10 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerAttack attackScript;
 
     private Vector3 rotationOffset;
+
+    //private CharacterController charController;
+    //private static float GRAVITY = Physics.gravity.y;
+    //private Vector3 velocity = Vector3.zero;
 
     // Webplayer Beispiel Bedingung
 
@@ -60,11 +67,18 @@ public class PlayerMovement : MonoBehaviour {
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
-
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Move(h, v);
 
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            //print("Springe wirklich");
+            //playerRigidbody.velocity = Vector3.up * jumpHeight;
+
+            /* NEW */
+            StartCoroutine(JumpRoutine());
+        }
         //if (anim != null)
         //{
         //    float h = Input.GetAxisRaw("Horizontal");
@@ -81,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
     void Update () {
         //#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //Vector3 inputs = Vector3.zero;
-
+        
         if (anim != null && Time.frameCount % 5 == 0)
         {
             float h2 = Input.GetAxisRaw("Horizontal");
@@ -166,8 +180,27 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         /* ********************* End *******************/
+        
 
+    }
 
+    IEnumerator JumpRoutine()
+    {
+        playerRigidbody.velocity = Vector3.zero;
+        float timer = 0;
+
+        while (Input.GetButton("Jump") && timer < jumpTime)
+        {
+            //Calculate how far through the jump we are as a percentage
+            //apply the full jump force on the first frame, then apply less force
+            //each consecutive frame
+
+            float proportionCompleted = timer / jumpTime;
+            Vector2 thisFrameJumpVector = Vector3.Lerp(jumpVector, Vector3.zero, proportionCompleted);
+            playerRigidbody.AddForce(thisFrameJumpVector);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 
 
@@ -267,36 +300,78 @@ public class PlayerMovement : MonoBehaviour {
         
     }
 
+    /* Altes Movement ohne CharControll */
+
     private void Move(float h, float v)
     {
         if ((attackScript.GetAttackStatus() && !attackScript.rangeAttack) || attackScript.GetReloadStatus())
         {
             return;
         }
-            //moveDirection = new Vector3(h, 0, v); 
-            // Normalise the movement vector and make it proportional to the speed per second.
 
-
-            // Move the player to it's current position plus the movement.
-
-            /** Had 2 Be Commented for Movement towards Camera Rotation **///
-            if (h != 0 || v != 0)
+        /** Had 2 Be Commented for Movement towards Camera Rotation **///
+        if (h != 0 || v != 0)
         {
             moveDirection = Vector3.zero;
             moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
             moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
+            moveDirection.y = 0;
             moveDirection = moveDirection.normalized * speed * Time.deltaTime;
-
-            movement.Set(transform.position.x + moveDirection.x, transform.position.y, transform.position.z + moveDirection.z);
-
-            playerRigidbody.MovePosition(movement);
+           
+            playerRigidbody.MovePosition(transform.position + moveDirection);
         }
 
         //Jumping Code
-        if (Input.GetButtonDown("Jump") && isGrounded) playerRigidbody.velocity = Vector3.up * jumpHeight;
         
 
+
     }
+
+    /********** CharController Test *******************/
+    //private void Move(float h, float v)
+    //{
+    //    if ((attackScript.GetAttackStatus() && !attackScript.rangeAttack) || attackScript.GetReloadStatus())
+    //    {
+    //        return;
+    //    }
+    //    //moveDirection = new Vector3(h, 0, v); 
+    //    // Normalise the movement vector and make it proportional to the speed per second.
+
+
+    //    // Move the player to it's current position plus the movement.
+
+    //    /** Had 2 Be Commented for Movement towards Camera Rotation **///
+    //    if (h != 0 || v != 0)
+    //    {
+    //        if (charController.isGrounded)
+    //        {
+    //            // We are grounded, so recalculate
+    //            // move direction directly from axes
+    //            moveDirection = Vector3.zero;
+    //            moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
+    //            moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
+    //            moveDirection = moveDirection * speed;
+    //        }
+
+    //        moveDirection = moveDirection.normalized * speed * Time.deltaTime;
+    //    }
+    //    else moveDirection.Set(0, moveDirection.y, 0);
+
+    //    // Apply gravity
+    //    moveDirection.y += (GRAVITY * Time.deltaTime);
+    //    //if (isGrounded && charController.velocity.y < 0)
+    //    //    velocity.y = 0f;
+    //    //moveDirection += velocity;
+    //    //charController.Move(velocity * Time.deltaTime);
+    //    // Move the controller
+    //    charController.Move(moveDirection * Time.deltaTime);
+
+    //    //Jumping Code
+    //    //if (Input.GetButtonDown("Jump") && isGrounded) playerRigidbody.velocity = Vector3.up * jumpHeight;
+
+
+    //}
+    /*************************************************************************/
 
     //private void RotateWithCamera()
     //{
@@ -325,5 +400,10 @@ public class PlayerMovement : MonoBehaviour {
         else if (i == 2) return shootingSpeed;
         return defaultSpeed;
     }
+
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!collision.collider.isTrigger) playerRigidbody.velocity.Set(0,0,0);
+    //}
 
 }
