@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Potion : Item {
-    
+
+
+    public AudioClip collectSound;
     private void Start()
     {
         ItemID = "Heal_Potion";
@@ -15,6 +17,7 @@ public class Potion : Item {
         {
             GameManager.control.CollectPotion();
             QuestLog.questLog.ItemCollected(ItemID);
+            AudioSource.PlayClipAtPoint(collectSound, transform.position);
             Destroy(this.gameObject);
         }
     }

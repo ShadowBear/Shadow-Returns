@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
     public Image experienceImage;
     public Text experienceText;
+    public GameObject levelUP;
 
     //Dash Images and Value
     public GameObject dashBlocksParent;
@@ -113,11 +114,24 @@ public class GameManager : MonoBehaviour {
             lvlText.text = playerLvl.ToString();
             //if u get More Exp than the next level also needed do it again
             if (experiencePoints >= nextLvlExperience) ReceiveExperience(0);
+            //Play LevelUpSound
+            StartCoroutine(LevelUP());
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().LevelUpHealth();
         }
         experienceText.text = experiencePoints + "/" + nextLvlExperience;
         experienceImage.fillAmount = (float)experiencePoints / nextLvlExperience;
 
+    }
+
+    IEnumerator LevelUP()
+    {
+        if (levelUP)
+        {
+            levelUP.SetActive(true);
+            yield return new WaitForSeconds(4f);
+            levelUP.SetActive(false);
+            yield return null;
+        }
     }
 
     public void CollectPotion()

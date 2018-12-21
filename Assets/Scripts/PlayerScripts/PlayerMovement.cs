@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerAttack attackScript;
 
     private Vector3 rotationOffset;
+    private Footsteps footstepsScript;
 
     //private CharacterController charController;
     //private static float GRAVITY = Physics.gravity.y;
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
         shield = GetComponentInChildren<Shield>();
         anim = GetComponentInChildren<Animator>();
         attackScript = GetComponentInChildren<PlayerAttack>();
+        footstepsScript = GetComponentInChildren<Footsteps>();
     }
 //#else
 //    // Android
@@ -102,10 +104,13 @@ public class PlayerMovement : MonoBehaviour {
             float v2 = Input.GetAxisRaw("Vertical");
             //CheckSpeed for Animation
             animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
+            if (animSpeed > 0.1f && isGrounded) footstepsScript.walking = true;
+            else footstepsScript.walking = false;
             //animSpeed = playerRigidbody.velocity.magnitude;
             lastPosition = transform.position;
             anim.SetFloat("Speed", animSpeed);
             MoveAnimation(h2, v2);
+            
         }
 
         //RotateWithCamera();

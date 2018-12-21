@@ -19,6 +19,7 @@ public class ExplosionItems : HealthScript {
 
     new void Start () {
         base.Start();
+        m_ExplosionAudio = GetComponentInParent<AudioSource>();
 	}
 
     new void Update()
@@ -54,6 +55,7 @@ public class ExplosionItems : HealthScript {
             }            
         }
         explosionParticles.Play();
+        m_ExplosionAudio.Play();
         Destroy(explosionParticles.transform.parent.gameObject, 1.5f);
         Destroy(gameObject);
 

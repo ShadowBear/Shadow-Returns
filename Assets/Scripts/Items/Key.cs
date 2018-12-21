@@ -13,6 +13,7 @@ public class Key : Item {
             GameManager.control.CollectKey();
             if(ItemID.Length > 0) QuestLog.questLog.ItemCollected(ItemID);
             else QuestLog.questLog.ItemCollected("Key");
+            GameObject.FindGameObjectWithTag("ItemSound").GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
     }

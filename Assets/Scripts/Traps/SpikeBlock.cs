@@ -9,7 +9,7 @@ public class SpikeBlock : MonoBehaviour {
     public bool activated;
 
 	void Start () {
-        anim = transform.parent.GetComponentInChildren<Animator>();
+        anim = transform.parent.GetComponentInChildren<Animator>();        
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -22,4 +22,5 @@ public class SpikeBlock : MonoBehaviour {
             }
         }
     }
+
 }
