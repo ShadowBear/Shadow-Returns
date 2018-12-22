@@ -15,7 +15,7 @@ public class Item : MonoBehaviour {
             if (antiPrell != 0) return;
             antiPrell++;
             QuestLog.questLog.ItemCollected(ItemID);
-            GameObject.FindGameObjectWithTag("ItemSound").GetComponent<AudioSource>().Play();
+            if(GameObject.FindGameObjectWithTag("ItemSound")) GameObject.FindGameObjectWithTag("ItemSound").GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
     }

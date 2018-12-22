@@ -13,14 +13,10 @@ public class CamerController : MonoBehaviour {
     private GameObject player;
 
     public Transform cameraPoint;
-
-    private List<string> renderList;
-
+    
     public bool rotateAroundPlayer = true;
     public float rotationSpeed = 5.0f;
-
-    private string shaderName = "Diffuse";
-
+    
     //private RaycastHit oldHit;
     RaycastHit[] hits;
 
@@ -29,7 +25,6 @@ public class CamerController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         follow = player;
         StartCoroutine(LateCameraPositionStart());
-        renderList = new List<string>();
     }
 	
 	// Update is called once per frame

@@ -41,6 +41,11 @@ public class Soundmanager : MonoBehaviour {
         }
     }
 
+    public void SetStartAudio(AudioClip nextTrack)
+    {
+        StartCoroutine(FadeOut(audioSource, nextTrack, 0));
+    }
+
     public static IEnumerator FadeOut(AudioSource audio, AudioClip nextTrack, float FadeTime)
     {        
         float startVolume = audio.volume;
