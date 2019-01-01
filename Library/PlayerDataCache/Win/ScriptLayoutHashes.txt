@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Lennert/Documents/GitHub/Shadow-Returns/BuildVersions/Shadow Returns.exe
+C:/Users/Public/Documents/Unity Projects/ShadowReturns/Shadow-Returns/BuildVersions/Shadow Returns.exe
 SceneListBegin?
 Assets/Scenes/StartMenu.unity
 Assets/Scenes/Level01.unity

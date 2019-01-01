@@ -11,6 +11,11 @@ public class PlayerStartConfig : MonoBehaviour {
         GameObject.FindGameObjectWithTag("Player").transform.position = transform.position;
         if (startSoundTrack) GameObject.FindGameObjectWithTag("Soundbox").
             GetComponentInParent<Soundmanager>().startClip = startSoundTrack;
+        if (GameObject.FindGameObjectWithTag("LoadingScreen") != null)
+        {
+            Time.timeScale = 1;
+            GameObject.FindGameObjectWithTag("LoadingScreen").SetActive(false);
+        }
     }
 
     private void Start()
