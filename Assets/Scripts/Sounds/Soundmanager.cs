@@ -11,7 +11,7 @@ public class Soundmanager : MonoBehaviour {
 
     //Only when the trigger is True next audio can be played
     public bool resetTrigger;
-    private float resetTimerHysteres = 10f;
+    private float resetTimerHysteres = 4;
     private float timer = 0;
 
     // Use this for initialization
@@ -49,6 +49,8 @@ public class Soundmanager : MonoBehaviour {
     public static IEnumerator FadeOut(AudioSource audio, AudioClip nextTrack, float FadeTime)
     {        
         float startVolume = audio.volume;
+        if (FadeTime <= 0) FadeTime = 0.1f;
+        if (startVolume <= 0 || startVolume > 1) startVolume = 1;
 
         while (audio.volume > 0)
         {
@@ -60,13 +62,17 @@ public class Soundmanager : MonoBehaviour {
         if(nextTrack != null)
         {
             audio.clip = nextTrack;
+            audio.volume = 0;
             audio.Play();
+            if(float.IsNaN(startVolume)) startVolume = 1;
             while (audio.volume < startVolume)
             {
-                audio.volume += startVolume * Time.deltaTime / FadeTime;
-
+                audio.volume += startVolume * Time.deltaTime / FadeTime;                
                 yield return null;
-            }            
+            }
+            if (audio.volume <= 0 || audio.volume > 1) audio.volume = 1;
+            //if (float.IsNaN(audio.volume)) audio.volume = 1;
+            Debug.Log(audio.volume);
         }
     }
 

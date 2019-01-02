@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour {
 
     // Webplayer Beispiel Bedingung
 
-//#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
-    // PC
+#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+    //PC
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -52,25 +52,34 @@ public class PlayerMovement : MonoBehaviour {
         attackScript = GetComponentInChildren<PlayerAttack>();
         footstepsScript = GetComponentInChildren<Footsteps>();
     }
-//#else
-//    // Android
-//    public GameObject joystickObject;
-//    private VirtualJoystick vrStick;
+#else
+    // Android
+    public GameObject joystickObject;
+    private VirtualJoystick vrStick;
 
-//    void Start()
-//    {
-//        playerRigidbody = GetComponent<Rigidbody>();
-//        vrStick = joystickObject.GetComponent<VirtualJoystick>();
-//    }
-//#endif
+    void Start()
+    {
+        vrStick = joystickObject.GetComponent<VirtualJoystick>();
+        playerRigidbody = GetComponent<Rigidbody>();
+        shield = GetComponentInChildren<Shield>();
+        anim = GetComponentInChildren<Animator>();
+        attackScript = GetComponentInChildren<PlayerAttack>();
+        footstepsScript = GetComponentInChildren<Footsteps>();
+    }
+#endif
 
 
     // Update is called once per frame
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
+#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
+#else
+                float h = vrStick.Horizontal();
+                float v = vrStick.Vertical(); 
+#endif
         Move(h, v);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -95,13 +104,18 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update () {
-        //#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+
         //Vector3 inputs = Vector3.zero;
-        
+
         if (anim != null && Time.frameCount % 5 == 0)
         {
+#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
             float h2 = Input.GetAxisRaw("Horizontal");
             float v2 = Input.GetAxisRaw("Vertical");
+#else
+                float h2 = vrStick.Horizontal();
+                float v2 = vrStick.Vertical(); 
+#endif
             //CheckSpeed for Animation
             animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
             if (animSpeed > 0.1f && isGrounded) footstepsScript.walking = true;
@@ -115,14 +129,8 @@ public class PlayerMovement : MonoBehaviour {
 
         //RotateWithCamera();
 
-        //#else
-        //        float h = vrStick.Horizontal();
-        //        float v = vrStick.Vertical(); 
-        //#endif
-
         //if (Input.GetButtonDown("Jump")) print("Springe");
         // Ground With Layers for later ToDo
-
 
         //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         //moveDirection *= speed * Time.deltaTime;
