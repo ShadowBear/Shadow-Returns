@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -11,12 +12,16 @@ public class PlayerMovement : MonoBehaviour {
     //Standart 8.5f
     [Range(1,10)]
     public float jumpHeight = 8.5f;
+    private bool jump;
+    [Range(1f, 4f)] [SerializeField] float gravityMultiplier = 2f;
 
     [Range(0,5)]
     public float jumpTime = 1;
     public Vector3 jumpVector = new Vector3(0,100,0);
-    public float groundDistance = 0.2f;
+    [SerializeField] float groundCheckDistance = 0.2f;
+    private float origGroundCheckDistance;
     public float dashDistance = 5f;
+    [SerializeField] float attackDashDistance = 0.75f;
     public LayerMask ground;
 
     private Vector3 moveDirection = Vector3.zero;
@@ -42,54 +47,61 @@ public class PlayerMovement : MonoBehaviour {
 
     // Webplayer Beispiel Bedingung
 
-#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+    //#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
     //PC
-    void Start()
-    {
-        playerRigidbody = GetComponent<Rigidbody>();
-        shield = GetComponentInChildren<Shield>();
-        anim = GetComponentInChildren<Animator>();
-        attackScript = GetComponentInChildren<PlayerAttack>();
-        footstepsScript = GetComponentInChildren<Footsteps>();
-    }
-#else
-    // Android
-    public GameObject joystickObject;
-    private VirtualJoystick vrStick;
 
+    //private void Awake()
+    //{
+    //    SceneManager.activeSceneChanged += DestroyOnStartMenu;
+    //}
     void Start()
     {
-        vrStick = joystickObject.GetComponent<VirtualJoystick>();
         playerRigidbody = GetComponent<Rigidbody>();
         shield = GetComponentInChildren<Shield>();
         anim = GetComponentInChildren<Animator>();
         attackScript = GetComponentInChildren<PlayerAttack>();
         footstepsScript = GetComponentInChildren<Footsteps>();
+        origGroundCheckDistance = groundCheckDistance;
     }
-#endif
+//#else
+//    // Android
+//    public GameObject joystickObject;
+//    private VirtualJoystick vrStick;
+
+//    void Start()
+//    {
+//        vrStick = joystickObject.GetComponent<VirtualJoystick>();
+//        playerRigidbody = GetComponent<Rigidbody>();
+//        shield = GetComponentInChildren<Shield>();
+//        anim = GetComponentInChildren<Animator>();
+//        attackScript = GetComponentInChildren<PlayerAttack>();
+//        footstepsScript = GetComponentInChildren<Footsteps>();
+//    }
+//#endif
 
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        isGrounded = Physics.CheckSphere(groundCheckTrans.position, groundDistance, ground, QueryTriggerInteraction.Ignore);
-#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+        CheckGroundStatus();
+// #if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-#else
-                float h = vrStick.Horizontal();
-                float v = vrStick.Vertical(); 
-#endif
+//#else
+//                float h = vrStick.Horizontal();
+//                float v = vrStick.Vertical(); 
+//#endif
         Move(h, v);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            //print("Springe wirklich");
-            //playerRigidbody.velocity = Vector3.up * jumpHeight;
-
-            /* NEW */
-            StartCoroutine(JumpRoutine());
+            jump = true;
+            //StartCoroutine(JumpRoutine());
         }
+        if (isGrounded) HandleGroundedMovement(jump);
+        else HandleAirborneMovement();
+
+        jump = false;
         //if (anim != null)
         //{
         //    float h = Input.GetAxisRaw("Horizontal");
@@ -109,13 +121,13 @@ public class PlayerMovement : MonoBehaviour {
 
         if (anim != null && Time.frameCount % 5 == 0)
         {
-#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+//#if Unity_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
             float h2 = Input.GetAxisRaw("Horizontal");
             float v2 = Input.GetAxisRaw("Vertical");
-#else
-                float h2 = vrStick.Horizontal();
-                float v2 = vrStick.Vertical(); 
-#endif
+//#else
+//                float h2 = vrStick.Horizontal();
+//                float v2 = vrStick.Vertical(); 
+//#endif
             //CheckSpeed for Animation
             animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
             if (animSpeed > 0.1f && isGrounded) footstepsScript.walking = true;
@@ -126,16 +138,6 @@ public class PlayerMovement : MonoBehaviour {
             MoveAnimation(h2, v2);
             
         }
-
-        //RotateWithCamera();
-
-        //if (Input.GetButtonDown("Jump")) print("Springe");
-        // Ground With Layers for later ToDo
-
-        //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //moveDirection *= speed * Time.deltaTime;
-        //transform.Translate(moveDirection);
-        //this.characterController.Move(moveDirection);
 
         /* ******************** Shield *************************/
         if (Input.GetKey(KeyCode.LeftShift))
@@ -197,6 +199,47 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
+    private void CheckGroundStatus()
+    {
+        RaycastHit hitInfo;
+        // helper to visualise the ground check ray in the scene view
+        //Debug.DrawLine(groundCheckTrans.position + (Vector3.up * 0.1f), groundCheckTrans.position + (Vector3.down * groundCheckDistance));
+        // 0.1f is a small offset to start the ray from inside the character
+        // it is also good to note that the transform position in the sample assets is at the base of the character
+        //if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, groundCheckDistance))
+        if (Physics.Raycast(groundCheckTrans.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, groundCheckDistance, ground))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+            //m_GroundNormal = Vector3.up;
+        }
+    }
+    void HandleAirborneMovement()
+    {
+        // apply extra gravity from multiplier:
+        Vector3 extraGravityForce = (Physics.gravity * gravityMultiplier) - Physics.gravity;
+        playerRigidbody.AddForce(extraGravityForce);
+
+        //groundCheckDistance = playerRigidbody.velocity.y < 0 ? origGroundCheckDistance : 0.1f;
+    }
+
+
+    void HandleGroundedMovement(bool jump)
+    {
+
+        //groundCheckDistance = 0.2f;
+        // check whether conditions are right to allow a jump:
+        if (jump)
+        {
+            // jump!
+            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, jumpHeight, playerRigidbody.velocity.z);
+            isGrounded = false;
+        }
+    }
+
     IEnumerator JumpRoutine()
     {
         playerRigidbody.velocity = Vector3.zero;
@@ -215,6 +258,30 @@ public class PlayerMovement : MonoBehaviour {
             yield return null;
         }
     }
+
+    public void AttackDashForward()
+    {
+        Vector3 dashAttackDirection = transform.GetComponentInChildren<PlayerRotation>().transform.forward;
+        Vector3 dashVector = dashAttackDirection * attackDashDistance;
+        Vector3 targetPosition;
+        Ray dashRay = new Ray(transform.position + playerRigidbody.centerOfMass, dashAttackDirection);
+        RaycastHit rayHit;
+        if (Physics.Raycast(dashRay, out rayHit, attackDashDistance, ground.value))
+            targetPosition = rayHit.point;
+        else targetPosition = transform.position + dashVector;
+        transform.SetPositionAndRotation(targetPosition, transform.rotation);
+    }
+
+    //void DestroyOnStartMenu(Scene newScene, Scene oldScene)
+    //{
+    //    if (newScene == SceneManager.GetSceneByBuildIndex(1)) 
+    //    {
+    //        SceneManager.UnloadSceneAsync(oldScene);
+    //        SceneManager.activeSceneChanged -= DestroyOnStartMenu;
+    //        Destroy(gameObject);
+
+    //    }
+    //}
 
 
     private void MoveAnimation(float h, float v)

@@ -27,8 +27,13 @@ public class BrokenWalls : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             if (interactCanvasSymbol.enabled == false) interactCanvasSymbol.enabled = true;
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetButtonDown("Action") && Time.timeScale == 1)
             {
+#elif UNITY_ANDROID
+            if ((AndroidActionButton.androidActionButton.clicked ) && Time.timeScale == 1)
+            {
+#endif
                 //Time.timeScale = 0;
                 menu.SetDialogText(brokenWallText);
                 menu.SetHeaderText("Rissige Wand");

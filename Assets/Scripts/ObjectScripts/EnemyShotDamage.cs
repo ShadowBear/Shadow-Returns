@@ -15,6 +15,7 @@ public class EnemyShotDamage : MonoBehaviour
             //Apply Damage
             col.GetComponent<PlayerHealth>().TakeDamage(damage);
             Instantiate(explosion, transform.position, transform.rotation);
+            Debug.Log("Player Hit");
             Destroy(gameObject);
         }
 
@@ -23,5 +24,10 @@ public class EnemyShotDamage : MonoBehaviour
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
+    }
+
+    public void SetDamage(int dmg)
+    {
+        damage = dmg;
     }
 }

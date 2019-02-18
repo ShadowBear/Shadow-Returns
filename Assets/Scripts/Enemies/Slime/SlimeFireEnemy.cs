@@ -13,6 +13,7 @@ public class SlimeFireEnemy : EnemyAIController {
     {
         base.Start();
         ID = 7;
+        meeleDMG = (int)(enemy.Schleim[0] + enemy.Schleim[2] * (0.5 * enemy.Schleim[0]) - (0.5 * enemy.Schleim[0]));
     }
 
     // Update is called once per frame

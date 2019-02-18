@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
 
 public class GolemEnemy : EnemyAIController {
 
@@ -15,6 +17,7 @@ public class GolemEnemy : EnemyAIController {
     private State currentState;
     private float guardTime = 2.5f;
 
+    
     enum State { Guard, Chase, Attack, Patrol};
 
     // Use this for initialization
@@ -34,6 +37,8 @@ public class GolemEnemy : EnemyAIController {
         }
         ID = 1;
 
+        meeleDMG = (int)(enemy.Golem[0] + enemy.Golem[2] * (0.5 * enemy.Golem[0]) - (0.5 * enemy.Golem[0]));
+       
     }
 
     // Update is called once per frame
@@ -75,7 +80,7 @@ public class GolemEnemy : EnemyAIController {
         {
             currentState = State.Guard;
             agent.isStopped = true;
-            guardTime = Random.Range(3f, 7f);
+            guardTime = UnityEngine.Random.Range(3f, 7f);
         }
         else if (currentState == State.Guard)
         {

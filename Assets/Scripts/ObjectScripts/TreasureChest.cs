@@ -34,8 +34,13 @@ public class TreasureChest : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKeyDown(KeyCode.E) && Time.timeScale > 0 && !antiPrell)
+#if UNITY_EDITOR || UNITY_STANDALONE
+            if (Input.GetButtonDown("Action") && Time.timeScale > 0 && !antiPrell)
             {
+#elif UNITY_ANDROID
+            if ((AndroidActionButton.androidActionButton.clicked ) && Time.timeScale > 0 && !antiPrell)
+            {
+#endif
                 StartCoroutine(AntiPrell());
                 open = open ? false : true;
                 if (anim) anim.SetBool("Open", open);

@@ -13,8 +13,13 @@ public class Interactable : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetButtonDown("Action"))
+#if UNITY_EDITOR || UNITY_STANDALONE
+            if (Input.GetButtonDown("Action") )
             {
+#elif UNITY_ANDROID
+            if (AndroidActionButton.androidActionButton.clicked ) 
+            {
+#endif
                 Interact();
             }
         }

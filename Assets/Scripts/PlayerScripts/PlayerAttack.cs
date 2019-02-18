@@ -366,4 +366,9 @@ public class PlayerAttack : MonoBehaviour {
         }
     }
 
+    public void AttackDashForward()
+    {
+        GetComponentInParent<PlayerMovement>().AttackDashForward();
+    }
+
 }

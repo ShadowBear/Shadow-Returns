@@ -50,7 +50,7 @@ public class Soundmanager : MonoBehaviour {
     {        
         float startVolume = audio.volume;
         if (FadeTime <= 0) FadeTime = 0.1f;
-        if (startVolume <= 0 || startVolume > 1) startVolume = 1;
+        if (startVolume <= 0.5 || startVolume > 1) startVolume = 1;
 
         while (audio.volume > 0)
         {
@@ -71,8 +71,6 @@ public class Soundmanager : MonoBehaviour {
                 yield return null;
             }
             if (audio.volume <= 0 || audio.volume > 1) audio.volume = 1;
-            //if (float.IsNaN(audio.volume)) audio.volume = 1;
-            Debug.Log(audio.volume);
         }
     }
 

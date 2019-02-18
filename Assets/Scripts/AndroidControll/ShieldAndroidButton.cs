@@ -12,20 +12,10 @@ public class ShieldAndroidButton : MonoBehaviour, IPointerUpHandler, IPointerDow
     public void OnPointerDown(PointerEventData eventData)
     {
         shield.GetComponent<Shield>().ActivateShield();
-        //playerMovementScript.shieldedAndroid = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         shield.GetComponent<Shield>().DeActivateShield();
-        //shield.SetActive(false);
-        //playerMovementScript.shieldedAndroid = false;
-    }
-
-    // Use this for initialization
-    void Start () {
-
-        //shield = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Shield>();
-        //playerMovementScript = GameObject.FindGameObjectWithTag("Player").GetComponent<TankMovement>();
     }
 }

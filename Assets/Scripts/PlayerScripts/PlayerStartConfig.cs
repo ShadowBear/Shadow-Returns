@@ -23,7 +23,6 @@ public class PlayerStartConfig : MonoBehaviour {
         if (startSoundTrack)
         {
             Soundmanager.soundmanager.SetStartAudio(startSoundTrack);
-            print("ChangeTrack");
         }
         Destroy(gameObject);
     }

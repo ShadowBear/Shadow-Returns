@@ -28,8 +28,13 @@ public class NPCDialog : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             if (interactCanvasSymbol.enabled == false) interactCanvasSymbol.enabled = true;
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetButtonDown("Action") && !AntiPrell)
             {
+#elif UNITY_ANDROID
+            if ((AndroidActionButton.androidActionButton.clicked ) && !AntiPrell)
+            {
+#endif
                 AntiPrell = true;
                 StartCoroutine(StopPrelling());
                 Interact();

@@ -9,6 +9,7 @@ public class MagmaEnemy : EnemyAIController {
     {
         ID = 4;
         base.Start();
+        meeleDMG = (int)(enemy.Magma[0] + enemy.Magma[2] * (0.5 * enemy.Magma[0]) - (0.5 * enemy.Magma[0]));
     }
 
     // Update is called once per frame

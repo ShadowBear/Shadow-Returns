@@ -7,7 +7,7 @@ public class EnemyInstantiateTrigger : MonoBehaviour {
     // Use this for initialization
     public GameObject[] enemyTyp;
     public GameObject spawnPointParent;
-    public int enemyStartHealth = 50;
+    //public int enemyStartHealth = 50;
 
 
     public void Triggered()
@@ -25,8 +25,8 @@ public class EnemyInstantiateTrigger : MonoBehaviour {
                 foreach (GameObject enemy in enemyTyp)
                 {
                     GameObject enemyInstance = Instantiate(enemy, child.position, Quaternion.identity);
-                    HealthScript enemyHealth = enemyInstance.GetComponent<HealthScript>();
-                    if (enemyHealth != null) enemyHealth.SetHealth(enemyStartHealth);
+                    //HealthScript enemyHealth = enemyInstance.GetComponent<HealthScript>();
+                    //if (enemyHealth != null) enemyHealth.SetHealth(enemyStartHealth);
                     //yield return new WaitForSeconds(0.25f);
                 }
             }

@@ -14,8 +14,13 @@ public class CollectSword : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetButtonDown("Action"))
             {
+#elif UNITY_ANDROID
+            if (AndroidActionButton.androidActionButton.clicked )
+            {
+#endif
                 if (collectSword)
                 {
                     GameManager.control.GetComponent<MenuController>().SetDialogText("Wow du hast eine Waffe gefunden!!!");

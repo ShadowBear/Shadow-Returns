@@ -9,8 +9,8 @@ public class SpiderEnemy : EnemyAIController {
 	new void Start () {
         ID = 11;
         base.Start();
-        
-	}
+        meeleDMG = (int)(enemy.Spinne[0] + enemy.Spinne[2] * (0.5 * enemy.Spinne[0]) - (0.5 * enemy.Spinne[0]));
+    }
 	
 	// Update is called once per frame
 	new void Update () {

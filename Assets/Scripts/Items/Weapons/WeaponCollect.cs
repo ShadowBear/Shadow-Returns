@@ -18,10 +18,15 @@ public class WeaponCollect : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetButtonDown("Action"))
             {
+#elif UNITY_ANDROID
+            if (AndroidActionButton.androidActionButton.clicked )
+            {
+#endif
                 //Debug.Log("ActionButton");
-                foreach(Weapon w in weaponDepot.GetComponentsInChildren<Weapon>(true))
+                foreach (Weapon w in weaponDepot.GetComponentsInChildren<Weapon>(true))
                 {
                     if (w.weaponID == weaponToCollectID)
                     {

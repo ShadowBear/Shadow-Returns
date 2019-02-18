@@ -54,8 +54,13 @@ public class SceneManagerScript : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player") && Input.GetButtonDown("Action") && !AntiPrell)
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (Input.GetButtonDown("Action") && Time.timeScale > 0 && !AntiPrell)
         {
+#elif UNITY_ANDROID
+            if ((AndroidActionButton.androidActionButton.clicked ) && Time.timeScale > 0 && !AntiPrell)
+            {
+#endif
             AntiPrell = true;
             //Debug.Log("ChangeScene");
             loadingEnumerator = AsynchronLoadScene(NextSceneToLoad);

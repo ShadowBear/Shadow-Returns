@@ -8,6 +8,7 @@ public class BugEnemy : EnemyAIController {
     {
         base.Start();
         ID = 2;
+        meeleDMG = (int)(enemy.Kaefer[0] + enemy.Kaefer[2] * (0.5 * enemy.Kaefer[0]) - (0.5 * enemy.Kaefer[0]));
     }
 
     // Update is called once per frame

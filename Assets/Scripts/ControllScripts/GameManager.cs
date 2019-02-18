@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -60,9 +61,10 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         if (control == null) control = this;
         else if (control != this) Destroy(gameObject);
-	}
+        //SceneManager.activeSceneChanged += DestroyOnStartMenu;
+    }
 
-    private void Start()
+        private void Start()
     {
         experienceText.text = experiencePoints + "/" + nextLvlExperience;
         experienceImage.fillAmount = (float)experiencePoints / nextLvlExperience;
@@ -166,6 +168,17 @@ public class GameManager : MonoBehaviour {
         if (coinAmount > 9999) coinAmount = 9999;
         coinText.text = coinAmount.ToString();
     }
+
+    //void DestroyOnStartMenu(Scene newScene, Scene oldScene)
+    //{
+    //    if (newScene == SceneManager.GetSceneByBuildIndex(1))
+    //    {
+    //        SceneManager.UnloadSceneAsync(oldScene);
+    //        SceneManager.activeSceneChanged -= DestroyOnStartMenu;
+    //        Destroy(gameObject);
+
+    //    }
+    //}
 
     //public void SwordCollect()
     //{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.IO;
 
 public class EnemyAIController : MonoBehaviour {
 
@@ -38,8 +39,6 @@ public class EnemyAIController : MonoBehaviour {
     public float walkDistanceToMelee = 6f;
     public float minDistanceToMelee = 2.5f;
 
-
-
     //public float maxDistanceToPlayer = 5f;
     //public float maxDistanceToMeele = 0.5f;
 
@@ -51,6 +50,7 @@ public class EnemyAIController : MonoBehaviour {
 
     public Transform shotTransform;
     public GameObject shot;
+    [HideInInspector]
     public int meeleDMG = 15;
     //public int rangeDMG = 10;
 
@@ -67,16 +67,26 @@ public class EnemyAIController : MonoBehaviour {
 
     private EnemyHealth health;
 
+    //JSON Externalisieren
+    private string path;
+    private string jsonString;
+    public JSONEnemy enemy = new JSONEnemy();
+
     // Use this for initialization
     protected void Start () {
         agent = GetComponent<NavMeshAgent>();
         //agent.autoBraking = false;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
-        hitbox.enabled = false;
+        if(hitbox)hitbox.enabled = false;
         health = GetComponent<EnemyHealth>();
         health.SetEnemyID(ID);
-        
+
+        //JSON
+        path = Application.streamingAssetsPath + "/JSON/EnemyData.json";
+        jsonString = File.ReadAllText(path);
+        enemy = JsonUtility.FromJson<JSONEnemy>(jsonString);
+
         //Patrol();
     }
 

@@ -29,8 +29,13 @@ public class DoorScript : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetButtonDown("Action") && AntiPrell == 0)
             {
+#elif UNITY_ANDROID
+            if ((AndroidActionButton.androidActionButton.clicked ) && AntiPrell == 0)
+            {
+#endif
                 AntiPrell++;
                 StartCoroutine(StopPrelling());
                 GameManager.control.GetComponent<MenuController>().SetHeaderText("Tür");
