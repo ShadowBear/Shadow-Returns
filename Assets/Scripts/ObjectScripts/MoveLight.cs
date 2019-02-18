@@ -12,7 +12,6 @@ public class MoveLight : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        //moveObject = gameObject;
         nextPosition = movePoints[0].transform.position;
 	}
 	

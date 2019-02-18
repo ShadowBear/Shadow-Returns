@@ -64,10 +64,7 @@ public class MenuController : MonoBehaviour {
     }
 
     void ToggleWindow(GameObject window)
-    {
-        //print("WechsleFenster");
-        //print("TimeScale: " + Time.timeScale);
-        
+    {        
         if (window.activeSelf && !GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().isDead)
         {
             Time.timeScale = 1;
@@ -77,7 +74,6 @@ public class MenuController : MonoBehaviour {
         {
             Time.timeScale = 0;
             window.SetActive(true);
-            //audioSource.Play();
         }
     }
 

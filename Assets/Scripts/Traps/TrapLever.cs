@@ -8,7 +8,6 @@ public class TrapLever : MonoBehaviour {
     public bool repeatTrap = false;
     [SerializeField]
     private float repeatTime = 3f;
-    //private bool moving = false;
     Animator anim;
 
     // Use this for initialization

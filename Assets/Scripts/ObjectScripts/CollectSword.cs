@@ -25,19 +25,16 @@ public class CollectSword : MonoBehaviour {
                 {
                     GameManager.control.GetComponent<MenuController>().SetDialogText("Wow du hast eine Waffe gefunden!!!");
                     GameManager.control.GetComponent<MenuController>().Dialog();
-                    //GameManager.control.SwordCollect();
                     Destroy(this.gameObject);
                 }
                 else if (collectGun) {
                     GameManager.control.GetComponent<MenuController>().SetDialogText("Wow du hast eine Waffe gefunden!!!");
                     GameManager.control.GetComponent<MenuController>().Dialog();
-                    //GameManager.control.GunCollect();
                     Destroy(this.gameObject);
                 }
                 else if (collectShield) {
                     GameManager.control.GetComponent<MenuController>().SetDialogText("Wow du hast einen Schildtrank gefunden!!!");
                     GameManager.control.GetComponent<MenuController>().Dialog();
-                    //GameManager.control.ShieldCollect();
                     Destroy(this.gameObject);
                 }
                 

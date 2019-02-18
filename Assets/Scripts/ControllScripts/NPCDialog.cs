@@ -8,7 +8,6 @@ public class NPCDialog : MonoBehaviour {
     public string npcName;
     public bool reapeatSpeak = true;
     public string[] notRepeatText;
-    //public GameObject interactSymbol;
     private Canvas interactCanvasSymbol;
 
     [SerializeField]

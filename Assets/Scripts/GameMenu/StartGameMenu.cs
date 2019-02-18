@@ -69,7 +69,6 @@ public class StartGameMenu : MonoBehaviour {
         operation.allowSceneActivation = false;
         while (!operation.isDone) 
         {
-            //float progress = Mathf.Clamp01(operation.progress / 0.9f);
             progressBar.value = operation.progress;
             loadingProgressText.text = (operation.progress * 100).ToString("F0") + " %";
 

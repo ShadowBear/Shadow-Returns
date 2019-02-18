@@ -13,7 +13,6 @@ public class BrokenWalls : MonoBehaviour {
 
     private Canvas interactCanvasSymbol;
 
-
     private void Start()
     {
         menu = GameManager.control.GetComponent<MenuController>();
@@ -34,7 +33,6 @@ public class BrokenWalls : MonoBehaviour {
             if ((AndroidActionButton.androidActionButton.clicked ) && Time.timeScale == 1)
             {
 #endif
-                //Time.timeScale = 0;
                 menu.SetDialogText(brokenWallText);
                 menu.SetHeaderText("Rissige Wand");
                 menu.Dialog();

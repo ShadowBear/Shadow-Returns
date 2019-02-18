@@ -90,8 +90,7 @@ public class HealthScript : MonoBehaviour {
             if(damage >= 0) GameManager.control.ShowDmgText(damage, transform);
 
             //Pushing Back On Hit
-            //if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().AddForce(-transform.forward * pushForce);
-
+            
             if (health <= 0 && !isDead)
             {
                 Dying();
@@ -109,8 +108,6 @@ public class HealthScript : MonoBehaviour {
 
     protected virtual void Dying()
     {
-        //print("DieParentHealth!!");
-        //if (GameObject.FindGameObjectWithTag("Player") != gameObject) StartCoroutine(DieAnim());
         StartCoroutine(DieAnim());
     }
 
@@ -124,16 +121,6 @@ public class HealthScript : MonoBehaviour {
         }
         if (GetComponent<HidingGhostTomb>() != null) GetComponent<HidingGhostTomb>().Die();
         Destroy(gameObject);
-        //if (GetComponent<DropRate>()) GetComponent<DropRate>().DropItem();
         yield return null;   
     }
-
-
-    //public void RotateHealthbar()
-    //{
-    //    rotationOffset = Camera.main.transform.position;
-    //    rotationOffset.y = player.transform.position.y;
-    //    relativeRotationTransform.LookAt(rotationOffset);
-    //    relativeRotationTransform.forward = -relativeRotationTransform.forward;
-    //}
 }

@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class SlimeHealthChild : HealthScript
 {
-
-    //[SerializeField]
-    //private float health;
-    
     public GameObject slime;
     private SlimeAI slimeAI;
 
@@ -19,9 +15,7 @@ public class SlimeHealthChild : HealthScript
     public BoxCollider hitBox;
     public float dashDistance = 2f;
     public LayerMask ground;
-
-    //private Animator anim;
-
+    
     new void Start()
     {
         base.Start();
@@ -31,17 +25,7 @@ public class SlimeHealthChild : HealthScript
     // Update is called once per frame
     new void Update()
     {
-        //if (health <= 0 && !isDead)
-        //{
-        //    StartCoroutine(Die());
-        //}
         base.Update();
-        //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
-        //if (useRelativeRotation)
-        //{
-        //    Vector3 cam = new Vector3(Camera.main.transform.position.x,0,Camera.main.transform.position.z);
-        //    relativeRotationTransform.LookAt(cam);            
-        //}
     }
        
     public void SetLifeState(int life, int startLife)

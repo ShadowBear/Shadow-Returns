@@ -39,7 +39,6 @@ public class DoorScript : MonoBehaviour {
                 AntiPrell++;
                 StartCoroutine(StopPrelling());
                 GameManager.control.GetComponent<MenuController>().SetHeaderText("Tür");
-                //Debug.Log("ActionToDo");
                 if (keyNeededBool)
                 {
                     if (GameManager.control.keyNmbr > 0)

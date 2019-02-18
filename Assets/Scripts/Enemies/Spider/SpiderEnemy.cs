@@ -52,7 +52,6 @@ public class SpiderEnemy : EnemyAIController {
 
     new protected IEnumerator RangeAttack()
     {
-        //print("SpiderRange");
         isAttacking = true;
         agent.isStopped = true;
         canshoot = false;

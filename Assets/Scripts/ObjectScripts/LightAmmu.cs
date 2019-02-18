@@ -22,38 +22,6 @@ public class LightAmmu : MonoBehaviour {
         }
     }
 
-    /************* OLD Without Inheritance**********************/
-    /*
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("Enemy") || col.CompareTag("Destroyable"))
-        {
-            //Apply Damage
-            if (col.GetComponent<EnemyHealth>()) col.GetComponent<EnemyHealth>().TakeDamage(CalculateDmg(), melee);
-            else if (col.GetComponent<HealthScript>()) col.GetComponent<HealthScript>().TakeDamage(CalculateDmg(), melee);
-        }
-        else if (col.CompareTag("Boss"))
-        {
-            col.GetComponent<LibaryGhostBossHealth>().TakeDamage(CalculateDmg());
-        }
-        else if (col.CompareTag("Slime"))
-        {
-            //col.GetComponent<SlimeHealth>().TakeDamage(CalculateDmg());
-            col.GetComponent<SlimeHealthChild>().TakeDamage(CalculateDmg(), melee);
-        }
-        else if (col.CompareTag("Explosion"))
-        {
-            col.GetComponent<ExplosionItems>().TakeDamage(CalculateDmg());
-        }
-        if (!col.CompareTag("Player") && !col.CompareTag("Light") && !col.isTrigger)
-        {
-            if (explosion != null) Instantiate(explosion, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-    }
-    */
-    /**********************************************************/
-
     int CalculateDmg()
     {
         int dmgVarianz = Random.Range(1, 5) - 3;

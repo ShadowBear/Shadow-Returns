@@ -34,7 +34,6 @@ public class PatrollingGuards : MonoBehaviour {
         Guarding, Patrolling
     };
 
-    // Use this for initialization
     void Start()
     {
         wayPointController = patrolPointParent.GetComponent<FreeWayPointsController>();
@@ -43,7 +42,6 @@ public class PatrollingGuards : MonoBehaviour {
         currentState = State.Guarding;
         animator = GetComponent<Animator>();
         animator.SetBool("Static_b", false);
-        //CheckPathsReachable();
     }
 
 
@@ -86,7 +84,6 @@ public class PatrollingGuards : MonoBehaviour {
                 int animation = Random.Range(0, 3);
                 animator.SetInteger("Animation_int", animation);                
             }
-            //FreeWayPointsController.wayPointsController.SetFree(nextWP, false);
             wayPointController.SetFree(nextWP, false);
         }
     }
@@ -98,10 +95,8 @@ public class PatrollingGuards : MonoBehaviour {
         {
             //Start with 1 for not using the parent transform
             nextPoint = Random.Range(1, patrolPoints.Length);
-            //print("WP: " + nextPoint);
             nextTarget = patrolPoints[nextPoint];
             nextWP = nextPoint;
-            //if (nextTarget == currentTarget || FreeWayPointsController.wayPointsController.getFreeState(nextPoint) == true) break;
             if (nextTarget == currentTarget || wayPointController.getFreeState(nextPoint) == true) break;
         }
         if (nextTarget != currentTarget)
@@ -109,10 +104,7 @@ public class PatrollingGuards : MonoBehaviour {
             navMeshAgent.SetDestination(nextTarget.position);
             navMeshAgent.isStopped = false;
             idleSet = false;
-
         }
-        //if(lastWP != nextWP && !wasSeated)
-        //FreeWayPointsController.wayPointsController.SetFree(lastWP, true);
         wayPointController.SetFree(lastWP, true);
         currentTarget = patrolPoints[nextPoint];        
         lastWP = nextWP;
@@ -127,18 +119,6 @@ public class PatrollingGuards : MonoBehaviour {
         {
             NavMeshPath path = new NavMeshPath();
             navMeshAgent.CalculatePath(patrolPoints[i].position, path);
-            //if (path.status == NavMeshPathStatus.PathPartial)
-            //{
-            //    print("Cant Reach Path to: " + i);
-            //}
-            //if(path.status == NavMeshPathStatus.PathComplete)
-            //{
-            //    print("Reached Path to: " + i);
-            //}
-            //if (path.status == NavMeshPathStatus.PathInvalid)
-            //{
-            //    print("Invalide Path to: " + i);
-            //}
         }
     }
 

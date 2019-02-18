@@ -9,7 +9,6 @@ public class GhostDead : MonoBehaviour {
 
     void Start()
     {
-        //print("RagedGhost is das");
         anim = GetComponent<Animator>();
     }
 
@@ -36,15 +35,4 @@ public class GhostDead : MonoBehaviour {
         Destroy(gameObject);
         yield return null;
     }
-    //void OnTriggerStay(Collider col)
-    //{
-    //    if (col.CompareTag("GhostKiller"))
-    //    {
-    //        if (cagedGhost != null)
-    //        {
-    //            cagedGhost.SetActive(true);
-    //        }
-    //        Destroy(gameObject);
-    //    }
-    //}
 }

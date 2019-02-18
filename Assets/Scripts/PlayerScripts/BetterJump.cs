@@ -12,19 +12,6 @@ public class BetterJump : MonoBehaviour {
         rigid = GetComponent<Rigidbody>();
 	}
 	
-    /* ****** Old One
-	// Update is called once per frame
-	void FixedUpdate () {
-		if(rigid.velocity.y < 0)
-        {
-            rigid.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
-        }else if(rigid.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rigid.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
-        }
-	}
-    */
-
     void FixedUpdate()
     {
         if (rigid.velocity.y < 0)

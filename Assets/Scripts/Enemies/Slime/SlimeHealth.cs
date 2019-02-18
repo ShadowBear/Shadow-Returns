@@ -38,12 +38,7 @@ public class SlimeHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (health <= 0 && !isDead)
-        //{
-        //    StartCoroutine(Die());
-        //}
-        //if (useRelativeRotation) relativeRotationTransform.rotation = relativeRotation;
-        if (useRelativeRotation)
+       if (useRelativeRotation)
         {
             Vector3 cam = new Vector3(Camera.main.transform.position.x,0,Camera.main.transform.position.z);
             relativeRotationTransform.LookAt(cam);            
@@ -63,7 +58,6 @@ public class SlimeHealth : MonoBehaviour
             health -= damage;
             healthbar.fillAmount = (float)health / maxHealth;
             if (damage > 1) GameManager.control.ShowDmgText(damage, transform);
-            //if (anim != null) anim.SetTrigger("damaged");
         }
     }
 

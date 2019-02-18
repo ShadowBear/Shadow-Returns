@@ -37,12 +37,7 @@ public class Shield : MonoBehaviour {
     // Blau voll Geladen -> Grün -> Gelb -> Orange -> Rot Fast leer
 	void Update () {
         playerHealth.isShielded = shieldMeshRenderer.enabled ? true : false;
-        //if (Time.frameCount % 5 == 0) playerHealth.isShielded = transform.GetChild(0).gameObject.activeSelf ? true : false;
-        
-        ShieldColor();
-
-        //playerShoot.shielded = rend.enabled ? true : false;
-
+        ShieldColor();        
         shieldImage.fillAmount = 1 * power/ maxPower;
         shieldText.text = (int)power + "/" + maxPower;
 

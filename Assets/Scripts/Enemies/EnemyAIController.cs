@@ -75,7 +75,6 @@ public class EnemyAIController : MonoBehaviour {
     // Use this for initialization
     protected void Start () {
         agent = GetComponent<NavMeshAgent>();
-        //agent.autoBraking = false;
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
         if(hitbox)hitbox.enabled = false;
@@ -86,8 +85,7 @@ public class EnemyAIController : MonoBehaviour {
         path = Application.streamingAssetsPath + "/JSON/EnemyData.json";
         jsonString = File.ReadAllText(path);
         enemy = JsonUtility.FromJson<JSONEnemy>(jsonString);
-
-        //Patrol();
+        
     }
 
     // Update is called once per frame
@@ -140,7 +138,6 @@ public class EnemyAIController : MonoBehaviour {
     {
         if(Time.frameCount % 10 == 0)
         {
-            //Debug.Log("Follow");
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
         }

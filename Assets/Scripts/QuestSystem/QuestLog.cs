@@ -32,7 +32,6 @@ public class QuestLog : MonoBehaviour {
         if (activeQuests.Count >= maxActiveQuests) { } //Debug.Log("Questlog Voll");
         else
         {
-            //Debug.Log("Quest added");
             activeQuests.Add(q);
             //Update Questlog Text
             UpdateQuestLogText();

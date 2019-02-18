@@ -8,13 +8,6 @@ public class ShadowRoomController : MonoBehaviour {
 
     public Animator bookshelf1;
     public Animator bookshelf2;
-	void Start () {
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {

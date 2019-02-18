@@ -6,22 +6,9 @@ public class FreeWayPointsController : MonoBehaviour {
 
     public GameObject patrolPointParent;
     public Transform[] patrolPoints;
-
-    //private int lastWP = 0;
-    //private int nextWP = 0;
-
+    
     [SerializeField]
     private bool[] freeWP;
-
-    //public static FreeWayPointsController wayPointsController;
-
-    //void Awake()
-    //{
-    //    //Unique GameManager
-    //    if (wayPointsController == null) wayPointsController = this;
-    //    else if (wayPointsController != this) Destroy(gameObject);
-    //}
-
 
     // Use this for initialization
     void Start () {

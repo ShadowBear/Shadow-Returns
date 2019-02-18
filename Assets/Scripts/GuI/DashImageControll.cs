@@ -25,7 +25,6 @@ public class DashImageControll : MonoBehaviour {
 
     public bool CanDash()
     {
-        //if (dash.fillAmount == 1) canDash = true;
         return canDash;
     }
 

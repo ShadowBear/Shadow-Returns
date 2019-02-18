@@ -16,7 +16,6 @@ public class SlimeSpawner : MonoBehaviour {
     private bool canSpawn = true;
     public float spawnTimer = 0.75f;
     private float count;
-    //public bool activated = false;
     // Use this for initialization
 	void Start () {
         count = spawnTimer;

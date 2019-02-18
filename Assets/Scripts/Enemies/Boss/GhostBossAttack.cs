@@ -64,7 +64,6 @@ public class GhostBossAttack : MonoBehaviour {
 
     IEnumerator MeleeAttack01()
     {
-        //print("Attack 01");
         isAttacking = true;
         if (anim != null) anim.SetTrigger("attack");
         hitbox.enabled = true;
@@ -85,7 +84,6 @@ public class GhostBossAttack : MonoBehaviour {
         yield return new WaitForSeconds(attackRateTime);
         isAttacking = false;
         agent.isStopped = false;
-        //yield return new WaitForSeconds(rangeAttackWaitTime);
         canShoot = true;
         yield return null;
     }
@@ -110,14 +108,6 @@ public class GhostBossAttack : MonoBehaviour {
     // Speed up Attack on Player (Nearly Charge)
     IEnumerator Attack03(float distance)
     {
-        //print("Attack 03");
-        //float chargeLength = 0;
-        //while (chargeLength < 0.7f)
-        //{
-        //    transform.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * distance * chargeForce, ForceMode.VelocityChange);
-        //    chargeLength += Time.deltaTime;
-        //}
-
         Vector3 chargePosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         agent.SetDestination(chargePosition);
         float speed = agent.speed;

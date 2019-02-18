@@ -12,9 +12,7 @@ public class SlimeAI : MonoBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private bool isAttacking = false;
-    //private bool isMoving = false;
     private bool isCircling = false;
-    //private bool hasDodged = false;
 
     //Animation Speed
     private float speed = 0;
@@ -95,7 +93,6 @@ public class SlimeAI : MonoBehaviour
 
     public void TakeHit()
     {
-        //print("I am Hit");
         if (!isHit)
         {
             if (hitCounter <= maxHitsTaken)
@@ -186,7 +183,6 @@ public class SlimeAI : MonoBehaviour
 
     IEnumerator DodgeAttack()
     {
-        //hasDodged = true;
         int dodgeDirection = Random.Range(0, 3);
         switch (dodgeDirection)
         {
@@ -201,7 +197,6 @@ public class SlimeAI : MonoBehaviour
         }
         rigid.AddForce(-transform.forward.normalized * dodgeForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dodgeWaitTime);
-        //hasDodged = false;
         yield return null;
     }
 
@@ -220,7 +215,6 @@ public class SlimeAI : MonoBehaviour
 
     IEnumerator RangeAttack()
     {
-        //print("RangeAttack");
         isAttacking = true;
         agent.isStopped = true;
         float waitAttackTime = Random.Range(minWaitAttackTime, maxWaitAttackTime);
@@ -259,7 +253,6 @@ public class SlimeAI : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            //col.GetComponent<HealthScript>().TakeDamage(meeleDMG);
             col.GetComponent<PlayerHealth>().TakeDamage(meeleDMG);
         }
     }

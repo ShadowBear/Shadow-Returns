@@ -101,7 +101,6 @@ public class GraveyardBoss : MonoBehaviour {
 
     IEnumerator Dying()
     {
-        //Instantiate(explosion, transform.position, explosion.transform.rotation);
         dying = true;
         transform.position = player.transform.position + player.transform.forward * 2;
         transform.LookAt(player.transform);

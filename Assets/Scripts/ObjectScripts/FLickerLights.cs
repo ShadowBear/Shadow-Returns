@@ -46,10 +46,6 @@ public class FLickerLights : MonoBehaviour {
             lightSource.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip2);
             lightSource.intensity = 0f;
-            //yield return new WaitForSeconds(waitTimeZip2);
-            //light.intensity = maxLightIntensitiy;
-            //yield return new WaitForSeconds(waitTimeZip2);
-            //light.intensity = 0f;
             yield return new WaitForSeconds(waitTimeZip3);
 
             //Lights up for x Seconds
@@ -69,10 +65,6 @@ public class FLickerLights : MonoBehaviour {
             lightSource.intensity = 0f;
             yield return new WaitForSeconds(waitTimeZip2);
             lightSource.intensity = maxLightIntensitiy;
-            //yield return new WaitForSeconds(waitTimeZip2);
-            //light.intensity = 0;
-            //yield return new WaitForSeconds(waitTimeZip2);
-            //light.intensity = maxLightIntensitiy;
             yield return new WaitForSeconds(waitTimeZip3);
 
             //Lights out for x Seconds

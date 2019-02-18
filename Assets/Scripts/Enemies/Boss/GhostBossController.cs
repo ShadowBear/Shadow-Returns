@@ -38,18 +38,6 @@ public class GhostBossController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         distanceToPlayer = (transform.position - player.transform.position).magnitude;
-        
-        // ********** Angriffen ausweichen ************* //
-        //if(distanceToPlayer < minDistanceBeforeDodge)
-        //{
-        //    if (!hasDodged)
-        //    {
-        //        if (player.GetComponentInChildren<PlayerAttack>().getAttackStatus())
-        //        {
-        //            StartCoroutine(Dodge(true));
-        //        }
-        //    }            
-        //}
         if (distanceToPlayer < minDistanceBeforeAttack)
         {
             transform.LookAt(player.transform);
@@ -58,20 +46,17 @@ public class GhostBossController : MonoBehaviour {
             {
                 if (hit.collider.CompareTag("Player"))
                 {
-                    //navAgent.isStopped = true;
                     if (testCounter > swapTime)
                     {
                         testCounter = 0;
                         if(rageMode) RoundThePlayer();
                         attackScript.AttackEnemy(distanceToPlayer);
-                        //print("See Player and Attack");
                     }
                 }
                 else
                 {
                     navAgent.isStopped = false;
                     navAgent.SetDestination(player.transform.position);
-                    //print("Walk to Player Cant See him");
                 }
             }                       
             testCounter += Time.deltaTime;
@@ -117,9 +102,6 @@ public class GhostBossController : MonoBehaviour {
 
     void RoundThePlayer()
     {
-        //Vector3 pos = (Vector3)Random.insideUnitCircle.normalized * 5;
-        //navAgent.Warp(player.transform.position + pos);
-
         // get a random direction (360°) in radians
         float angle = Random.Range(0.0f, Mathf.PI * 2);
 

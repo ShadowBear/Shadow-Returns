@@ -9,7 +9,6 @@ public class SwingingAxt : MonoBehaviour {
     public AudioSource audioSource;
 	void Start () {
         InvokeRepeating("PlaySound", 0.5f, 1.5f);
-        //Invoke("PlaySound", 0.5f);
     }
 	
 	// Update is called once per frame
@@ -19,7 +18,6 @@ public class SwingingAxt : MonoBehaviour {
 
     void PlaySound()
     {
-        //audioSource.Play();
         StartCoroutine(Sound());
     }
 

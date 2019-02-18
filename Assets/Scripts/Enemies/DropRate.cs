@@ -9,9 +9,7 @@ public class DropRate : MonoBehaviour {
     private GameObject[] drops;
     //Amout of drops for later use
     //public int dropCounts;
-
-    //private bool quitting = false;
-
+    
     [SerializeField]
     private GameObject ep;   
     [SerializeField]
@@ -41,20 +39,9 @@ public class DropRate : MonoBehaviour {
             }            
         }
         GameObject epObject = Instantiate(ep, transform.position + offset, transform.rotation);
-        //epObject.GetComponent<Experience>().experience = epValue;
         epObject.GetComponentInChildren<Experience>().experience = epValue;
         Vector3 randomExplosionVector = new Vector3(Random.Range(-1f, 1f), 0.9f, Random.Range(-1f, 1f));
         epObject.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + randomExplosionVector, explosionRadius);
     }
-
-    //private void OnDestroy()
-    //{
-    //    //if(!quitting) DropItem();
-    //}
-
-    //private void OnApplicationQuit()
-    //{
-    //    quitting = true;
-    //}
 
 }

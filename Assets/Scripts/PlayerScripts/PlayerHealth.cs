@@ -137,16 +137,6 @@ public class PlayerHealth : HealthScript {
             yield return new WaitForSeconds(0.75f);
             dmgFrame.CrossFadeAlpha(0, 0.5f, false);
         }
-
-        //Vignitte Testing *********************//
-        //processingProfile.vignette.enabled = true;
-        //VignetteModel.Settings settings = processingProfile.vignette.settings;
-        //settings.intensity = 0.6f;
-        //yield return new WaitForSeconds(1.5f);
-        //settings.intensity = 0.2f;
-        //yield return new WaitForSeconds(1.5f);
-        //processingProfile.vignette.enabled = false;
-
         yield return null;
     }
 

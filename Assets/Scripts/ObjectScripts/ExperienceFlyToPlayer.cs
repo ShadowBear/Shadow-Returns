@@ -23,8 +23,6 @@ public class ExperienceFlyToPlayer : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            //transform.parent.transform.position += ((other.transform.position + offset) - parent.transform.position).normalized * forceSpeed;
-            //print("Force");
             GetComponent<Rigidbody>().AddForce(((other.transform.position + offset) - parent.transform.position).normalized * forceSpeed, ForceMode.Force);
         }
     }

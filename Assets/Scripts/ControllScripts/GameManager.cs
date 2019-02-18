@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour {
     private float scaleRate = 1;
 
     //Sword, Shield and Pistol 
-    //public bool swordCollected = false;
-    //public bool gunCollected = false;
     public bool shieldCollected = false;
 
     public static GameManager control;    
@@ -72,25 +70,11 @@ public class GameManager : MonoBehaviour {
 
     public void SuitUp()
     {
-        //swordCollected = true;
-        //gunCollected = true;
         shieldCollected = true;
     }
 
     public void ShowDmgText(float damage, Transform displayTrans)
     {
-        ///******Test old*******///
-        //Component dmgText = Instantiate(textTmp, displayTrans.position, Quaternion.identity) as Component;
-        //dmgText.transform.SetParent(canvas.transform);
-        //dmgText.GetComponent<Text>().text = ((int)damage).ToString();
-        //dmgText.transform.localScale = new Vector3(scaleRate, scaleRate, scaleRate);
-        //if (damage > 15) dmgText.GetComponent<Text>().color = Color.red;
-        //dmgText.gameObject.SetActive(true);
-
-        //dmgText.transform.GetComponent<Text>().transform.position = displayTrans.position + new Vector3(0,1,0);
-        //dmgText.transform.GetComponent<Text>().transform.position = Camera.main.WorldToScreenPoint(displayTrans.position);
-
-        ////********* NEW ***********///
         GameObject dmgText = Instantiate(damageTextObject);
         if (!GameObject.FindGameObjectWithTag("Canvas")) Debug.Log("Canvas nicht gefunden");
         dmgText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
@@ -101,7 +85,6 @@ public class GameManager : MonoBehaviour {
 
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(displayTrans.position);
         dmgText.transform.position = screenPosition + new Vector2(0, 1.5f);
-        //dmgText.transform.position = displayTrans.position + new Vector3(0,1.5f,0);
 
     }
 

@@ -62,7 +62,6 @@ public class SceneManagerScript : MonoBehaviour {
             {
 #endif
             AntiPrell = true;
-            //Debug.Log("ChangeScene");
             loadingEnumerator = AsynchronLoadScene(NextSceneToLoad);
             progressBar.value = 0;
         }

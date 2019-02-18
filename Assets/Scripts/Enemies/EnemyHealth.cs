@@ -80,8 +80,6 @@ public class EnemyHealth : HealthScript
     {
         if (GetComponent<Rigidbody>() != null)
         {
-            //GetComponent<Rigidbody>().AddForce(-transform.forward * pushForce);
-
             //PushBack Distance depends on Attacktyp
             float pushBackRange = 0;
             if (melee) pushBackRange = dashDistance;

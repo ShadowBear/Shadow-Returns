@@ -96,23 +96,11 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             jump = true;
-            //StartCoroutine(JumpRoutine());
         }
         if (isGrounded) HandleGroundedMovement(jump);
         else HandleAirborneMovement();
 
         jump = false;
-        //if (anim != null)
-        //{
-        //    float h = Input.GetAxisRaw("Horizontal");
-        //    float v = Input.GetAxisRaw("Vertical");
-        //    //CheckSpeed for Animation
-        //    animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
-        //    //animSpeed = playerRigidbody.velocity.magnitude;
-        //    lastPosition = transform.position;
-        //    anim.SetFloat("Speed", animSpeed);
-        //    MoveAnimation(h, v);
-        //}
     }
 
     void Update () {
@@ -132,7 +120,6 @@ public class PlayerMovement : MonoBehaviour {
             animSpeed = ((transform.position - lastPosition).magnitude) / Time.deltaTime;
             if (animSpeed > 0.1f && isGrounded) footstepsScript.walking = true;
             else footstepsScript.walking = false;
-            //animSpeed = playerRigidbody.velocity.magnitude;
             lastPosition = transform.position;
             anim.SetFloat("Speed", animSpeed);
             MoveAnimation(h2, v2);
@@ -161,8 +148,6 @@ public class PlayerMovement : MonoBehaviour {
             
         }
         /* ********************** Dash *************************/
-
-        //if (Input.GetButtonDown("Dash"))
         if(Input.GetButtonDown("Dash"))
         {
             DashImageControll[] dashBlocks = GameManager.control.dashBlocksParent.GetComponentsInChildren<DashImageControll>();
@@ -189,9 +174,6 @@ public class PlayerMovement : MonoBehaviour {
                     break;
                 }
             }
-            //old Dash
-            //Vector3 dashVelocity = Vector3.Scale(transform.GetChild(1).transform.forward, dashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * 8 + 1)) / -Time.deltaTime)));
-            //playerRigidbody.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
 
         /* ********************* End *******************/
@@ -214,7 +196,6 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             isGrounded = false;
-            //m_GroundNormal = Vector3.up;
         }
     }
     void HandleAirborneMovement()
@@ -222,16 +203,11 @@ public class PlayerMovement : MonoBehaviour {
         // apply extra gravity from multiplier:
         Vector3 extraGravityForce = (Physics.gravity * gravityMultiplier) - Physics.gravity;
         playerRigidbody.AddForce(extraGravityForce);
-
-        //groundCheckDistance = playerRigidbody.velocity.y < 0 ? origGroundCheckDistance : 0.1f;
     }
 
 
     void HandleGroundedMovement(bool jump)
     {
-
-        //groundCheckDistance = 0.2f;
-        // check whether conditions are right to allow a jump:
         if (jump)
         {
             // jump!
@@ -453,20 +429,7 @@ public class PlayerMovement : MonoBehaviour {
     //}
     /*************************************************************************/
 
-    //private void RotateWithCamera()
-    //{
-    //    //rotationOffset = Camera.main.transform.position;
-    //    //rotationOffset.y = transform.position.y;
-    //    //Vector3.RotateTowards(transform.position, rotationOffset, (speed * Time.deltaTime), 0.0f);
-    //    //Debug.Log("Rotate");
-
-    //    //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-    //    //moveDirection += Camera.main.transform.forward * Input.GetAxis("Vertical");
-    //    //moveDirection += Camera.main.transform.right * Input.GetAxis("Horizontal");
-    //    //transform.Translate(-moveDirection * Time.deltaTime * speed);
-    //}
-
-    /// <summary>
+     /// <summary>
     /// Return different movementspeed
     /// 1 = Normal
     /// 2 = Shooting
@@ -480,10 +443,4 @@ public class PlayerMovement : MonoBehaviour {
         else if (i == 2) return shootingSpeed;
         return defaultSpeed;
     }
-
-    //public void OnCollisionEnter(Collision collision)
-    //{
-    //    if (!collision.collider.isTrigger) playerRigidbody.velocity.Set(0,0,0);
-    //}
-
 }

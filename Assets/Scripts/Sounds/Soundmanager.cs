@@ -16,7 +16,6 @@ public class Soundmanager : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        //DontDestroyOnLoad(gameObject);
         if (soundmanager == null) soundmanager = this;
         else if (soundmanager != this) Destroy(gameObject);
 

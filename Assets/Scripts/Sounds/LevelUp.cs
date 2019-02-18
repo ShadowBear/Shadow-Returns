@@ -4,18 +4,5 @@ using UnityEngine;
 
 public class LevelUp : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 
-    private void Awake()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
